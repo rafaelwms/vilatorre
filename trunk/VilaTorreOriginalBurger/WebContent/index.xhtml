@@ -13,7 +13,10 @@
 <h:body>
  <div id="login" align="center" >
 	<h:form>
-		<p:panel header="Bem Vindo ao Vila Torre Original Burger" style="width:500px;height:300px">
+	<p:dialog header="Bem Vindo ao Vila Torre Original Burger" widgetVar="dlg"
+			showEffect="slide" width="450" modal="true" visible="true"
+			resizable="false" closable="false" draggable="true">
+		
 			<img src="Imagens/Vila Torre - LOGO - 200.png"/><br/>
 			LOGIN:<p:inputText id="campo_login" value="#{loginBean.login}"></p:inputText><br/>
 			SENHA:<p:password id="campo_senha" value="#{loginBean.senha}"></p:password><br/>
@@ -21,7 +24,7 @@
             ajax="false" /> 
 			
 		
-		</p:panel>
+		</p:dialog>
 
 	</h:form>
 </div> 
