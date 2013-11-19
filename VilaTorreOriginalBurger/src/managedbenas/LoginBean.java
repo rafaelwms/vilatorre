@@ -25,6 +25,13 @@ public class LoginBean {
 		
 	}
 	
+	
+	public String telaCliente(){
+		return "/telaCliente.xhtml?faces-redirect=true";
+	}
+	
+	
+	
 	public String getLogin() {
 		return login;
 	}

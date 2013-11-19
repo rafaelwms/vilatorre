@@ -134,7 +134,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 	 *            identificador
 	 * @return Objeto do tipo T
 	 */
-	public final Entidade consultarPorId(Integer chave) {
+	public final Entidade consultarPorId(Integer chave) throws Exception{
 		Entidade instance = null;
 		try {
 			instance = (Entidade) getEntityManager().find(classePersistente, chave);
@@ -144,7 +144,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 		return instance;
 	}
 
-	public List<Entidade> consultarTodos() {
+	public List<Entidade> consultarTodos() throws Exception{
 		try {
 			String sql = "from " + classePersistente.getSimpleName();
 			TypedQuery<Entidade> query = entityManager.createQuery(sql, classePersistente);
