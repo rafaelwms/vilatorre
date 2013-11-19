@@ -2,9 +2,7 @@ package negocio;
 
 public class NegocioComum {
 
-	public boolean validarString(String texto, String objeto, String atributo,
-			int de, int ate, String artigoObjeto, String artigoAtributo)
-			throws Exception {
+	public boolean validarString(String texto, String objeto, String atributo, int de, int ate, String artigoObjeto, String artigoAtributo) throws Exception {
 		if (de == ate) {
 
 			if (texto.trim().length() != ate) {
