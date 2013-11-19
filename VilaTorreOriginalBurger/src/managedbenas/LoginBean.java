@@ -1,17 +1,18 @@
 package managedbenas;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 import basicasHumana.Usuario;
 
-@ManagedBean
-@SessionScoped
+@ManagedBean(name="LoginBean")
+@RequestScoped
 public class LoginBean {
 	
 	private String login;
 	private String senha;
 	private Usuario usuarioLogado;
+	
 	
 	public String tentarLogar(){
 		
