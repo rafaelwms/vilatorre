@@ -15,13 +15,13 @@ public class LoginBean {
 	
 	public String tentarLogar(){
 		
-		if(login == "rafael" && senha == "wms") {
+		if((login.equals("rafael"))&&(senha.equals("wms"))){
 			
 			return "/loginSucedido.xhtml?faces-redirect=true";
 		}else
+
+			return "/sefu.xhtml?faces-redirect=true";
 		
-		
-		return "";
 	}
 	
 	public String getLogin() {
