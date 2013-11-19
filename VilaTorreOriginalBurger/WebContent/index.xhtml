@@ -18,10 +18,9 @@
 			resizable="false" closable="false" draggable="true">
 		
 			<img src="Imagens/Vila Torre - LOGO - 200.png"/><br/>
-			LOGIN:<p:inputText id="campo_login" value="#{loginBean.login}"></p:inputText><br/>
-			SENHA:<p:password id="campo_senha" value="#{loginBean.senha}"></p:password><br/>
-			<p:commandButton value="CONECTAR" actionListener="#{loginBean.tentarLogar}"   
-            ajax="false" /> 
+			LOGIN:<p:inputText id="login" value="#{loginBean.login}"></p:inputText><br/>
+			SENHA:<p:password id="senha" value="#{loginBean.senha}"></p:password><br/>
+			<p:commandButton value="CONECTAR" action="#{loginBean.tentarLogar}" ajax="false" /> 
 			
 		
 		</p:dialog>
