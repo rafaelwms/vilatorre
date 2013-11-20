@@ -10,7 +10,7 @@ import basicasHumana.*;
 public class Fachada implements IFachada {
 
 	private static IFachada fachada;
-	private static NegocioCliente execCliente;
+	private NegocioCliente execCliente;
 
 	public static IFachada getInstancia() {
 		if (fachada == null) {

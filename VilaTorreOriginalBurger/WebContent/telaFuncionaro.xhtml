@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<link type="text/css" rel="stylesheet" href="css/custom.css"/>
+</h:head>
+<h:body >
+
+	<h:form>
+
+	<p:dialog  header="Funcionário." widgetVar="dlg"
+			showEffect="clip" width="600" modal="true" visible="true"
+			resizable="false" closable="false" draggable="false">
+		<p:panel>
+			<div align="center">
+			<img src="Imagens/Vila Torre - LOGO - 200.png"/><br/>
+			</div>
+			</p:panel>
+			
+			
+			<p:panel header="Dados Pessoais">
+			<h:panelGrid columns="2">
+			<h:outputText for="nome" value="Nome:"/><p:inputText tabindex="1" size="70" maxlength="130" required="true" requiredMessage="É necessário informar o nome." id="nome" value="#{clienteBeans.cliente.nome}"/>
+			<h:outputText for="nasc" value="Data Nasc.:"/><p:calendar tabindex="2" id="nasc" value="#{clienteBeans.cliente.nasc}"/>
+			<h:outputText for="rg" value="RG:  "/><p:inputText tabindex="3" required="true" requiredMessage="É necessário informar o rg." label="RG" id="rg" value="#{clienteBeans.cliente.rg}"/>
+			<h:outputText for="cpf" value="CPF: "/><p:inputMask tabindex="4" required="true"  requiredMessage="É necessário informar o cpf." mask="999.999.999-99"  id="cpf" value="#{clienteBeans.cliente.cpf}"/>
+			<h:outputText for="fone" value="Fone: "/><p:inputMask tabindex="5" required="true" requiredMessage="É necessário informar o fone."  mask="(99)9999-9999"  id="fone" value="#{clienteBeans.cliente.fone}"/>
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:panel header="Dados de Usuário">
+			<h:panelGrid columns="2">
+			<h:outputText for="login" value="Login:"/><p:inputText tabindex="6"  maxlength="130" required="false" requiredMessage="É necessário informar o login." id="login" value="#{clienteBeans.usuario.login}"/>
+			<h:outputText for="senha" value="Senha:"/><p:password tabindex="7" feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="Razoável" strongLabel="Forte" required="false" requiredMessage="É necessário informar a senha." id="senha" value="#{clienteBeans.usuario.senha}"/>
+			<h:outputText for="senha2" value="Confirm. Senha:"/><p:password tabindex="8" feedback="false" required="false"   requiredMessage="É necessário confirmar a senha." id="senha2"/>
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:panel header="Endereço">
+			<h:panelGrid columns="2">
+			<h:outputText for="logradouro" value="Logradouro:"/><p:inputText tabindex="9" size="70"  maxlength="130" required="true" id="logradouro" value="#{clienteBeans.endereco.logradouro}"/>
+			<h:outputText for="numero" value="Numero:"/><p:inputText tabindex="10" required="true" id="numero" value="#{clienteBeans.endereco.numero}"/>
+			<h:outputText for="complemento" value="Complemento:"/><p:inputText tabindex="11"  required="false" id="complemento" value="#{clienteBeans.endereco.complemento}"/>
+			<h:outputText for="bairro" value="Bairro:"/><p:inputText  tabindex="12" required="true" id="bairro" value="#{clienteBeans.endereco.bairro}"/>
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:panel>
+			<div style="float: none;" align="center">
+			<p:commandButton value="Salvar" action="#{clienteBeans.salvar}" ajax="false" /> 
+			<p:commandButton value="Limpar" action="reset" ajax="false" />
+			</div>
+			</p:panel>
+			
+		
+			
+		
+		</p:dialog>
+		  
+    
+	
+	</h:form>
+	
+
+</h:body>
+</html>
