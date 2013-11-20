@@ -16,7 +16,7 @@ public class Cliente extends Pessoa{
 	
 	public Cliente(){}
 	
-	public Cliente(String nome, int dia, int mes, int ano, String cpf, String rg, String fonePrincipal, String foneSecundario, Endereco endereco ){
+	public Cliente(String nome, int dia, int mes, int ano, String cpf, String rg, String fonePrincipal, Endereco endereco ){
 
 		this.setCadastro(new Date());
 		this.setNome(nome);
@@ -24,7 +24,6 @@ public class Cliente extends Pessoa{
 		this.setCpf(cpf);
 		this.setRg(rg);
 		this.setFonePrincipal(fonePrincipal);
-		this.setFoneSecundario(foneSecundario);
 		this.setEndereco(endereco);
 
 	}
