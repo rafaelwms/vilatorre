@@ -15,7 +15,7 @@
 	<h:form>
 
 	<p:dialog  header="Dados do Usuário." widgetVar="dlg"
-			showEffect="slide" width="600" modal="true" visible="true"
+			showEffect="clip" width="600" modal="true" visible="true"
 			resizable="false" closable="false" draggable="false">
 		<p:panel>
 			<div align="center">
@@ -36,9 +36,9 @@
 			
 			<p:panel header="Dados de Usuário">
 			<h:panelGrid columns="2">
-			<h:outputText for="login" value="Login:"/><p:inputText tabindex="6"  maxlength="130" required="true" requiredMessage="É necessário informar o login." id="login" value="#{clienteBeans.usuario.login}"/>
-			<h:outputText for="senha" value="Senha:"/><p:password tabindex="7" feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="Razoável" strongLabel="Forte" required="true" requiredMessage="É necessário informar a senha." id="senha" value="#{clienteBeans.usuario.senha}"/>
-			<h:outputText for="senha2" value="Confirm. Senha:"/><p:password tabindex="8" feedback="false" required="true"   requiredMessage="É necessário confirmar a senha." id="senha2"/>
+			<h:outputText for="login" value="Login:"/><p:inputText tabindex="6"  maxlength="130" required="false" requiredMessage="É necessário informar o login." id="login" value="#{clienteBeans.usuario.login}"/>
+			<h:outputText for="senha" value="Senha:"/><p:password tabindex="7" feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="Razoável" strongLabel="Forte" required="false" requiredMessage="É necessário informar a senha." id="senha" value="#{clienteBeans.usuario.senha}"/>
+			<h:outputText for="senha2" value="Confirm. Senha:"/><p:password tabindex="8" feedback="false" required="false"   requiredMessage="É necessário confirmar a senha." id="senha2"/>
 			</h:panelGrid>
 			</p:panel>
 			
