@@ -15,7 +15,6 @@ public class NegocioFuncionario extends NegocioComum implements IDAOFuncionario{
 			this.validarString(entidade.getCpf(), "funcionário", "cpf", 14, 14, "o", "o");
 			this.validarString(entidade.getRg(), "funcionário", "rg", 7, 12, "o", "o");
 			this.validarString(entidade.getFonePrincipal(), "funcionário", "fone princiapal", 13, 13, "o", "o");
-			this.validarString(entidade.getFoneSecundario(), "funcionário", "fone secundario", 13, 13, "o", "o");
 			this.validarString(entidade.getUsuario().getLogin(), "funcionário", "login", 6, 30, "o", "o");
 			this.validarString(entidade.getEndereco().getLogradouro(), "endereço", "logradouro", 10, 200, "o", "o");
 			this.validarString(entidade.getEndereco().getCidade(), "endereço", "cidade", 4, 30, "o", "a");

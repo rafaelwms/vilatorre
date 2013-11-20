@@ -13,14 +13,14 @@ public class Fornecedor extends Pessoa{
 	
 	public Fornecedor(){}
 	
-	public Fornecedor(String nome, int dia, int mes, int ano, int diaAdm, int mesAdm, int anoAdm, String cpf, String rg, String fonePrincipal, String foneSecundario, Endereco endereco ){
+	public Fornecedor(String nome, int dia, int mes, int ano, int diaAdm, int mesAdm, int anoAdm, String cpf, String rg, String fonePrincipal, Endereco endereco ){
 		this.setNome(nome);
 		this.setNasc(Datas.criarData(dia, mes, ano));
 		this.setInicioParceria(Datas.criarData(diaAdm, mesAdm, anoAdm));
 		this.setCpf(cpf);
 		this.setRg(rg);
 		this.setFonePrincipal(fonePrincipal);
-		this.setFoneSecundario(foneSecundario);
+		
 		this.setEndereco(endereco);
 	}
 

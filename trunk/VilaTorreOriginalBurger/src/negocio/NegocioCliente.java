@@ -18,7 +18,6 @@ public class NegocioCliente extends NegocioComum implements IDAOCliente {
 			this.validarString(entidade.getCpf(), "cliente", "cpf", 14, 14, "o", "o");
 			this.validarString(entidade.getRg(), "cliente", "rg", 7, 12, "o", "o");
 			this.validarString(entidade.getFonePrincipal(), "cliente", "fone princiapal", 13, 13, "o", "o");
-			this.validarString(entidade.getFoneSecundario(), "cliente", "fone secundario", 13, 13, "o", "o");
 			this.validarString(entidade.getUsuario().getLogin(), "cliente", "login", 6, 30, "o", "o");
 			this.validarString(entidade.getUsuario().getSenha(), "cliente", "senha", 6, 30, "o", "a");
 			this.validarString(entidade.getEndereco().getLogradouro(), "endereço", "logradouro", 10, 200, "o", "o");
@@ -33,9 +32,7 @@ public class NegocioCliente extends NegocioComum implements IDAOCliente {
 				throw new Exception("Fone principal já cadastrado no sistema.");
 			}
 			
-			if(dados.localizarClientePeloFone(entidade.getFoneSecundario()) != null){
-				throw new Exception("Fone secundário já cadastrado no sistema.");
-			}
+
 			
 			dados.inserir(entidade);
 			
@@ -53,7 +50,6 @@ public class NegocioCliente extends NegocioComum implements IDAOCliente {
 			this.validarString(entidade.getCpf(), "cliente", "cpf", 14, 14, "o", "o");
 			this.validarString(entidade.getRg(), "cliente", "rg", 7, 12, "o", "o");
 			this.validarString(entidade.getFonePrincipal(), "cliente", "fone princiapal", 13, 13, "o", "o");
-			this.validarString(entidade.getFoneSecundario(), "cliente", "fone secundario", 13, 13, "o", "o");
 			this.validarString(entidade.getUsuario().getLogin(), "cliente", "login", 6, 30, "o", "o");
 			this.validarString(entidade.getUsuario().getSenha(), "cliente", "senha", 6, 30, "o", "a");
 			this.validarString(entidade.getEndereco().getLogradouro(), "endereço", "logradouro", 10, 200, "o", "o");
@@ -68,9 +64,6 @@ public class NegocioCliente extends NegocioComum implements IDAOCliente {
 				throw new Exception("Fone principal já cadastrado no sistema.");
 			}
 			
-			if(dados.localizarClientePeloFone(entidade.getFoneSecundario()) != null){
-				throw new Exception("Fone secundário já cadastrado no sistema.");
-			}
 			
 			dados.alterar(entidade);
 			

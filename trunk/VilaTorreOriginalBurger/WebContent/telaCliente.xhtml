@@ -8,24 +8,66 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
+<link type="text/css" rel="stylesheet" href="css/custom.css"/>
 </h:head>
-<h:body>
- <div id="login" align="center" >
-	<h:form>
-<p:fieldset legend="Simple FieldSet">  
-    <h:panelGrid columns="2" cellpadding="10">  
-        <p:graphicImage value="Imagens/java_logo1.jpg" />  
-        <h:outputText  
-            value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.  
-            His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. T  
-            hrough Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect,  
-            but given to ruthless violence whenever anything stands against the good of the family." />  
-    </h:panelGrid>  
-</p:fieldset>
+<h:body >
 
+	<h:form>
+
+	<p:dialog  header="Dados do Usuário." widgetVar="dlg"
+			showEffect="slide" width="600" modal="true" visible="true"
+			resizable="false" closable="false" draggable="false">
+		<p:panel>
+			<div align="center">
+			<img src="Imagens/Vila Torre - LOGO - 200.png"/><br/>
+			</div>
+			</p:panel>
+			
+			
+			<p:panel header="Dados Pessoais">
+			<h:panelGrid columns="2">
+			<h:outputText for="nome" value="Nome:"/><p:inputText size="70" maxlength="130" required="true" requiredMessage="É necessário informar o nome." id="nome" value="#{LoginBean.login}"/>
+			<h:outputText for="nasc" value="Data Nasc.:"/><p:calendar id="nasc"/>
+			<h:outputText for="rg" value="RG:  "/><p:inputText required="true" requiredMessage="É necessário informar o rg." label="RG" id="rg" value="#{LoginBean.senha}"/>
+			<h:outputText for="cpf" value="CPF: "/><p:inputMask required="true"  requiredMessage="É necessário informar o cpf." mask="999.999.999-99"  id="cpf" value="#{LoginBean.senha}"/>
+			<h:outputText for="fone" value="Fone: "/><p:inputMask required="true" requiredMessage="É necessário informar o fone."  mask="(99)9999-9999"  id="fone" value="#{LoginBean.senha}"/>
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:panel header="Dados de Usuário">
+			<h:panelGrid columns="2">
+			<h:outputText for="login" value="Login:"/><p:inputText  maxlength="130" required="true" requiredMessage="É necessário informar o login." id="login" value="#{LoginBean.login}"/>
+			<h:outputText for="senha" value="Senha:"/><p:password feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="Razoável" strongLabel="Forte" required="true" requiredMessage="É necessário informar a senha." id="senha" value="#{LoginBean.login}"/>
+			<h:outputText for="senha2" value="Confirm. Senha:"/><p:password feedback="false" required="true" requiredMessage="É necessário confirmar a senha." id="senha2" value="#{LoginBean.login}"/>
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:panel header="Endereço">
+			<h:panelGrid columns="2">
+			<h:outputText for="logradouro" value="Logradouro:"/><p:inputText size="70"  maxlength="130" required="true" id="logradouro" value="#{LoginBean.login}"/>
+			<h:outputText for="numero" value="Numero:"/><p:inputText  required="true" id="nhumero" value="#{LoginBean.login}"/>
+			<h:outputText for="complemento" value="Complemento:"/><p:inputText  required="false" id="complemento" value="#{LoginBean.login}"/>
+			<h:outputText for="bairro" value="Bairro:"/><p:inputText  required="true" id="bairro" value="#{LoginBean.login}"/>
+			<h:outputText for="cidade" value="Cidade:"/><p:inputText  required="true" id="cidade" value="#{LoginBean.login}"/>
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:panel>
+			<div style="float: none;" align="center">
+			<p:commandButton value="Salvar" action="#{LoginBean.tentarLogar}" ajax="false" /> 
+			<p:commandButton value="Limpar" action="reset" ajax="false" />
+			</div>
+			</p:panel>
+			
+		
+			
+		
+		</p:dialog>
+		  
+    
+	
 	</h:form>
-</div> 
+	
 
 </h:body>
 </html>

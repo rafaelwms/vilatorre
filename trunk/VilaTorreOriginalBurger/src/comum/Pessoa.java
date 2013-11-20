@@ -24,10 +24,7 @@ public abstract class Pessoa extends ObjetoGeral{
 	private Usuario usuario;
 	
 	@Column(length=13)
-	private String fonePrincipal;
-	
-	@Column(length=13)
-	private String foneSecundario;
+	private String fone;
 	
 	
 	public Pessoa(){}
@@ -74,22 +71,12 @@ public abstract class Pessoa extends ObjetoGeral{
 
 
 	public String getFonePrincipal() {
-		return fonePrincipal;
+		return fone;
 	}
 
 
 	public void setFonePrincipal(String fonePrincipal) {
-		this.fonePrincipal = fonePrincipal;
-	}
-
-
-	public String getFoneSecundario() {
-		return foneSecundario;
-	}
-
-
-	public void setFoneSecundario(String foneSecundario) {
-		this.foneSecundario = foneSecundario;
+		this.fone = fonePrincipal;
 	}
 
 
