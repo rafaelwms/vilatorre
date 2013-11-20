@@ -29,9 +29,10 @@ public String salvar(){
 		fachada.alterarCliente(cliente);
 		return "/alteracaoClienteRealizada.xhtml";
 	}
-		
-	
-	
+}
+
+public void reset(){
+	cliente = new Cliente();
 }
 
 
