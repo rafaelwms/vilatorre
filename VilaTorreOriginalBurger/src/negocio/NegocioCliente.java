@@ -5,6 +5,7 @@ import java.util.List;
 import dadosHumana.DAOCliente;
 
 import basicasHumana.Cliente;
+import basicasHumana.Usuario.TipoUser;
 import iDAOHumana.IDAOCliente;
 
 public class NegocioCliente extends NegocioComum implements IDAOCliente {
@@ -32,7 +33,7 @@ public class NegocioCliente extends NegocioComum implements IDAOCliente {
 				throw new Exception("Fone já cadastrado no sistema.");
 			}
 			
-
+			entidade.getUsuario().setTipoUser(TipoUser.USER);
 			entidade.getEndereco().setCidade("Recife");
 			entidade.getEndereco().setUf("PE");
 			dados.inserir(entidade);
