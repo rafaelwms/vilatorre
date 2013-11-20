@@ -33,7 +33,7 @@ public class Funcionario extends Pessoa{
 		this.setAdmissao(Datas.criarData(diaAdm, mesAdm, anoAdm));
 		this.setCpf(cpf);
 		this.setRg(rg);
-		this.setFonePrincipal(fonePrincipal);
+		this.setFone(fonePrincipal);
 		this.setEndereco(endereco);
 
 	}

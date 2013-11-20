@@ -70,13 +70,13 @@ public abstract class Pessoa extends ObjetoGeral{
 	}
 
 
-	public String getFonePrincipal() {
+	public String getFone() {
 		return fone;
 	}
 
 
-	public void setFonePrincipal(String fonePrincipal) {
-		this.fone = fonePrincipal;
+	public void setFone(String fone) {
+		this.fone = fone;
 	}
 
 
