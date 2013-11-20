@@ -23,7 +23,7 @@ public class Cliente extends Pessoa{
 		this.setNasc(Datas.criarData(dia, mes, ano));
 		this.setCpf(cpf);
 		this.setRg(rg);
-		this.setFonePrincipal(fonePrincipal);
+		this.setFone(fonePrincipal);
 		this.setEndereco(endereco);
 
 	}

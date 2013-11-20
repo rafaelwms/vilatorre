@@ -17,7 +17,7 @@ public class NegocioCliente extends NegocioComum implements IDAOCliente {
 			this.validarString(entidade.getNome(), "cliente", "nome", 10, 130, "o", "o");
 			this.validarString(entidade.getCpf(), "cliente", "cpf", 14, 14, "o", "o");
 			this.validarString(entidade.getRg(), "cliente", "rg", 7, 12, "o", "o");
-			this.validarString(entidade.getFonePrincipal(), "cliente", "fone princiapal", 13, 13, "o", "o");
+			this.validarString(entidade.getFone(), "cliente", "fone princiapal", 13, 13, "o", "o");
 			this.validarString(entidade.getUsuario().getLogin(), "cliente", "login", 6, 30, "o", "o");
 			this.validarString(entidade.getUsuario().getSenha(), "cliente", "senha", 6, 30, "o", "a");
 			this.validarString(entidade.getEndereco().getLogradouro(), "endereço", "logradouro", 10, 200, "o", "o");
@@ -28,12 +28,13 @@ public class NegocioCliente extends NegocioComum implements IDAOCliente {
 				throw new Exception("Cpf já cadastrado no sistema.");
 			}		
 			
-			if(dados.localizarClientePeloFone(entidade.getFonePrincipal()) != null){
-				throw new Exception("Fone principal já cadastrado no sistema.");
+			if(dados.localizarClientePeloFone(entidade.getFone()) != null){
+				throw new Exception("Fone já cadastrado no sistema.");
 			}
 			
 
-			
+			entidade.getEndereco().setCidade("Recife");
+			entidade.getEndereco().setUf("PE");
 			dados.inserir(entidade);
 			
 		} catch (Exception ex) {
@@ -49,7 +50,7 @@ public class NegocioCliente extends NegocioComum implements IDAOCliente {
 			this.validarString(entidade.getNome(), "cliente", "nome", 10, 130, "o", "o");
 			this.validarString(entidade.getCpf(), "cliente", "cpf", 14, 14, "o", "o");
 			this.validarString(entidade.getRg(), "cliente", "rg", 7, 12, "o", "o");
-			this.validarString(entidade.getFonePrincipal(), "cliente", "fone princiapal", 13, 13, "o", "o");
+			this.validarString(entidade.getFone(), "cliente", "fone princiapal", 13, 13, "o", "o");
 			this.validarString(entidade.getUsuario().getLogin(), "cliente", "login", 6, 30, "o", "o");
 			this.validarString(entidade.getUsuario().getSenha(), "cliente", "senha", 6, 30, "o", "a");
 			this.validarString(entidade.getEndereco().getLogradouro(), "endereço", "logradouro", 10, 200, "o", "o");
@@ -60,7 +61,7 @@ public class NegocioCliente extends NegocioComum implements IDAOCliente {
 				throw new Exception("Cpf já cadastrado no sistema.");
 			}		
 			
-			if(dados.localizarClientePeloFone(entidade.getFonePrincipal()) != null){
+			if(dados.localizarClientePeloFone(entidade.getFone()) != null){
 				throw new Exception("Fone principal já cadastrado no sistema.");
 			}
 			
