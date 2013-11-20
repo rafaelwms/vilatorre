@@ -8,20 +8,21 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
+ <h:link type="text/css" rel="stylesheet" href="css/custom.css" />
 </h:head>
 <h:body>
  <div id="login" align="center" >
 	<h:form>
 	<p:dialog header="Bem Vindo ao Vila Torre Original Burger" widgetVar="dlg"
-			showEffect="slide" width="450" modal="true" visible="true"
+			showEffect="explode" width="300" modal="true" visible="true"
 			resizable="false" closable="false" draggable="true">
 		
 			<img src="Imagens/Vila Torre - LOGO - 200.png"/><br/>
 			LOGIN:<p:inputText id="login" value="#{LoginBean.login}"></p:inputText><br/>
 			SENHA:<p:password id="senha" value="#{LoginBean.senha}"></p:password><br/>
-			<p:commandButton value="CONECTAR" action="#{LoginBean.tentarLogar}" ajax="false" /> <br/>
-			<p:commandButton value="CADASTRO" action="#{LoginBean.telaCliente}" ajax="false" />
+			
+			<p:commandButton value="LOGIN" action="#{LoginBean.tentarLogar}" ajax="false" />
+			<p:commandButton value="NOVO" action="#{LoginBean.telaCliente}" ajax="false" />
 
 			
 		
