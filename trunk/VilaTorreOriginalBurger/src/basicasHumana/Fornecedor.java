@@ -9,6 +9,7 @@ import comum.*;
 @Entity
 public class Fornecedor extends Pessoa{
 	
+	@Temporal(TemporalType.DATE)
 	private Date inicioParceria;
 	
 	public Fornecedor(){}

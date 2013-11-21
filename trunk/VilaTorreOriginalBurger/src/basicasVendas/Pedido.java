@@ -4,20 +4,26 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import basicasHumana.Cliente;
+
 @Entity
 public class Pedido {
+	
+	@Id
+	@GeneratedValue
+	private Integer id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date abertura_pedido;
 	
 	@ManyToOne
+	@JoinTable(name="itens_pedido", joinColumns={@JoinColumn(name="pedido_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="item_id", referencedColumnName="id")})
 	private List<ItemPedido> lista_itens;
 	
 	@Column
 	private boolean status_aberto;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable=true)
 	private Date fechamento_pedido;
 	
 	@Enumerated(EnumType.STRING)
@@ -26,13 +32,14 @@ public class Pedido {
 	@Column(nullable=true)
 	private int num_mesa;
 	
-	@Column(nullable=true)
-	private Cliente cliente;
 	
 	private enum TipoPedido{Mesa, Viagem, DeliveryFone, DeliverySite}
 	
-	
+	@Column(nullable=false)
 	private double valor_total;
+	
+	@Embedded
+	private Pagamento pagamento;
 	
 	public Pedido(){}
 
@@ -92,12 +99,13 @@ public class Pedido {
 		this.valor_total = valor_total;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 

@@ -1,21 +1,20 @@
 package basicasMaterial;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
 
 import basicasHumana.*;
 
 @Embeddable
-public class MateriaPrimaEFornecedor  implements Serializable{
+public class MateriaPrimaEFornecedor {
 
+	
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(referencedColumnName="id")
+	@JoinColumn(name="materia_id")
 	private MateriaPrima materia;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(referencedColumnName="id")
+	@JoinColumn(name="fornecedor_id")
 	private Fornecedor fornecedor;
 
 	

@@ -21,7 +21,8 @@ public class Funcionario extends Pessoa{
 	@Column(nullable=false)
 	private double salario;
 
-	@Embedded
+	@ManyToOne
+	@JoinTable(name="funcionario_cargo", joinColumns={@JoinColumn(name="func_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="cargo_id", referencedColumnName="id")})
 	private Cargo cargo;
 	
 	public Funcionario(){}

@@ -14,6 +14,7 @@ public class Cliente extends Pessoa{
 	@Temporal(TemporalType.DATE)
 	private Date cadastro;
 	
+	@Column(nullable=true)
 	private String email;
 	
 	public Cliente(){}

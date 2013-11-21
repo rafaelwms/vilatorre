@@ -2,7 +2,7 @@ package managedbenas;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
+import util.Datas;
 import comum.Endereco;
 
 
@@ -12,18 +12,24 @@ import fachadas.*;
 @ManagedBean
 @ViewScoped
 public class ClienteBeans {
-	
+
+private String nasc;
 private Cliente cliente = new Cliente();
 private Usuario usuario = new Usuario();
 private Endereco endereco = new Endereco();
-private IFachada fachada = Fachada.getInstancia();
+private Fachada fachada = new Fachada();
 
 public String salvar(){
+		
 		cliente.setUsuario(usuario);
 		cliente.setEndereco(endereco);
 	if (cliente.getId() == null  || cliente.getId() == 0){
+		cliente.setNasc(Datas.criarData(nasc));
 		
-		fachada.inserirCliente(cliente);
+		
+	//	fachada.inserirCliente(cliente);
+		System.out.println(nasc);
+		System.out.println(""+cliente.getNasc());
 		return "/cadastroRealizado.xhtml?faces-redirect=true";
 	}else{
 		fachada.alterarCliente(cliente);
@@ -61,6 +67,14 @@ public Endereco getEndereco() {
 
 public void setEndereco(Endereco endereco) {
 	this.endereco = endereco;
+}
+
+public String getNasc() {
+	return nasc;
+}
+
+public void setNasc(String nasc) {
+	this.nasc = nasc;
 }
 
 
