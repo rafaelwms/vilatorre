@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import comum.*;
 
-@Embeddable
+@Entity
 public class Cargo extends ObjetoGeral{
 
 }

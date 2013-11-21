@@ -23,7 +23,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 
 	@SuppressWarnings("unchecked")
 	public DAOGenerico(){
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("unitPSC");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("XOXO");
 		entityManager = emf.createEntityManager();
 		
 		ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();  

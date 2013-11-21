@@ -10,22 +10,23 @@ import basicasMaterial.Produto;
  * 
  */
 
-@Entity
+
 public class ItemPedido {
 	
 	@OneToMany
+	@JoinTable
 	private Pedido pedido;
 	
-	@Column
+	
 	private int numOrdem;
 	
-	//@ManyToOne?? 
+	 
 	private Produto produto;
 	
-	@Column
+	
 	private int qtd;
 	
-	@Column
+	
 	private double totalItem;
 	
 	public ItemPedido(){}

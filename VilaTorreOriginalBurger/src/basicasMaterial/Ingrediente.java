@@ -2,8 +2,10 @@ package basicasMaterial;
 
 import javax.persistence.*;
 
+import comum.ObjetoGeral;
+
 @Entity
-public class Ingrediente {
+public class Ingrediente extends ObjetoGeral{
 	
 	@Column
 	private int qtd;

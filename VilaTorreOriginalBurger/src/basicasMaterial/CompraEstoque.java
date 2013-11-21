@@ -6,18 +6,12 @@ import javax.persistence.*;
 
 import basicasHumana.*;
 
-import comum.ObjetoGeral;
 
 @Entity
-public class CompraEstoque extends ObjetoGeral{
+public class CompraEstoque{
 	
-	@OneToOne
-	@JoinColumn(name="id")
-	private Fornecedor fornecedor;
-	
-	@OneToOne
-	@JoinColumn(name="id")
-	private MateriaPrima materia_prima;
+	@EmbeddedId
+	private MateriaPrimaEFornecedor id;
 	
 	@Column
 	private double quantidade;
@@ -25,7 +19,7 @@ public class CompraEstoque extends ObjetoGeral{
 	@Column
 	private double valorinvestido;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date dataCompra;
 	
 	public CompraEstoque(){}
@@ -33,7 +27,6 @@ public class CompraEstoque extends ObjetoGeral{
 	public CompraEstoque(Fornecedor fornecedor, double quantidade, double valorinvestido){
 		
 		this.setDataCompra(new Date());
-		this.setFornecedor(fornecedor);
 		this.setQuantidade(quantidade);
 		this.setValorinvestido(valorinvestido);
 		
@@ -41,21 +34,7 @@ public class CompraEstoque extends ObjetoGeral{
 	}
 	
 
-	public Fornecedor getFornecedor() {
-		return fornecedor;
-	}
 
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
-	}
-
-	public MateriaPrima getMateria_prima() {
-		return materia_prima;
-	}
-
-	public void setMateria_prima(MateriaPrima materia_prima) {
-		this.materia_prima = materia_prima;
-	}
 
 	public double getQuantidade() {
 		return quantidade;

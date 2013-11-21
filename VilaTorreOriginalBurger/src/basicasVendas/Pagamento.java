@@ -4,11 +4,9 @@ import java.util.*;
 
 import javax.persistence.*;
 
-@Entity
+@Embeddable
 public class Pagamento {
 	
-	@OneToOne
-	private Pedido pedido;
 	
 	@Column(nullable=false)
 	@Enumerated(EnumType.STRING)
@@ -39,7 +37,6 @@ public class Pagamento {
 	
 	public Pagamento(Pedido pedido, FormaPagamento forma_pagamento, Bandeira bandeira, String cod_confirmacao, double desconto){
 		this.setHora_pagamento(new Date());
-		this.setPedido(pedido);
 		this.setForma_pagamento(forma_pagamento);
 		this.setBandeira(bandeira);
 		this.setCod_confirmacao(cod_confirmacao);
@@ -48,13 +45,7 @@ public class Pagamento {
 		
 	}
 
-	public Pedido getPedido() {
-		return pedido;
-	}
 
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
 
 	public FormaPagamento getForma_pagamento() {
 		return forma_pagamento;
@@ -103,4 +94,6 @@ public class Pagamento {
 	public void setHora_pagamento(Date hora_pagamento) {
 		this.hora_pagamento = hora_pagamento;
 	}
+
+
 }
