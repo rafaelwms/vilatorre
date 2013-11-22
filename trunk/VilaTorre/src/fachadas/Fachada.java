@@ -13,7 +13,7 @@ public class Fachada implements IFachada {
 	private NegocioComum negocioComum;
 
 	private Fachada() {
-		this.negocioComum = new NegocioCliente();
+		this.negocioComum = new NegocioComum();
 	}
 
 	public static IFachada getInstancia() {
