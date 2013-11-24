@@ -4,7 +4,10 @@ package negocio;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import basicas.Cliente;
+import basicas.Funcionario;
 import basicas.Pessoa;
 import dados.*;
 
@@ -12,9 +15,11 @@ public class NegocioComum{
 	
 	private IDAOCliente daoCliente;
 	private IDAOPessoa daoPessoa;
+	private IDAOFuncionario daoFuncionario;
 	public NegocioComum(){
 		this.daoCliente = new DAOCliente();
 		this.daoPessoa = new DAOPessoa();
+		this.daoFuncionario = new DAOFuncionario();
 	}
 
 
@@ -44,59 +49,159 @@ public class NegocioComum{
 		}
 	}
 	
+	/*
+	 * *********************************
+	 *  MÉTODOS REFERENTE SO CLIENTE
+	 * *********************************
+	 * */
 
 	public void inserirCliente(Cliente entidade)throws Exception {
 		try{
-			verificarCpf(entidade.getCpf());
-			verificarRg(entidade.getRg());
-			verificarEmail(entidade.getEmail());
+			this.verificarCpf(entidade.getCpf());
+			this.verificarRg(entidade.getRg());
+			this.verificarEmail(entidade.getEmail());
 			if(!entidade.getUsuario().getLogin().trim().equals("")){
-			verificarLogin(entidade.getUsuario().getLogin());
+			this.verificarLogin(entidade.getUsuario().getLogin());
 			}
-		    daoCliente.inserir(entidade);
-		}catch(Exception ex){
-			throw new Exception(ex.getMessage());
+		}catch(NoResultException ex){
+			daoCliente.inserir(entidade);
+		}catch(Exception x){
+			throw new Exception(x.getMessage());
 		}
 	}
 
 	public void alterarCliente(Cliente entidade) throws Exception{
+		try{
+			if(!entidade.getUsuario().getLogin().trim().equals("")){
+			this.verificarLogin(entidade.getUsuario().getLogin());
+			}
+		}catch(NoResultException ex){
 		daoCliente.alterar(entidade);
-		
+		}catch(Exception x){
+			throw new Exception(x.getMessage());
+		}
 	}
 
 
 	public void remover(Cliente entidade)throws Exception{
-		// TODO Auto-generated method stub
+		try{
+			daoCliente.remover(entidade);
+			}catch(Exception x){
+				throw new Exception(x.getMessage());
+			}
 		
 	}
 
 
 	public Cliente consultarPorId(Integer id)throws Exception{
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			return daoCliente.consultarPorId(id);
+			}catch(Exception x){
+				throw new Exception(x.getMessage());
+			}
 	}
 
 
 	public List<Cliente> consultarTodosClientes() throws Exception{
-		return null;
+		try{
+			return daoCliente.consultarTodos();
+			}catch(Exception x){
+				throw new Exception(x.getMessage());
+			}
 	}
 
 
 	public Cliente localizarClientePeloFone(String fone) throws Exception{
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			return daoCliente.localizarClientePeloFone(fone);
+			}catch(Exception x){
+				throw new Exception(x.getMessage());
+			}
 	}
 
 
 	public List<Cliente> localizarClientePeloNome(String nome) throws Exception{
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			return daoCliente.localizarClientePeloNome(nome);
+			}catch(Exception x){
+				throw new Exception(x.getMessage());
+			}
 	}
 
 
 	public Cliente localizarClientePeloCpf(String cpf) throws Exception{
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			return daoCliente.localizarClientePeloCpf(cpf);
+			}catch(Exception x){
+				throw new Exception(x.getMessage());
+			}
 	}
+
+	
+	/*
+	 * **********************************
+	 *  MÉTODOS REFERENTES AO FUNCIONÁRIO
+	 * **********************************
+	 * */
+
+
+
+	public void inserir(Funcionario entidade) throws Exception {
+		try{
+			this.verificarCpf(entidade.getCpf());
+			this.verificarRg(entidade.getRg());
+			if(!entidade.getUsuario().getLogin().trim().equals("")){
+			this.verificarLogin(entidade.getUsuario().getLogin());
+			}
+		}catch(NoResultException ex){
+			daoFuncionario.inserir(entidade);
+		}catch(Exception x){
+			throw new Exception(x.getMessage());
+		}
+		
+	}
+
+	public void alterar(Funcionario entidade) throws Exception {
+		try{
+			this.verificarCpf(entidade.getCpf());
+			this.verificarRg(entidade.getRg());
+			if(!entidade.getUsuario().getLogin().trim().equals("")){
+			this.verificarLogin(entidade.getUsuario().getLogin());
+			}
+		}catch(NoResultException ex){
+			daoFuncionario.alterar(entidade);
+		}catch(Exception x){
+			throw new Exception(x.getMessage());
+		}
+		
+	}
+
+
+	public void remover(Funcionario entidade) throws Exception {
+		try{
+			daoFuncionario.remover(entidade);
+		}catch(Exception x){
+			throw new Exception(x.getMessage());
+		}
+		
+	}
+
+
+
+
+	public List<Funcionario> consultarTodos() throws Exception {
+	try{	
+		return daoFuncionario.consultarTodos();
+		
+	}catch(Exception x){
+			throw new Exception(x.getMessage());
+		}
+	}
+	
+	/*
+	 * **********************************
+	 *  MÉTODOS REFERENTES AO FUNCIONÁRIO
+	 * **********************************
+	 * */
 
 }
