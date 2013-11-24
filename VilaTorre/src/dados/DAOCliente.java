@@ -30,6 +30,11 @@ public class DAOCliente extends DAOGenerico<Cliente> implements IDAOCliente{
 		return (Cliente) query.getSingleResult();
 	}
 	
-	
+	@Override
+	public Cliente verificarEmail(String email) throws Exception {
+		TypedQuery<Cliente> query = entityManager.createQuery("from Cliente c where c.email = :e-mail", Cliente.class);
+		query.setParameter("e-mail", email);
+		return (Cliente)query.getSingleResult();
+	}
 
 }

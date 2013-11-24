@@ -5,6 +5,25 @@
 	version="1.0">
 
 
+
+	<persistence-unit name="GerarTabelas" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/vila_torre" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="dialect" value="org.hibernate.dialect.MySQLDialect" />
+
+			<!-- Configuracoes do Hibernate -->
+			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="org.hibernate" value="info" /> 
+			<property name="org.hibernate.SQL.level" value="debug" /> 
+			<property name="org.hibernate.type.level" value="debug"/> 
+		</properties>
+	</persistence-unit>
 	
 	<persistence-unit name="ProjetoVilaTorre" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
@@ -19,14 +38,12 @@
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
-			<!-- <property name="org.hibernate" value="info" />
-			<property name="org.hibernate.SQL.level" value="debug" />
-			<property name="org.hibernate.type.level" value="debug" /> -->
-			
-			
-
+		    <property name="org.hibernate" value="info" /> 
+		    <property name="org.hibernate.SQL.level" value="debug"/> 
+		    <property name="org.hibernate.type.level" value="debug"/>
 		</properties>
-
 	</persistence-unit>
-	
+
+
+
 </persistence>

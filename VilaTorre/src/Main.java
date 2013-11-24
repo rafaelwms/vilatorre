@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		
-	    EntityManagerFactory factory = Persistence.createEntityManagerFactory("unit");
+	    EntityManagerFactory factory = Persistence.createEntityManagerFactory("GerarTabelas");
 
 	      factory.close();
 	    }

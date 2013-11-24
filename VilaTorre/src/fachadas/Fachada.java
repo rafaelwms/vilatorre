@@ -2,7 +2,7 @@ package fachadas;
 
 import java.util.List;
 
-import negocio.NegocioCliente;
+
 import negocio.NegocioComum;
 
 import basicas.*;
@@ -10,7 +10,7 @@ import basicas.*;
 public class Fachada implements IFachada {
 
 	private static IFachada fachada;
-	private NegocioComum negocioComum;
+	private static NegocioComum negocioComum;
 
 	private Fachada() {
 		this.negocioComum = new NegocioComum();
@@ -24,76 +24,81 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public void inserirCliente(Cliente cliente) {
+	public void inserirCliente(Cliente cliente) throws Exception{
+		try{
 		negocioComum.inserirCliente(cliente);
-
+		}catch (Exception ex){
+			throw new Exception(ex.getMessage());
+		}
 	}
 
 	@Override
-	public void alterarCliente(Cliente cliente) {
+	public void alterarCliente(Cliente cliente) throws Exception{
 		negocioComum.alterarCliente(cliente);
 	}
 
 	@Override
-	public void removerCliente(Cliente cliente) {
+	public void removerCliente(Cliente cliente) throws Exception{
 		negocioComum.remover(cliente);
 	}
 
 	@Override
-	public List<Cliente> consultarTodosCliente() {
+	public List<Cliente> consultarTodosCliente() throws Exception{
 		return negocioComum.consultarTodosClientes();
 
 	}
 
-	public Cliente consultarPorIdCliente(Integer id) {
-
+	public Cliente consultarPorIdCliente(Integer id) throws Exception{
+		
 		return negocioComum.consultarPorId(id);
 
 	}
 
 	@Override
-	public Cliente localizarClientePeloFone(String fone) {
+	public Cliente localizarClientePeloFone(String fone) throws Exception{
 		return negocioComum.localizarClientePeloFone(fone);
 	}
 
 	@Override
-	public List<Cliente> localizarClientePeloNome(String nome) {
+	public List<Cliente> localizarClientePeloNome(String nome) throws Exception{
 		return negocioComum.localizarClientePeloNome(nome);
 	}
 
 	@Override
-	public Cliente localizarClientePeloCpf(String cpf) {
+	public Cliente localizarClientePeloCpf(String cpf) throws Exception{
 		return null;
 	}
 
 	@Override
-	public void inserirFuncionario(Funcionario funcionario) {
+	public void inserirFuncionario(Funcionario funcionario) throws Exception {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void alterarFuncionario(Funcionario funcionario) {
+	public void alterarFuncionario(Funcionario funcionario) throws Exception {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void removerFuncionario(Funcionario funcionario) {
+	public void removerFuncionario(Funcionario funcionario) throws Exception {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public List<Funcionario> consultarTodos() {
+	public List<Funcionario> consultarTodos() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Funcionario consultarFuncionarioPorId(Integer id) {
+	public Funcionario consultarFuncionarioPorId(Integer id) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

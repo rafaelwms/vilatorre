@@ -39,7 +39,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 	 *            a ser realizado o merge
 	 * @return objeto que foi executado o merge
 	 */
-	public final void alterar(Entidade objeto) {
+	public final void alterar(Entidade objeto) throws Exception{
 		EntityTransaction tx = getEntityManager().getTransaction();
 		try {
 			tx.begin();
@@ -61,7 +61,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 	 * 
 	 * @param objeto a ser salvo
 	 */
-	public final void inserir(Entidade objeto) {
+	public final void inserir(Entidade objeto) throws Exception{
 		EntityTransaction tx = getEntityManager().getTransaction();		
 		try {
 			tx.begin();
@@ -82,7 +82,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 	 * @param objeto
 	 *            a ser salvo
 	 */
-	public final void inserirColecao(Collection<Entidade> colecao) {
+	public final void inserirColecao(Collection<Entidade> colecao) throws Exception{
 		EntityTransaction tx = getEntityManager().getTransaction();
 		try {
 			tx.begin();
@@ -108,7 +108,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 	 * @param objeto
 	 *            a ser removido
 	 */
-	public final void remover(Entidade objeto) {
+	public final void remover(Entidade objeto) throws Exception{
 		EntityTransaction tx = getEntityManager().getTransaction();
 		try {
 			tx.begin();
@@ -136,7 +136,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 	 *            identificador
 	 * @return Objeto do tipo T
 	 */
-	public final Entidade consultarPorId(Integer chave){
+	public final Entidade consultarPorId(Integer chave) throws Exception{
 		Entidade instance = null;
 		try {
 			instance = (Entidade) getEntityManager().find(classePersistente, chave);
@@ -146,7 +146,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 		return instance;
 	}
 
-	public List<Entidade> consultarTodos(){
+	public List<Entidade> consultarTodos() throws Exception{
 		try {
 			String sql = "from " + classePersistente.getSimpleName();
 			TypedQuery<Entidade> query = entityManager.createQuery(sql, classePersistente);
