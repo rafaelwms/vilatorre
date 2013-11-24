@@ -1,8 +1,11 @@
 package beans;
 
+import java.text.ParseException;
 import java.util.Date;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import util.Datas;
 import basicas.Cliente;
@@ -10,113 +13,123 @@ import basicas.Endereco;
 import basicas.Usuario;
 import basicas.Usuario.TipoUser;
 import fachadas.Fachada;
-import fachadas.IFachada;
 
 @ManagedBean
 public class ClienteBeans {
-	
-private Cliente cliente = new Cliente();
-private Usuario usuario = new Usuario();
-private Endereco endereco = new Endereco();
 
+	private Cliente cliente = new Cliente();
+	private Usuario usuario = new Usuario();
+	private Endereco endereco = new Endereco();
 
+	private String nasc;
+	private Date nascimento;
+	private Date momento;
 
+	public String salvar() {
 
-private String nasc;
-private Date nascimento;
-private Date momento;
-
-public String salvar(){
-	    nascimento = Datas.criarData(nasc);
-		momento = new Date();
-		
-		endereco.setCidade("Recife");
-		endereco.setUf("PE");
-		cliente.setEndereco(endereco);
-		cliente.setUsuario(usuario);
-		cliente.getUsuario().setTipoUser(TipoUser.CLIENTE);
-		cliente.setNasc(nascimento);
-		cliente.setCadastro(momento);
-		
-	if (cliente.getId() == null  || cliente.getId() == 0){
-		try{
-		Fachada.getInstancia().inserirCliente(cliente);
-		return "/cadastroRealizado.xhtml?faces-redirect=true";
-		}catch(Exception ex){
-			System.out.println(ex);
-			System.out.println(nasc);
-			System.out.println(momento);
-			System.out.println(nascimento);
-		return "/sefu.xhtml?faces-redirect=true";	
-		}
-	}else{
 		try {
-			Fachada.getInstancia().alterarCliente(cliente);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			nascimento = Datas.criarData(nasc);
+			momento = new Date();
+			endereco.setCidade("Recife");
+			endereco.setUf("PE");
+			cliente.setEndereco(endereco);
+			cliente.setUsuario(usuario);
+			cliente.getUsuario().setTipoUser(TipoUser.CLIENTE);
+			cliente.setNasc(nascimento);
+			cliente.setCadastro(momento);
+			
+			
+			ValidacoesDeTela.validarString(cliente.getNome(), "cliente", "nome", 6, 130, "o", "o");
+			ValidacoesDeTela.validarString(cliente.getFone(), "cliente", "fone", 13, 13, "o", "o");
+			ValidacoesDeTela.validarString(cliente.getCpf(), "cliente", "cpf", 14, 14, "o", "o");
+			ValidacoesDeTela.validarEmail(cliente.getEmail(), "cliente", "o");
+			
+			if((!cliente.getUsuario().getLogin().trim().equals(""))){
+				ValidacoesDeTela.validarString(cliente.getUsuario().getLogin(), "cliente", "login", 6, 30, "o", "o");
+				ValidacoesDeTela.validarString(cliente.getUsuario().getSenha(), "cliente", "senha", 6, 30, "o", "a");
+			}
+
+			if (cliente.getId() == null || cliente.getId() == 0) {
+
+				Fachada.getInstancia().inserirCliente(cliente);
+				FacesContext.getCurrentInstance().addMessage("cadastroCli", new FacesMessage("Cadadstro de " + cliente.getNome() + " efetuado com sucesso."));
+				cliente = new Cliente();
+				usuario = new Usuario();
+				endereco = new Endereco();
+				nasc = "";
+				return null;
+
+			} else {
+
+				Fachada.getInstancia().alterarCliente(cliente);
+				FacesContext.getCurrentInstance().addMessage("alterCli", new FacesMessage("Cadadstro de " + cliente.getNome() + " alterado com sucesso."));
+				cliente = new Cliente();
+				return null;
+			}
+		} catch (ParseException px){
+			FacesContext.getCurrentInstance().addMessage("expetionCli", new FacesMessage("Data \""+nasc+"\" incorreta."));
+			return null;
+		} catch (Exception ex) {
+			FacesContext.getCurrentInstance().addMessage("expetionCli", new FacesMessage(ex.getMessage()));
+			return null;
 		}
-		return "/alteracaoClienteRealizada.xhtml";
+
 	}
-}
 
-public void reset(){
-	cliente = new Cliente();
-}
+	public String reset() {
+		cliente = new Cliente();
+		usuario = new Usuario();
+		endereco = new Endereco();
+		nasc = "";
+		return null;
+	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
 
-public Cliente getCliente() {
-	return cliente;
-}
-public void setCliente(Cliente cliente) {
-	this.cliente = cliente;
-}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
-public Usuario getUsuario() {
-	return usuario;
-}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
+	public Endereco getEndereco() {
+		return endereco;
+	}
 
-public void setUsuario(Usuario usuario) {
-	this.usuario = usuario;
-}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 
+	public String getNasc() {
+		return nasc;
+	}
 
-public Endereco getEndereco() {
-	return endereco;
-}
+	public void setNasc(String nasc) {
+		this.nasc = nasc;
+	}
 
+	public Date getMomento() {
+		return momento;
+	}
 
-public void setEndereco(Endereco endereco) {
-	this.endereco = endereco;
-}
+	public void setMomento(Date momento) {
+		this.momento = momento;
+	}
 
-public String getNasc() {
-	return nasc;
-}
+	public Date getNascimento() {
+		return nascimento;
+	}
 
-public void setNasc(String nasc) {
-	this.nasc = nasc;
-}
-
-public Date getMomento() {
-	return momento;
-}
-
-public void setMomento(Date momento) {
-	this.momento = momento;
-}
-
-public Date getNascimento() {
-	return nascimento;
-}
-
-public void setNascimento(Date nascimento) {
-	this.nascimento = nascimento;
-}
-
-
-
+	public void setNascimento(Date nascimento) {
+		this.nascimento = nascimento;
+	}
 
 }

@@ -15,6 +15,9 @@ public abstract class Pessoa{
 	@Column(length=130)
 	private String nome;
 	
+	@Column
+	private int sexo;
+	
 	@Temporal(TemporalType.DATE)
 	private Date nasc;
 	
@@ -112,6 +115,16 @@ public abstract class Pessoa{
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+
+	public int getSexo() {
+		return sexo;
+	}
+
+
+	public void setSexo(int sexo) {
+		this.sexo = sexo;
 	}
 	
 	

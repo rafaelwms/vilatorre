@@ -14,6 +14,6 @@ public interface IDAOCliente extends IDAOGenerico<Cliente> {
 	
 	public Cliente localizarClientePeloCpf(String cpf);
 	
-	
+	public Cliente verificarEmail(String email) throws Exception;
 	
 }

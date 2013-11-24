@@ -25,42 +25,47 @@
 			
 			
 			<p:panel header="Dados Pessoais">
-			<h:panelGrid columns="2">
-			<h:outputText for="nome" value="Nome:"/><p:inputText tabindex="1" size="70" maxlength="130" required="true" requiredMessage="É necessário informar o nome." id="nome" value="#{clienteBeans.cliente.nome}"/>
+			<h:panelGrid columns="2" >
+			<h:outputText for="nome" value="Nome:"/><p:inputText required="true" requiredMessage="Digite o nome." tabindex="1" size="70" maxlength="130" id="nome" value="#{clienteBeans.cliente.nome}"/>
+			<h:outputText for="sexo" value="Sexo:"/>        
+			<p:selectOneButton  id="sexo" value="#{clienteBeans.cliente.sexo}" >  
+              <f:selectItem itemLabel="Masculino" itemValue="1" />  
+              <f:selectItem itemLabel="Feminino" itemValue="0" />  
+       		  </p:selectOneButton>
 			<h:outputText for="nasc" value="Data Nasc.:"/><p:inputMask tabindex="2" id="nasc" mask="99/99/9999" value="#{clienteBeans.nasc}"/>
-			<h:outputText for="rg" value="RG:  "/><p:inputText tabindex="3" required="true" requiredMessage="É necessário informar o rg." label="RG" id="rg" value="#{clienteBeans.cliente.rg}"/>
-			<h:outputText for="cpf" value="CPF: "/><p:inputMask tabindex="4" required="true"  requiredMessage="É necessário informar o cpf." mask="999.999.999-99"  id="cpf" value="#{clienteBeans.cliente.cpf}"/>
-			<h:outputText for="fone" value="Fone: "/><p:inputMask tabindex="5" required="true" requiredMessage="É necessário informar o fone."  mask="(99)9999-9999"  id="fone" value="#{clienteBeans.cliente.fone}"/>
-			<h:outputText for="email" value="E-mail: "/><p:inputText tabindex="6" required="true" requiredMessage="É necessário informar o e-mail."  id="email" value="#{clienteBeans.cliente.email}"/>
+			<h:outputText for="rg" value="RG:  "/><p:inputText required="true" requiredMessage="Digite o rg." tabindex="3"  label="RG" id="rg" value="#{clienteBeans.cliente.rg}"/>
+			<h:outputText for="cpf" value="CPF: "/><p:inputMask required="true" requiredMessage="Digite o cpf." tabindex="4"  mask="999.999.999-99"  id="cpf" value="#{clienteBeans.cliente.cpf}"/>
+			<h:outputText for="fone" value="Fone: "/><p:inputMask required="true" requiredMessage="Digite o fone." tabindex="5"   mask="(99)9999-9999"  id="fone" value="#{clienteBeans.cliente.fone}"/>
+			<h:outputText for="email" value="E-mail: "/><p:inputText required="true" requiredMessage="Digite o e-mail." tabindex="6"   id="email" value="#{clienteBeans.cliente.email}"/>
 			</h:panelGrid>
 			</p:panel>
 			
 			<p:panel header="Dados de Usuário">
 			<h:panelGrid columns="2">
-			<h:outputText for="login" value="Login:"/><p:inputText tabindex="7"  maxlength="130" required="false" requiredMessage="É necessário informar o login." id="login" value="#{clienteBeans.usuario.login}"/>
-			<h:outputText for="senha" value="Senha:"/><p:password tabindex="8" feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="Razoável" strongLabel="Forte" required="false" requiredMessage="É necessário informar a senha." id="senha" value="#{clienteBeans.usuario.senha}"/>
-			<h:outputText for="senha2" value="Confirm. Senha:"/><p:password tabindex="9" feedback="false" required="false"   requiredMessage="É necessário confirmar a senha." id="senha2"/>
+			<h:outputText for="login" value="Login:"/><p:inputText tabindex="7"  maxlength="130"  id="login" value="#{clienteBeans.usuario.login}"/>
+			<h:outputText for="senha" value="Senha:"/><p:password tabindex="8" feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="Razoável" strongLabel="Forte" id="senha" value="#{clienteBeans.usuario.senha}"/>
+			<h:outputText for="senha2" value="Confirm. Senha:"/><p:password tabindex="9" feedback="false" required="false" id="senha2"/>
 			</h:panelGrid>
 			</p:panel>
 			
 			<p:panel header="Endereço">
 			<h:panelGrid columns="2">
-			<h:outputText for="logradouro" value="Logradouro:"/><p:inputText tabindex="10" size="70"  maxlength="130" required="true" id="logradouro" value="#{clienteBeans.endereco.logradouro}"/>
-			<h:outputText for="numero" value="Numero:"/><p:inputText tabindex="11" required="true" id="numero" value="#{clienteBeans.endereco.numero}"/>
+			<h:outputText for="logradouro" value="Logradouro:"/><p:inputText required="true" requiredMessage="Digite o lagradouro." tabindex="10" size="70"  maxlength="130"  id="logradouro" value="#{clienteBeans.endereco.logradouro}"/>
+			<h:outputText for="numero" value="Numero:"/><p:inputText required="true" requiredMessage="Digite o número." tabindex="11" id="numero" value="#{clienteBeans.endereco.numero}"/>
 			<h:outputText for="complemento" value="Complemento:"/><p:inputText tabindex="12"  required="false" id="complemento" value="#{clienteBeans.endereco.complemento}"/>
-			<h:outputText for="bairro" value="Bairro:"/><p:inputText  tabindex="13" required="true" id="bairro" value="#{clienteBeans.endereco.bairro}"/>
+			<h:outputText for="bairro" value="Bairro:"/><p:inputText required="true" requiredMessage="Digite o bairro." tabindex="13" id="bairro" value="#{clienteBeans.endereco.bairro}"/>
 			</h:panelGrid>
 			</p:panel>
 			
 			<p:panel>
 			<div style="float: none;" align="center">
-			<p:commandButton value="Salvar" action="#{clienteBeans.salvar}"  ajax="false" /> 
-			<p:commandButton value="Limpar" actionListener="#{clienteBeans.reset}" ajax="false" />
-			
+			<p:commandButton value="Salvar" action="#{clienteBeans.salvar}"  ajax="false" icon="ui-icon-disk"/> 
+			<p:commandButton value="Limpar" type="reset" actionListener="#{clienteBeans.reset}" update="@form" icon="ui-icon-arrowreturnthick-1-w"/>
+			<p:commandButton value="Voltar" action="/index.xhml?faces-redirect=true"  ajax="false" icon="ui-icon-home"/> 
 			</div>
 			</p:panel>
 			<div align="center">
-			<p:panel header="2013 - All Rigths Reserved - Rafael WMS ®" />
+			<p:panel header="Vila Torre Original Burger System© 2013 All Rigths Reserved - Rafael WMS®" />
 			</div>
 			
 		
