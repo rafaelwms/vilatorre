@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Embeddable
 public class Usuario {
 	
+
 	@Column(length=30, nullable=true, unique=true)
 	private String login;
 	
@@ -78,6 +79,5 @@ public class Usuario {
 		this.tipoUser = tipoUser;
 	}
 
-
-
+	
 }

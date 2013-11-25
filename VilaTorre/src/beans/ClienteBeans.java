@@ -52,7 +52,7 @@ public class ClienteBeans {
 			if (cliente.getId() == null || cliente.getId() == 0) {
 
 				Fachada.getInstancia().inserirCliente(cliente);
-				FacesContext.getCurrentInstance().addMessage("cadastroCli", new FacesMessage("Cadadstro de " + cliente.getNome() + " efetuado com sucesso."));
+				FacesContext.getCurrentInstance().addMessage("cadastroCli", new FacesMessage("Cadastro de " + cliente.getNome() + " efetuado com sucesso."));
 				cliente = new Cliente();
 				usuario = new Usuario();
 				endereco = new Endereco();
@@ -62,7 +62,7 @@ public class ClienteBeans {
 			} else {
 
 				Fachada.getInstancia().alterarCliente(cliente);
-				FacesContext.getCurrentInstance().addMessage("alterCli", new FacesMessage("Cadadstro de " + cliente.getNome() + " alterado com sucesso."));
+				FacesContext.getCurrentInstance().addMessage("alterCli", new FacesMessage("Cadastro de " + cliente.getNome() + " alterado com sucesso."));
 				cliente = new Cliente();
 				return null;
 			}
@@ -81,6 +81,29 @@ public class ClienteBeans {
 		usuario = new Usuario();
 		endereco = new Endereco();
 		nasc = "";
+		return null;
+	}
+	
+	public String  remover(){
+		try{
+		if (cliente.getId() != null && cliente.getId() > 0) {
+
+			Fachada.getInstancia().removerCliente(cliente);
+			FacesContext.getCurrentInstance().addMessage("cadastroCli", new FacesMessage("Cadastro de removido com sucesso."));
+			cliente = new Cliente();
+			usuario = new Usuario();
+			endereco = new Endereco();
+			nasc = "";
+			return null;
+
+		}else{
+			FacesContext.getCurrentInstance().addMessage("cadastroCli", new FacesMessage("Seleicione um cliente para remoção."));
+			return null;
+		}
+		}catch(Exception ex){
+			FacesContext.getCurrentInstance().addMessage("exceptionCli", new FacesMessage(ex.getMessage()));
+		}
+		
 		return null;
 	}
 
