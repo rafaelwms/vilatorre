@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<link type="text/css" rel="stylesheet" href="../css/custom.css"/>
+<script language="JavaScript" src="../script/money.js"/>
+</h:head>
+<h:body >
+
+
+	<h:form>
+
+
+	<p:dialog  header=".: Gerenciar Cargos :." widgetVar="dlg"
+			showEffect="clip" width="600" modal="true" visible="true"
+			resizable="false" closable="false" draggable="false">
+		<p:panel>
+			<div align="center">
+			<img src="../Imagens/Vila Torre - LOGO - 200.png"/><br/>
+			</div>
+			</p:panel>
+			
+			
+			<p:panel header="Informações do cargo">
+			<h:panelGrid columns="2">
+			<h:outputText for="nomeCargo" value="Nome:"/><p:inputText id="nomeCargo" value="#{cargoBean.cargo.nome}"  tabindex="1" size="70"   />
+			<h:outputText for="descCargo" value="Descrição:"/><p:inputTextarea id="descCargo" value="#{cargoBean.cargo.descricao}" tabindex="2" />
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:panel>
+			<div style="float: none;" align="center">
+			<p:commandButton value="Salvar" action="#{cargoBean.salvar}" ajax="false" icon="ui-icon-disk"/> 
+			<p:commandButton value="Limpar" type="reset" ajax="false" icon="ui-icon-arrowreturnthick-1-w"/>
+			</div>
+			</p:panel>
+			
+		
+			
+		
+		</p:dialog>
+		  
+    
+	
+	</h:form>
+	
+
+</h:body>
+</html>

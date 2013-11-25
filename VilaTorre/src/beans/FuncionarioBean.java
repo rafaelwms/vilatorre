@@ -6,6 +6,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import negocio.ValidacoesDeTela;
+
 import fachadas.Fachada;
 
 import util.Datas;
@@ -18,7 +20,7 @@ public class FuncionarioBean {
 	private Funcionario func;
 	private Usuario usuario;
 	private Endereco endereco;
-	private Cargo cargo;
+	private Cargo cargoEscolhido;
 	private String admissao;
 	private String demissao;
 	private String nasc;
@@ -38,7 +40,7 @@ public class FuncionarioBean {
 			func.setDemissao(Datas.criarData(demissao));
 			func.setNasc(Datas.criarData(nasc));
 			func.setSalario(Double.parseDouble(salario));
-			func.setCargo(cargo);
+			func.setCargo(cargoEscolhido);
 			func.setUsuario(usuario);
 			endereco.setCidade("Recife");
 			endereco.setUf("PE");
@@ -53,7 +55,7 @@ public class FuncionarioBean {
 				
 				func = new Funcionario();
 				endereco = new Endereco();
-				cargo = new Cargo();
+				cargoEscolhido = new Cargo();
 				usuario = new Usuario();
 				
 				return  null;
@@ -64,7 +66,7 @@ public class FuncionarioBean {
 				
 				func = new Funcionario();
 				endereco = new Endereco();
-				cargo = new Cargo();
+				cargoEscolhido = new Cargo();
 				usuario = new Usuario();
 				
 				return  null;
@@ -102,12 +104,13 @@ public class FuncionarioBean {
 		return null;
 	}
 	
-	
+				
+
 	
 	public String reset(){
 		func = new Funcionario();
 		endereco = new Endereco();
-		cargo = new Cargo();
+		cargoEscolhido = new Cargo();
 		usuario = new Usuario();
 		
 		return  null;
@@ -115,8 +118,8 @@ public class FuncionarioBean {
 	
 	public List<Cargo> listarCargos(){
 		try{
-			cargos = Fachada.getInstancia().consultarTodosCargo();
-		return cargos;
+			setCargos(Fachada.getInstancia().consultarTodosCargo());
+		return getCargos();
 		}catch(Exception ex){
 			return null;
 		}
@@ -135,10 +138,10 @@ public class FuncionarioBean {
 		this.usuario = usuario;
 	}
 	public Cargo getCargo() {
-		return cargo;
+		return cargoEscolhido;
 	}
 	public void setCargo(Cargo cargo) {
-		this.cargo = cargo;
+		this.cargoEscolhido = cargo;
 	}
 	public String getAdmissao() {
 		return admissao;
