@@ -7,6 +7,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import negocio.ValidacoesDeTela;
+
 import util.Datas;
 import basicas.Cliente;
 import basicas.Endereco;
@@ -15,7 +17,7 @@ import basicas.Usuario.TipoUser;
 import fachadas.Fachada;
 
 @ManagedBean
-public class ClienteBeans {
+public class ClienteBean {
 
 	private Cliente cliente = new Cliente();
 	private Usuario usuario = new Usuario();
