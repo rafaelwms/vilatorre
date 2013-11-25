@@ -6,7 +6,7 @@ import dados.IDAOGenerico;
 
 public interface IDAOFornecedor extends IDAOGenerico<Fornecedor> {
 	
-	public List<Fornecedor> listarFornecedoresPorProduto(Produto produto) throws Exception;
+	public List<Fornecedor> listarFornecedoresPorProduto(MateriaPrima materia) throws Exception;
 	
 	
 }

@@ -1,7 +1,13 @@
 package beans;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
+import javax.faces.context.FacesContext;
+
+import fachadas.Fachada;
+
 import basicas.*;
+import basicas.Usuario.TipoUser;
 
 @ManagedBean
 @SessionScoped
@@ -13,20 +19,46 @@ public class LoginBean {
 	
 	
 	public String tentarLogar(){
+		String retorno = "";
 		
- 	if((login.equals("rafael"))&&(senha.equals("wms"))){
-
+		try{
 			
-			return "/loginSucedido.xhtml?faces-redirect=true";
-		}else{
-			return "/sefu.xhtml?faces-redirect=true";
+		if(login == null || login.trim().equals("")){
+			FacesContext.getCurrentInstance().addMessage("loginTry", new FacesMessage("Login vazio."));
+			return null;
 		}
+		else if (senha == null || senha.trim().equals("")){
+			FacesContext.getCurrentInstance().addMessage("loginTry", new FacesMessage("Senha vazia."));
+			return null;
+		} else {
+			
+		 logado = Fachada.getInstancia().logarPessoa(login, senha);
+		 FacesContext.getCurrentInstance().addMessage("loginTry", new FacesMessage("Bem vindo "+logado.getNome()+"."));
+		 
+		 if(logado.getUsuario().getTipoUser() == TipoUser.ADIM)
+			 retorno = "engine/admin.xhtml?faces-redirect=true";
+		 
+		 if(logado.getUsuario().getTipoUser() == TipoUser.USER)
+			 retorno = "engine/user.xhtml?faces-redirect=true";
+		 
+		 if(logado.getUsuario().getTipoUser() == TipoUser.CLIENTE)
+			 retorno = "engine/cliente.xhtml?faces-redirect=true";
+		 
+		  if(logado.getUsuario().getTipoUser() == TipoUser.DEVELOPER)
+			  retorno = "engine/rafaelwms.xhtml?faces-redirect=true";
+		  return retorno;
+		}
+		}catch(Exception ex){
+			FacesContext.getCurrentInstance().addMessage("loginTry", new FacesMessage(ex.getMessage()));
+			return null;
+		}
+		
 	}
 	
 	
 	public String telaCliente(){
 		
-		return "/telaCliente.xhtml?faces-redirect=true";
+		return "cliente/telaCliente.xhtml?faces-redirect=true";
 	}
 	
 	
@@ -45,10 +77,10 @@ public class LoginBean {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public Pessoa getUsuarioLogado() {
+	public Pessoa getLogado() {
 		return logado;
 	}
-	public void setUsuarioLogado(Pessoa logado) {
+	public void setLogado(Pessoa logado) {
 		this.logado = logado;
 	}
 
