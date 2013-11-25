@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -21,6 +23,7 @@ public class FuncionarioBean {
 	private String demissao;
 	private String nasc;
 	private String salario;
+	private List<Cargo> cargos;
 	
 	public String salvar(){
 		
@@ -99,6 +102,8 @@ public class FuncionarioBean {
 		return null;
 	}
 	
+	
+	
 	public String reset(){
 		func = new Funcionario();
 		endereco = new Endereco();
@@ -106,6 +111,15 @@ public class FuncionarioBean {
 		usuario = new Usuario();
 		
 		return  null;
+	}
+	
+	public List<Cargo> listarCargos(){
+		try{
+			cargos = Fachada.getInstancia().consultarTodosCargo();
+		return cargos;
+		}catch(Exception ex){
+			return null;
+		}
 	}
 	
 	public Funcionario getFunc() {
@@ -157,6 +171,14 @@ public class FuncionarioBean {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public List<Cargo> getCargos() {
+		return cargos;
+	}
+
+	public void setCargos(List<Cargo> cargos) {
+		this.cargos = cargos;
 	}
 
 
