@@ -8,7 +8,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<link type="text/css" rel="stylesheet" href="css/custom.css"/>
+<link type="text/css" rel="stylesheet" href="../css/custom.css"/>
+<script language="JavaScript" src="../script/money.js"/>
 </h:head>
 <h:body >
 
@@ -19,7 +20,7 @@
 			resizable="false" closable="false" draggable="false">
 		<p:panel>
 			<div align="center">
-			<img src="Imagens/Vila Torre - LOGO - 200.png"/><br/>
+			<img src="../Imagens/Vila Torre - LOGO - 200.png"/><br/>
 			</div>
 			</p:panel>
 			
@@ -27,11 +28,31 @@
 			<p:panel header="Dados Pessoais">
 			<h:panelGrid columns="2">
 			<h:outputText for="nome" value="Nome:"/><p:inputText tabindex="1" size="70" maxlength="130" required="true" requiredMessage="É necessário informar o nome." id="nome" value="#{clienteBeans.cliente.nome}"/>
+			<h:outputText for="sexo" value="Sexo:"/>        
+			<p:selectOneButton  id="sexo" value="#{clienteBeans.cliente.sexo}" >  
+              <f:selectItem itemLabel="Masculino" itemValue="1" />  
+              <f:selectItem itemLabel="Feminino" itemValue="0" />  
+       		  </p:selectOneButton>
 			<h:outputText for="nasc" value="Data Nasc.:"/><p:calendar tabindex="2" id="nasc" value="#{clienteBeans.cliente.nasc}"/>
 			<h:outputText for="rg" value="RG:  "/><p:inputText tabindex="3" required="true" requiredMessage="É necessário informar o rg." label="RG" id="rg" value="#{clienteBeans.cliente.rg}"/>
 			<h:outputText for="cpf" value="CPF: "/><p:inputMask tabindex="4" required="true"  requiredMessage="É necessário informar o cpf." mask="999.999.999-99"  id="cpf" value="#{clienteBeans.cliente.cpf}"/>
 			<h:outputText for="fone" value="Fone: "/><p:inputMask tabindex="5" required="true" requiredMessage="É necessário informar o fone."  mask="(99)9999-9999"  id="fone" value="#{clienteBeans.cliente.fone}"/>
 			</h:panelGrid>
+			</p:panel>
+			<p:panel header="Dados Trabalhistas">
+			<h:panelGrid columns="2">
+			<h:outputText for="admissao" value="Data de Admissão:"/><p:inputMask tabindex="6"  maxlength="130" required="false" id="admissao" mask="99/99/9999" value="#{funcionarioBean.admissao}"/>
+			<h:outputText for="salario" value="Salário R$"/><p:inputText id="salario" onkeypress="mascara(this,moeda)" value="#{funcionarioBean.salario}"/>
+			<h:outputText for="cargo" value="Confirm. Senha:"/> 
+			<p:selectOneMenu value="#">  
+        	     <f:selectItem itemLabel="Select One" itemValue="" />  
+          	     <f:selectItem itemLabel="Chapeiro" itemValue="1" />  
+           		 <f:selectItem itemLabel="Garçom" itemValue="2" />  
+           		 <f:selectItem itemLabel="Delivery" itemValue="3" />  
+           		 <f:selectItem itemLabel="Léo" itemValue="4" />
+       		 </p:selectOneMenu> 
+			</h:panelGrid>
+			
 			</p:panel>
 			
 			<p:panel header="Dados de Usuário">
