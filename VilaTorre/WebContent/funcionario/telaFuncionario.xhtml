@@ -15,7 +15,7 @@
 
 	<h:form>
 
-	<p:dialog  header="Funcionário." widgetVar="dlg"
+	<p:dialog  header="Novo Funcionário." widgetVar="dlg"
 			showEffect="clip" width="600" modal="true" visible="true"
 			resizable="false" closable="false" draggable="false">
 		<p:panel>
@@ -27,16 +27,16 @@
 			
 			<p:panel header="Dados Pessoais">
 			<h:panelGrid columns="2">
-			<h:outputText for="nome" value="Nome:"/><p:inputText tabindex="1" size="70" maxlength="130" required="true" requiredMessage="É necessário informar o nome." id="nome" value="#{clienteBeans.cliente.nome}"/>
+			<h:outputText for="nome" value="Nome:"/><p:inputText tabindex="1" size="70" maxlength="130" required="true" requiredMessage="É necessário informar o nome." id="nome" value="#{funcionarioBean.func.nome}"/>
 			<h:outputText for="sexo" value="Sexo:"/>        
-			<p:selectOneButton  id="sexo" value="#{clienteBeans.cliente.sexo}" >  
+			<p:selectOneButton  id="sexo" value="#{funcionarioBean.func.sexo}" >  
               <f:selectItem itemLabel="Masculino" itemValue="1" />  
               <f:selectItem itemLabel="Feminino" itemValue="0" />  
        		  </p:selectOneButton>
-			<h:outputText for="nasc" value="Data Nasc.:"/><p:calendar tabindex="2" id="nasc" value="#{clienteBeans.cliente.nasc}"/>
-			<h:outputText for="rg" value="RG:  "/><p:inputText tabindex="3" required="true" requiredMessage="É necessário informar o rg." label="RG" id="rg" value="#{clienteBeans.cliente.rg}"/>
-			<h:outputText for="cpf" value="CPF: "/><p:inputMask tabindex="4" required="true"  requiredMessage="É necessário informar o cpf." mask="999.999.999-99"  id="cpf" value="#{clienteBeans.cliente.cpf}"/>
-			<h:outputText for="fone" value="Fone: "/><p:inputMask tabindex="5" required="true" requiredMessage="É necessário informar o fone."  mask="(99)9999-9999"  id="fone" value="#{clienteBeans.cliente.fone}"/>
+			<h:outputText for="nasc" value="Data Nasc.:"/><p:calendar tabindex="2" id="nasc" value="#{funcionarioBean.nasc}"/>
+			<h:outputText for="rg" value="RG:  "/><p:inputText tabindex="3" required="true" requiredMessage="É necessário informar o rg." label="RG" id="rg" value="#{funcionarioBean.func.rg}"/>
+			<h:outputText for="cpf" value="CPF: "/><p:inputMask tabindex="4" required="true"  requiredMessage="É necessário informar o cpf." mask="999.999.999-99"  id="cpf" value="#{funcionarioBean.func.cpf}"/>
+			<h:outputText for="fone" value="Fone: "/><p:inputMask tabindex="5" required="true" requiredMessage="É necessário informar o fone."  mask="(99)9999-9999"  id="fone" value="#{funcionarioBean.func.fone}"/>
 			</h:panelGrid>
 			</p:panel>
 			<p:panel header="Dados Trabalhistas">
@@ -44,12 +44,9 @@
 			<h:outputText for="admissao" value="Data de Admissão:"/><p:inputMask tabindex="6"  maxlength="130" required="false" id="admissao" mask="99/99/9999" value="#{funcionarioBean.admissao}"/>
 			<h:outputText for="salario" value="Salário R$"/><p:inputText id="salario" onkeypress="mascara(this,moeda)" value="#{funcionarioBean.salario}"/>
 			<h:outputText for="cargo" value="Confirm. Senha:"/> 
-			<p:selectOneMenu value="#">  
-        	     <f:selectItem itemLabel="Select One" itemValue="" />  
-          	     <f:selectItem itemLabel="Chapeiro" itemValue="1" />  
-           		 <f:selectItem itemLabel="Garçom" itemValue="2" />  
-           		 <f:selectItem itemLabel="Delivery" itemValue="3" />  
-           		 <f:selectItem itemLabel="Léo" itemValue="4" />
+			<p:selectOneMenu value="#{funcionarioBean.cargo}" id="cargos" converter="cargoConverter">  
+        	      <f:selectItem noSelectionOption="true" itemLabel="Selecione um cargo"></f:selectItem>
+           		  <f:selectItems value="#{funcionarioBean.cargos}" var="carg" itemLabel="#{carg.nome}"></f:selectItems>
        		 </p:selectOneMenu> 
 			</h:panelGrid>
 			
@@ -57,18 +54,18 @@
 			
 			<p:panel header="Dados de Usuário">
 			<h:panelGrid columns="2">
-			<h:outputText for="login" value="Login:"/><p:inputText tabindex="6"  maxlength="130" required="false" requiredMessage="É necessário informar o login." id="login" value="#{clienteBeans.usuario.login}"/>
-			<h:outputText for="senha" value="Senha:"/><p:password tabindex="7" feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="Razoável" strongLabel="Forte" required="false" requiredMessage="É necessário informar a senha." id="senha" value="#{clienteBeans.usuario.senha}"/>
+			<h:outputText for="login" value="Login:"/><p:inputText tabindex="6"  maxlength="130" required="true" requiredMessage="É necessário informar o login." id="login" value="#{funcionarioBean.usuario.login}"/>
+			<h:outputText for="senha" value="Senha:"/><p:password tabindex="7" feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="Razoável" strongLabel="Forte" required="false" requiredMessage="É necessário informar a senha." id="senha" value="#{funcionarioBean.usuario.senha}"/>
 			<h:outputText for="senha2" value="Confirm. Senha:"/><p:password tabindex="8" feedback="false" required="false"   requiredMessage="É necessário confirmar a senha." id="senha2"/>
 			</h:panelGrid>
 			</p:panel>
 			
 			<p:panel header="Endereço">
 			<h:panelGrid columns="2">
-			<h:outputText for="logradouro" value="Logradouro:"/><p:inputText tabindex="9" size="70"  maxlength="130" required="true" id="logradouro" value="#{clienteBeans.endereco.logradouro}"/>
-			<h:outputText for="numero" value="Numero:"/><p:inputText tabindex="10" required="true" id="numero" value="#{clienteBeans.endereco.numero}"/>
-			<h:outputText for="complemento" value="Complemento:"/><p:inputText tabindex="11"  required="false" id="complemento" value="#{clienteBeans.endereco.complemento}"/>
-			<h:outputText for="bairro" value="Bairro:"/><p:inputText  tabindex="12" required="true" id="bairro" value="#{clienteBeans.endereco.bairro}"/>
+			<h:outputText for="logradouro" value="Logradouro:"/><p:inputText tabindex="9" size="70"  maxlength="130" required="true" id="logradouro" value="#{funcionarioBean.endereco.logradouro}"/>
+			<h:outputText for="numero" value="Numero:"/><p:inputText tabindex="10" required="true" id="numero" value="#{funcionarioBean.endereco.numero}"/>
+			<h:outputText for="complemento" value="Complemento:"/><p:inputText tabindex="11"  required="false" id="complemento" value="#{funcionarioBean.endereco.complemento}"/>
+			<h:outputText for="bairro" value="Bairro:"/><p:inputText  tabindex="12" required="true" id="bairro" value="#{funcionarioBean.endereco.bairro}"/>
 			</h:panelGrid>
 			</p:panel>
 			

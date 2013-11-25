@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import basicas.Cargo;
 import basicas.Cliente;
 import basicas.Funcionario;
 import basicas.Pessoa;
@@ -14,11 +15,13 @@ public class NegocioComum {
 	private IDAOCliente daoCliente;
 	private IDAOPessoa daoPessoa;
 	private IDAOFuncionario daoFuncionario;
-
+	private IDAOCargo daoCargo;
+	
 	public NegocioComum() {
 		this.daoCliente = new DAOCliente();
 		this.daoPessoa = new DAOPessoa();
 		this.daoFuncionario = new DAOFuncionario();
+		this.daoCargo = new DAOCargo();
 	}
 
 	
@@ -236,6 +239,48 @@ public class NegocioComum {
 				return null;
 			}
 	
+	}
+	/*
+	 * **********************************
+	 *   MÉTODOS REFERENTES A CARGO
+	 * **********************************
+	 */
+	
+	
+	public void inserirCargo(Cargo cargo)throws Exception{
+		try {
+			daoCargo.inserir(cargo);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	public void alterarCargo(Cargo cargo)throws Exception{
+		try {
+			daoCargo.alterar(cargo);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}	
+	public void removerCargo(Cargo cargo)throws Exception{
+		try {
+			daoCargo.remover(cargo);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	public List<Cargo> consultarTodosCargo()throws Exception{
+		try {
+			return daoCargo.consultarTodos();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	public Cargo consultarPorIdCargo(Integer id)throws Exception{
+		try {
+			return daoCargo.consultarPorId(id);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }

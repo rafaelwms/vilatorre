@@ -160,4 +160,34 @@ public class Fachada implements IFachada {
 		return negocioComum.verificarRg(rg);
 	}
 
+	@Override
+	public void inserirCargo(Cargo cargo) throws Exception {
+		// TODO Auto-generated method stub
+		negocioComum.inserirCargo(cargo);
+	}
+
+	@Override
+	public void alterarCargo(Cargo cargo) throws Exception {
+		// TODO Auto-generated method stub
+		negocioComum.alterarCargo(cargo);
+	}
+
+	@Override
+	public void removerCargo(Cargo cargo) throws Exception {
+		// TODO Auto-generated method stub
+		negocioComum.removerCargo(cargo);
+	}
+
+	@Override
+	public List<Cargo> consultarTodosCargo() throws Exception {
+		// TODO Auto-generated method stub
+		return negocioComum.consultarTodosCargo();
+	}
+
+	@Override
+	public Cargo consultarCargoPorId(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		return negocioComum.consultarPorIdCargo(id);
+	}
+
 }
