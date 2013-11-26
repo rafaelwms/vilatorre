@@ -1,5 +1,6 @@
 package beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -13,8 +14,8 @@ import basicas.Cargo;
 @ManagedBean
 public class CargoBean {
 
-	private Cargo cargo;
-	private List<Cargo> cargos;
+	private Cargo cargo = new Cargo();
+	private List<Cargo> cargos = new ArrayList<Cargo>();
 
 	
 	
@@ -50,8 +51,8 @@ public class CargoBean {
 
 	public List<Cargo> listarCargos(){
 		try{
-			setCargos(Fachada.getInstancia().consultarTodosCargo());
-		return getCargos();
+			cargos = Fachada.getInstancia().consultarTodosCargo();
+		return cargos;
 		}catch(Exception ex){
 			return null;
 		}

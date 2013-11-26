@@ -1,6 +1,6 @@
 package beans;
 
-import java.util.List;
+import java.util.*;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -17,15 +17,15 @@ import basicas.*;
 @ManagedBean
 public class FuncionarioBean {
 	
-	private Funcionario func;
-	private Usuario usuario;
-	private Endereco endereco;
-	private Cargo cargoEscolhido;
+	private Funcionario func = new Funcionario();
+	private Usuario usuario = new Usuario();
+	private Endereco endereco = new Endereco();
+	private Cargo cargoEscolhido = new Cargo();
 	private String admissao;
 	private String demissao;
 	private String nasc;
 	private String salario;
-	private List<Cargo> cargos;
+	private List<Cargo> cargos = new ArrayList<Cargo>();
 	
 	public String salvar(){
 		
@@ -118,8 +118,8 @@ public class FuncionarioBean {
 	
 	public List<Cargo> listarCargos(){
 		try{
-			setCargos(Fachada.getInstancia().consultarTodosCargo());
-		return getCargos();
+			cargos = Fachada.getInstancia().consultarTodosCargo();
+		return cargos;
 		}catch(Exception ex){
 			return null;
 		}
@@ -177,7 +177,13 @@ public class FuncionarioBean {
 	}
 
 	public List<Cargo> getCargos() {
-		return cargos;
+		try {
+			return Fachada.getInstancia().consultarTodosCargo();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public void setCargos(List<Cargo> cargos) {
