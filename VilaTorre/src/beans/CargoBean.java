@@ -21,15 +21,23 @@ public class CargoBean {
 	
 	public CargoBean(){}
 	
+	public void editar(Cargo param){
+		this.cargo = param;
+		System.out.println(cargo);
+	}
+	
+	public void excluir(){
+		try{
+			Fachada.getInstancia().removerCargo(cargo);
+		}catch(Exception x){}
+		
+	}
+	
 	
 	public String salvar(){
 
 		try{
-			if(cargo.getId()== null || cargo.getId() < 1){
-				
-				System.out.println(cargo.getNome());
-				System.out.println(cargo.getDescricao());
-				
+			if(cargo.getId()== null || cargo.getId() < 1){							
 				Fachada.getInstancia().inserirCargo(cargo);
 				FacesContext.getCurrentInstance().addMessage("cadastroCargo", new FacesMessage("Cargo "+cargo.getNome()+" cadastrado com êxito."));
 				return null;
@@ -58,6 +66,13 @@ public class CargoBean {
 		}
 	}
 	
+	public List<Cargo> getColecao(){
+		try{
+		return Fachada.getInstancia().consultarTodosCargo();
+		}catch(Exception x){
+			return null;
+		}
+	}
 	
 	public Cargo getCargo() {
 		return cargo;
@@ -69,7 +84,11 @@ public class CargoBean {
 
 
 	public List<Cargo> getCargos() {
-		return cargos;
+		try{
+		return Fachada.getInstancia().consultarTodosCargo();
+		}catch(Exception x){
+			return null;
+		}
 	}
 
 

@@ -8,48 +8,82 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<link type="text/css" rel="stylesheet" href="../css/custom.css"/>
-<script language="JavaScript" src="../script/money.js"/>
+	<link type="text/css" rel="stylesheet" href="../css/custom.css" />
+	<script language="JavaScript" src="../script/money.js" />
 </h:head>
-<h:body >
+<h:body>
 
 
-	<h:form>
+	
 
 
-	<p:dialog  header=".: Gerenciar Cargos :." widgetVar="dlg"
+		<p:dialog header=".: Gerenciar Cargos :." widgetVar="dlg"
 			showEffect="clip" width="600" modal="true" visible="true"
 			resizable="false" closable="false" draggable="false">
-		<p:panel>
-			<div align="center">
-			<img src="../Imagens/Vila Torre - LOGO - 200.png"/><br/>
-			</div>
-			</p:panel>
-			
-			
-			<p:panel header="Informações do cargo">
-			<h:panelGrid columns="2">
-			<h:outputText for="nomeCargo" value="Nome:"/><p:inputText id="nomeCargo" value="#{cargoBean.cargo.nome}"  tabindex="1" size="70"   />
-			<h:outputText for="descCargo" value="Descrição:"/><p:inputTextarea id="descCargo" value="#{cargoBean.cargo.descricao}" tabindex="2" />
-			</h:panelGrid>
-			</p:panel>
-			
 			<p:panel>
-			<div style="float: none;" align="center">
-			<p:commandButton value="Salvar" action="#{cargoBean.salvar}" ajax="false" icon="ui-icon-disk"/> 
-			<p:commandButton value="Limpar" type="reset" ajax="false" icon="ui-icon-arrowreturnthick-1-w"/>
-			</div>
+				<div align="center">
+					<img src="../Imagens/Vila Torre - LOGO - 200.png" /><br />
+				</div>
 			</p:panel>
-			
-		
-			
-		
+
+			<h:form id="formCargo">
+			<p:panel header="Informações do cargo" id="dadosCargo">
+				<h:panelGrid columns="2">
+					<h:outputText for="nomeCargo" value="Nome:" />
+					<p:inputText id="nomeCargo" value="#{cargoBean.cargo.nome}"
+						tabindex="1" size="70" />
+					<h:outputText for="descCargo" value="Descrição:" />
+					<p:inputTextarea id="descCargo"
+						value="#{cargoBean.cargo.descricao}" tabindex="2" />
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel>
+				<div style="float: none;" align="center">
+					<p:commandButton value="Salvar" action="#{cargoBean.salvar}"
+						ajax="false" icon="ui-icon-disk" />
+					<p:commandButton value="Limpar" type="reset" ajax="false" immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
+				</div>
+			</p:panel>
+			</h:form>
+			<p:panel header="Lista dos cargos" toggleable="true">
+				<h:form>
+
+					<p:dataTable id="dataTable" var="cargo" value="#{cargoBean.cargos}"
+						emptyMessage="Nenhum cargo cadastrado.">
+						<!--         <f:facet name="header">   -->
+						<!--            Ajax Sorting   -->
+						<!--         </f:facet>   -->
+
+						<p:column sortBy="cargo.nome" headerText="Cargo">
+							<h:outputText value="#{cargo.nome}" />
+						</p:column>
+
+						<p:column sortBy="cargo.descricao" headerText="Descrição">
+							<h:outputText value="#{cargo.descricao}" />
+						</p:column>
+						
+						<p:column headerText="Ações">
+							<p:commandButton  title="Editar" actionListener="#{cargoBean.editar(cargo)}" update=":formCargo:dadosCargo" icon="ui-icon-pencil"/>
+					&nbsp;&nbsp;
+					<p:commandButton title="Excluir" actionListener="#{cargoBean.excluir(cargo)}" icon="ui-icon-trash" />
+						</p:column>
+
+					</p:dataTable>
+
+				</h:form>
+
+			</p:panel>
+
+
+
+
 		</p:dialog>
-		  
-    
+
+
+
 	
-	</h:form>
-	
+
 
 </h:body>
 </html>
