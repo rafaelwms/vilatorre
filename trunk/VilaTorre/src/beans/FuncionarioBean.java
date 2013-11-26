@@ -26,6 +26,7 @@ public class FuncionarioBean {
 	private String nasc;
 	private String salario;
 	private List<Cargo> cargos = new ArrayList<Cargo>();
+	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 	
 	public String salvar(){
 		
@@ -188,6 +189,20 @@ public class FuncionarioBean {
 
 	public void setCargos(List<Cargo> cargos) {
 		this.cargos = cargos;
+	}
+
+	public List<Funcionario> getFuncionarios() {
+		try{
+			funcionarios = Fachada.getInstancia().consultarTodos();
+		return funcionarios;
+		}catch(Exception x){
+			System.out.println(x.getMessage());
+			return null;
+		}
+	}
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
 	}
 
 
