@@ -45,11 +45,17 @@
 			<h:panelGrid columns="2">
 			<h:outputText for="admissao" value="Data de Admissão:"/><p:inputMask tabindex="6"  maxlength="130" required="false" id="admissao" mask="99/99/9999" value="#{funcionarioBean.admissao}"/>
 			<h:outputText for="salario" value="Salário R$"/><p:inputText id="salario" onkeypress="mascara(this,moeda)" value="#{funcionarioBean.salario}"/>
-			<h:outputText for="cargo" value="Confirm. Senha:"/> 
+			<h:outputText for="cargo" value="Cargo:"/> 
 			<p:selectOneMenu value="#{funcionarioBean.cargo}" id="cargos" converter="cargoConverter">  
         	      <f:selectItem noSelectionOption="true" itemLabel="Selecione um cargo"></f:selectItem>
            		  <f:selectItems value="#{funcionarioBean.cargos}" var="carg" itemLabel="#{carg.nome}"></f:selectItems>
        		 </p:selectOneMenu> 
+       		 <h:outputText for="tipos" value="Nível de Acesso:"/> 
+       		 <p:selectOneMenu value="#{funcionarioBean.usuario.tipoUser}" id="tipos">  
+        	      <f:selectItem noSelectionOption="true" itemLabel="Selecione um Nível de Acesso"></f:selectItem>
+           		  <f:selectItems value="#{funcionarioBean.tipoUser}"/>
+       		 </p:selectOneMenu> 
+       		 
 			</h:panelGrid>
 			
 			</p:panel>

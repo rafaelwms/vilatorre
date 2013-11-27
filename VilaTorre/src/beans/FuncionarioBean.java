@@ -5,6 +5,7 @@ import java.util.*;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 import negocio.ValidacoesDeTela;
 
@@ -28,8 +29,8 @@ public class FuncionarioBean {
 	private String salario;
 	private List<Cargo> cargos = new ArrayList<Cargo>();
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
-	private TipoUser[] tipos;
-	private TipoUser tipouser;
+
+	private TipoUser tipos;
 	
 	public String salvar(){
 		
@@ -109,8 +110,11 @@ public class FuncionarioBean {
 	}
 	
 		public TipoUser[] getTipoUser(){
-			return TipoUser.values();
-		}		
+			
+		    return TipoUser.values();
+		  }
+			
+				
 
 	
 	public String reset(){
@@ -208,6 +212,14 @@ public class FuncionarioBean {
 
 	public void setFuncionarios(List<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;
+	}
+
+	public TipoUser getTipos() {
+		return tipos;
+	}
+
+	public void setTipos(TipoUser tipos) {
+		this.tipos = tipos;
 	}
 
 

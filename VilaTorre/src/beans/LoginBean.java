@@ -35,19 +35,16 @@ public class LoginBean {
 		 logado = Fachada.getInstancia().logarPessoa(login, senha);
 		 FacesContext.getCurrentInstance().addMessage("loginTry", new FacesMessage("Bem vindo "+logado.getNome()+"."));
 		 
-		 if(logado.getUsuario().getTipoUser() == TipoUser.ADIM)
+		 if(logado.getUsuario().getTipoUser() == TipoUser.ADMINISTRADOR)
 			 retorno = "engine/admin.xhtml?faces-redirect=true";
 		 
-		 if(logado.getUsuario().getTipoUser() == TipoUser.USER)
+		 if(logado.getUsuario().getTipoUser() == TipoUser.USUÁRIO)
 			 retorno = "engine/user.xhtml?faces-redirect=true";
 		 
 		 if(logado.getUsuario().getTipoUser() == TipoUser.CLIENTE)
 			 retorno = "engine/cliente.xhtml?faces-redirect=true";
-		 
-		  if(logado.getUsuario().getTipoUser() == TipoUser.DEVELOPER)
-			  retorno = "engine/rafaelwms.xhtml?faces-redirect=true";
-		  return retorno;
 		}
+			return retorno;
 		}catch(Exception ex){
 			FacesContext.getCurrentInstance().addMessage("loginTry", new FacesMessage(ex.getMessage()));
 			return null;

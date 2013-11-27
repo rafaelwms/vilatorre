@@ -26,9 +26,9 @@ public class CargoBean {
 		System.out.println(cargo);
 	}
 	
-	public void excluir(){
+	public void excluir(Cargo param){
 		try{
-			Fachada.getInstancia().removerCargo(cargo);
+			Fachada.getInstancia().removerCargo(param);
 		}catch(Exception x){}
 		
 	}
@@ -37,7 +37,8 @@ public class CargoBean {
 	public String salvar(){
 
 		try{
-			if(cargo.getId()== null || cargo.getId() < 1){							
+			if(cargo.getId()== null || cargo.getId() < 1){	
+				this.cargo.setId(null);
 				Fachada.getInstancia().inserirCargo(cargo);
 				FacesContext.getCurrentInstance().addMessage("cadastroCargo", new FacesMessage("Cargo "+cargo.getNome()+" cadastrado com êxito."));
 				return null;
