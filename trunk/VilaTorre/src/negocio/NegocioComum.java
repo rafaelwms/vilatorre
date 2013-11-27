@@ -401,7 +401,7 @@ public class NegocioComum {
 		}
 	}
 		
-		public List<Fornecedor> listarFornecedoresPorProduto(MateriaPrima materia) throws Exception{
+		public List<Fornecedor> listarFornecedoresPorMateria(MateriaPrima materia) throws Exception{
 
 			try {
 				return daoFornecedor.listarFornecedoresPorProduto(materia);

@@ -178,87 +178,87 @@ public class Fachada implements IFachada {
 
 	@Override
 	public void inserirUsuario(Usuario usuario) throws Exception {
-		// TODO Auto-generated method stub
+		negocioComum.inserirUsuario(usuario);
 		
 	}
 
 	@Override
 	public void alterarUsuario(Usuario usuario) throws Exception {
-		// TODO Auto-generated method stub
+		negocioComum.alterarUsuario(usuario);
 		
 	}
 
 	@Override
 	public void removerUsuario(Usuario usuario) throws Exception {
-		// TODO Auto-generated method stub
+		negocioComum.removerUsuario(usuario);
 		
 	}
 
 	@Override
 	public List<Usuario> consultarTodosUsuario() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarTodosUsuario();
 	}
 
 	@Override
 	public Usuario consultarUsuarioPorId(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarPorIdUsuario(id);
 	}
 
 	@Override
 	public void inserirFornecedor(Fornecedor fornecedor) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.inserirFornecedor(fornecedor);
 	}
 
 	@Override
 	public void alterarFornecedor(Fornecedor fornecedor) throws Exception {
-		// TODO Auto-generated method stub
+		negocioComum.alterarFornecedor(fornecedor);
 		
 	}
 
 	@Override
 	public void removerFornecedor(Fornecedor fornecedor) throws Exception {
-		// TODO Auto-generated method stub
+		negocioComum.removerFornecedor(fornecedor);
 		
 	}
 
 	@Override
 	public List<Fornecedor> consultarTodosFornecedor() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarTodosFornecedor();
 	}
 
 	@Override
 	public Fornecedor consultarFornecedorPorId(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarPorIdFornecedor(id);
 	}
 
 	@Override
-	public List<Fornecedor> listarFornecedoresPorProduto(MateriaPrima materia)
+	public List<Fornecedor> listarFornecedoresPorMateria(MateriaPrima materia)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.listarFornecedoresPorMateria(materia);
 	}
 
 	@Override
 	public void inserirMateriaPrima(MateriaPrima materia) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.inserirMateriaPrima(materia);
 	}
 
 	@Override
 	public void alterarMateriaPrima(MateriaPrima materia) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.alterarMateriaPrima(materia);
 	}
 
 	@Override
 	public void removerMateriaPrima(MateriaPrima materia) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.removerMateriaPrima(materia);
 	}
 
 	@Override
@@ -276,13 +276,13 @@ public class Fachada implements IFachada {
 	@Override
 	public void inserirIngrediente(Ingrediente ingrediente) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.inserirIngrediente(ingrediente);
 	}
 
 	@Override
 	public void alterarIngrediente(Ingrediente ingrediente) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.alterarIngrediente(ingrediente);
 	}
 
 	@Override
@@ -306,13 +306,13 @@ public class Fachada implements IFachada {
 	@Override
 	public void inserirProduto(Produto produto) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.inserirProduto(produto);
 	}
 
 	@Override
 	public void alterarProduto(Produto produto) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.alterarProduto(produto);
 	}
 
 	@Override
@@ -356,13 +356,14 @@ public class Fachada implements IFachada {
 	@Override
 	public void inserirItemPedido(ItemPedido item) throws Exception {
 		// TODO Auto-generated method stub
+		negocioComum.inserirItemPedido(item);
 		
 	}
 
 	@Override
 	public void alterarItemPedido(ItemPedido item) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.alterarItemPedido(item);
 	}
 
 	@Override
@@ -392,12 +393,13 @@ public class Fachada implements IFachada {
 	@Override
 	public void inserirPedido(Pedido pedido) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.inserirPedido(pedido);
 	}
 
 	@Override
 	public void alterarPedido(Pedido pedido) throws Exception {
 		// TODO Auto-generated method stub
+		negocioComum.alterarPedido(pedido);
 		
 	}
 
@@ -436,7 +438,7 @@ public class Fachada implements IFachada {
 	@Override
 	public void inserirPagamento(Pagamento pagamento) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.inserirPagamento(pagamento);
 	}
 
 	@Override
@@ -466,7 +468,7 @@ public class Fachada implements IFachada {
 	@Override
 	public void inserirFornecimento(Fornecimento fornecimento) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.inserirFornecimento(fornecimento);
 	}
 
 	@Override
@@ -517,7 +519,7 @@ public class Fachada implements IFachada {
 	@Override
 	public void inserirEstoque(Estoque estoque) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.inserirEstoque(estoque);
 	}
 
 	@Override

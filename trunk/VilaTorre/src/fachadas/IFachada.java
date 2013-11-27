@@ -58,7 +58,7 @@ public interface IFachada{
 	public void removerFornecedor(Fornecedor fornecedor)throws Exception;
 	public List<Fornecedor> consultarTodosFornecedor()throws Exception;
 	public Fornecedor consultarFornecedorPorId(Integer id)throws Exception;	
-	public List<Fornecedor> listarFornecedoresPorProduto(MateriaPrima materia) throws Exception;
+	public List<Fornecedor> listarFornecedoresPorMateria(MateriaPrima materia) throws Exception;
 	
 	//métodos pertinentes a classe MateriaPrimar
 	public void inserirMateriaPrima(MateriaPrima materia)throws Exception;
