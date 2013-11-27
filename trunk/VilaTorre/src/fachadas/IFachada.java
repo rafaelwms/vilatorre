@@ -44,5 +44,41 @@ public interface IFachada{
 	public void removerCargo(Cargo cargo)throws Exception;
 	public List<Cargo> consultarTodosCargo()throws Exception;
 	public Cargo consultarCargoPorId(Integer id)throws Exception;
+	
+	//métodos pertinentes a classe usuario
+	public void inserirUsuario(Usuario usuario)throws Exception;
+	public void alterarUsuario(Usuario usuario)throws Exception;	
+	public void removerUsuario(Usuario usuario)throws Exception;
+	public List<Usuario> consultarTodosUsuario()throws Exception;
+	public Usuario consultarUsuarioPorId(Integer id)throws Exception;
+	
+	//métodos pertinentes a classe Fornecedor
+	public void inserirFornecedor(Fornecedor fornecedor)throws Exception;
+	public void alterarFornecedor(Fornecedor fornecedor)throws Exception;	
+	public void removerFornecedor(Fornecedor fornecedor)throws Exception;
+	public List<Fornecedor> consultarTodosFornecedor()throws Exception;
+	public Fornecedor consultarFornecedorPorId(Integer id)throws Exception;	
+	
+	//métodos pertinentes a classe MateriaPrimar
+	public void inserirMateriaPrima(MateriaPrima materia)throws Exception;
+	public void alterarMateriaPrima(MateriaPrima materia)throws Exception;	
+	public void removerMateriaPrima(MateriaPrima materia)throws Exception;
+	public List<MateriaPrima> consultarTodosMateriaPrima()throws Exception;
+	public MateriaPrima consultarMateriaPrimaPorId(Integer id)throws Exception;
+
+	//metodos pertinentes a classe Ingrediente
+	public void inserirIngrediente(Ingrediente ingrediente)throws Exception;
+	public void alterarIngrediente(Ingrediente ingrediente)throws Exception;	
+	public void removerIngrediente(Ingrediente ingrediente)throws Exception;
+	public List<Ingrediente> consultarTodosIngrediente()throws Exception;
+	public Ingrediente consultarIngredientePorId(Integer id)throws Exception;
+	
+	//metodos pertinentes a classe Produto
+	public void inserirProduto(Produto produto)throws Exception;
+	public void alterarProduto(Produto produto)throws Exception;	
+	public void removerProduto(Produto produto)throws Exception;
+	public List<Produto> consultarTodosProduto()throws Exception;
+	public Produto consultarProdutoPorId(Integer id)throws Exception;
+
 
 }
