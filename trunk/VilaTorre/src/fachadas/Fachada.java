@@ -264,13 +264,13 @@ public class Fachada implements IFachada {
 	@Override
 	public List<MateriaPrima> consultarTodosMateriaPrima() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarTodosMateriaPrima();
 	}
 
 	@Override
 	public MateriaPrima consultarMateriaPrimaPorId(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarPorIdMateriaPrima(id);
 	}
 
 	@Override
@@ -288,19 +288,19 @@ public class Fachada implements IFachada {
 	@Override
 	public void removerIngrediente(Ingrediente ingrediente) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.removerIngrediente(ingrediente);
 	}
 
 	@Override
 	public List<Ingrediente> consultarTodosIngrediente() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarTodosIngrediente();
 	}
 
 	@Override
 	public Ingrediente consultarIngredientePorId(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarPorIdIngrediente(id);
 	}
 
 	@Override
@@ -318,39 +318,39 @@ public class Fachada implements IFachada {
 	@Override
 	public void removerProduto(Produto produto) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.removerProduto(produto);
 	}
 
 	@Override
 	public List<Produto> consultarTodosProduto() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarTodosProduto();
 	}
 
 	@Override
 	public Produto consultarProdutoPorId(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarPorIdProduto(id);
 	}
 
 	@Override
 	public List<Produto> procurarProdutosPorIngrediente(Ingrediente ingrediente)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.procurarProdutosPorIngrediente(ingrediente);
 	}
 
 	@Override
 	public List<Produto> procurarProdutoPorPreco(double preco) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.procurarProdutoPorPreco(preco);
 	}
 
 	@Override
 	public List<Produto> procurarProdutosPorCategoria(String cat)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.procurarProdutosPorCategoria(cat);
 	}
 
 	@Override
@@ -369,25 +369,25 @@ public class Fachada implements IFachada {
 	@Override
 	public void removerItemPedido(ItemPedido item) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.removerItemPedido(item);
 	}
 
 	@Override
 	public List<ItemPedido> consultarTodosItemPedido() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarTodosItemPedido();
 	}
 
 	@Override
 	public ItemPedido consultarItemPedidoPorId(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarPorIdItemPedido(id);
 	}
 
 	@Override
 	public List<ItemPedido> listarItemsDoPedido(Pedido pedido) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.listarItemsDoPedido(pedido);
 	}
 
 	@Override
@@ -406,33 +406,33 @@ public class Fachada implements IFachada {
 	@Override
 	public void removerPedido(Pedido pedido) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.removerPedido(pedido);
 	}
 
 	@Override
 	public List<Pedido> consultarTodosPedido() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarTodosPedido();
 	}
 
 	@Override
 	public Pedido consultarPedidoPorId(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarPorIdPedido(id);
 	}
 
 	@Override
 	public void removerItemPedido(Pedido pedido, ItemPedido item)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.removerItemPedido(pedido, item);
 	}
 
 	@Override
 	public void adicionarItemPedido(Pedido pedido, ItemPedido item)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.adicionarItemPedido(pedido, item);
 	}
 
 	@Override
@@ -444,25 +444,25 @@ public class Fachada implements IFachada {
 	@Override
 	public void alterarPagamento(Pagamento pagamento) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.alterarPagamento(pagamento);
 	}
 
 	@Override
 	public void removerPagamento(Pagamento pagamento) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.removerPagamento(pagamento);
 	}
 
 	@Override
 	public List<Pagamento> consultarTodosPagamento() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarTodosPagamento();
 	}
 
 	@Override
 	public Pagamento consultarPagamentoPorId(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarPorIdPagamento(id);
 	}
 
 	@Override
@@ -474,46 +474,45 @@ public class Fachada implements IFachada {
 	@Override
 	public void alterarFornecimento(Fornecimento fornecimento) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.alterarFornecimento(fornecimento);
 	}
 
 	@Override
 	public void removerFornecimento(Fornecimento fornecimento) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.removerFornecimento(fornecimento);
 	}
 
 	@Override
 	public List<Fornecimento> consultarTodosFornecimento() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarTodosFornecimento();
 	}
 
 	@Override
 	public Fornecimento consultarFornecimentoPorId(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarPorIdFornecimento(id);
 	}
 
 	@Override
 	public List<Fornecimento> localizarFornecimentoMateria(MateriaPrima materia)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.localizarFornecimentoMateria(materia);
 	}
 
 	@Override
 	public List<Fornecimento> localizarMateriasFornecedor(Fornecedor fornecedor)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.localizarMateriasFornecedor(fornecedor);
 	}
 
 	@Override
-	public List<Fornecimento> localizarMateriasRangePreco(MateriaPrima materia,
-			double de, double ate) throws Exception {
+	public List<Fornecimento> localizarMateriasRangePreco(MateriaPrima materia, double de, double ate) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.localizarMateriasRangePreco(materia, de, ate);
 	}
 
 	@Override
@@ -525,37 +524,37 @@ public class Fachada implements IFachada {
 	@Override
 	public void alterarEstoque(Estoque estoque) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.alterarEstoque(estoque);
 	}
 
 	@Override
 	public void removerEstoque(Estoque estoque) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.removerEstoque(estoque);
 	}
 
 	@Override
 	public List<Estoque> consultarTodosEstoque() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarTodosEstoque();
 	}
 
 	@Override
 	public Estoque consultarEstoquePorId(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return negocioComum.consultarPorIdEstoque(id);
 	}
 
 	@Override
-	public void deduzirEstoque(MateriaPrima mat, double qtd) throws Exception {
+	public void deduzirEstoque(Estoque estoque, double qtd) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.deduzirEstoque(estoque, qtd);
 	}
 
 	@Override
-	public void alimentarEstoque(MateriaPrima mat, double qtd) throws Exception {
+	public void alimentarEstoque(Estoque estoque, double qtd) throws Exception {
 		// TODO Auto-generated method stub
-		
+		negocioComum.alimentarEstoque(estoque, qtd);
 	}
 
 }

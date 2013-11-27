@@ -7,6 +7,8 @@ import basicas.MateriaPrima.Unidade;
 
 import javax.faces.bean.ManagedBean;
 
+import fachadas.Fachada;
+
 
 
 
@@ -29,7 +31,12 @@ public class MateriaPrimaBean {
 		return Unidade.values();
 	}
 	public List<MateriaPrima> getMaterias() {
-		return materias;
+		try{
+		return Fachada.getInstancia().consultarTodosMateriaPrima();
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+			return null;
+		}
 	}
 	public void setMaterias(List<MateriaPrima> materias) {
 		this.materias = materias;
