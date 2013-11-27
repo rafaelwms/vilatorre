@@ -367,6 +367,21 @@ public class NegocioComum {
 	 */
 	public void inserirFornecedor(Fornecedor fornecedor)throws Exception{
 		try {
+			
+			if (daoPessoa.verificarCpf(fornecedor.getCpf()) != null) {
+				throw new Exception("O CPF \"" + fornecedor.getCpf()
+						+ "\" já está cadastrado.");
+			}
+			if (daoPessoa.verificarRg(fornecedor.getRg()) != null) {
+				throw new Exception("O RG \"" + fornecedor.getRg()
+						+ "\" já está cadastrado.");
+			}
+			
+			if(daoPessoa.verificarFone(fornecedor.getFone()) != null){
+				throw new Exception("O fone \"" + fornecedor.getFone()
+						+ "\" já está cadastrado.");
+			}
+			
 			daoFornecedor.inserir(fornecedor);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());

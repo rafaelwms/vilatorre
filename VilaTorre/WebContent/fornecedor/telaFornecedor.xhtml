@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<link type="text/css" rel="stylesheet" href="../css/custom.css"/>
+</h:head>
+<h:body >
+
+	<h:form>
+	<p:growl></p:growl>
+	<p:dialog  header=".: Gerenciar Fornecedor :." widgetVar="dlg"
+			showEffect="clip" width="500" modal="true" visible="true"
+			resizable="false" closable="false" draggable="false">
+		<p:panel>
+			<div align="center">
+			<img src="../Imagens/Vila Torre - LOGO - 200.png"/><br/>
+			</div>
+			</p:panel>
+			
+			
+			<p:panel header="Dados Pessoais">
+			<h:panelGrid columns="2" >
+			<h:outputText for="nome" value="Nome:"/><p:inputText required="true" requiredMessage="Digite o nome." tabindex="1" size="70" maxlength="130" id="nome" value="#{fornecedorBean.fornecedor.nome}"/>
+			<h:outputText for="sexo" value="Sexo:"/>        
+			<p:selectOneButton  id="sexo" value="#{fornecedorBean.fornecedor.sexo}" >  
+              <f:selectItem itemLabel="Masculino" itemValue="1" />  
+              <f:selectItem itemLabel="Feminino" itemValue="0" />  
+       		  </p:selectOneButton>
+			<h:outputText for="nasc" value="Data Nasc.:"/><p:inputMask tabindex="2" id="nasc" mask="99/99/9999" value="#{fornecedorBean.nasc}"/>
+			<h:outputText for="rg" value="RG:  "/><p:inputText required="true" requiredMessage="Digite o rg." tabindex="3"  label="RG" id="rg" value="#{fornecedorBean.fornecedor.rg}"/>
+			<h:outputText for="cpf" value="CPF: "/><p:inputMask required="true" requiredMessage="Digite o cpf." tabindex="4"  mask="999.999.999-99"  id="cpf" value="#{fornecedorBean.fornecedor.cpf}"/>
+			<h:outputText for="fone" value="Fone: "/><p:inputMask required="true" requiredMessage="Digite o fone." tabindex="5"   mask="(99)9999-9999"  id="fone" value="#{fornecedorBean.fornecedor.fone}"/>
+			<h:outputText for="parceria" value="Inicio da Parceria: "/><p:inputMask required="true" requiredMessage="Digite o e-mail." tabindex="6" mask="99/99/9999"   id="parceria" value="#{fornecedorBean.parceiro}"/>
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:panel header="Endereço">
+			<h:panelGrid columns="2">
+			<h:outputText for="logradouro" value="Logradouro:"/><p:inputText required="true" requiredMessage="Digite o lagradouro." tabindex="7" size="70"  maxlength="130"  id="logradouro" value="#{fornecedorBean.endereco.logradouro}"/>
+			<h:outputText for="numero" value="Numero:"/><p:inputText required="true" requiredMessage="Digite o número." tabindex="8" id="numero" value="#{fornecedorBean.endereco.numero}"/>
+			<h:outputText for="complemento" value="Complemento:"/><p:inputText tabindex="9"  required="false" id="complemento" value="#{fornecedorBean.endereco.complemento}"/>
+			<h:outputText for="bairro" value="Bairro:"/><p:inputText required="true" requiredMessage="Digite o bairro." tabindex="10" id="bairro" value="#{fornecedorBean.endereco.bairro}"/>
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:panel>
+			<div style="float: none;" align="center">
+			<p:commandButton value="Salvar" action="#{fornecedorBean.salvar}"  ajax="false" icon="ui-icon-disk"/> 
+			<p:commandButton value="Limpar" type="reset" icon="ui-icon-arrowreturnthick-1-w"/>
+			<p:commandButton value="Voltar" action="/index.xhml?faces-redirect=true"  ajax="false" icon="ui-icon-home"/> 
+			</div>
+			</p:panel>
+			<div align="center">
+			<p:panel header="Vila Torre Original Burger System© 2013 All Rigths Reserved - Rafael WMS®" />
+			</div>
+			
+		
+		</p:dialog>
+		  
+    
+	
+	</h:form>
+	
+
+</h:body>
+</html>

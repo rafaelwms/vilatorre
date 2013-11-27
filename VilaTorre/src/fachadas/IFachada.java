@@ -124,8 +124,8 @@ public interface IFachada{
 	public void removerEstoque(Estoque estoque)throws Exception;
 	public List<Estoque> consultarTodosEstoque()throws Exception;
 	public Estoque consultarEstoquePorId(Integer id)throws Exception;
-    public void deduzirEstoque(MateriaPrima mat, double qtd) throws Exception;
-	public void alimentarEstoque(MateriaPrima mat, double qtd) throws Exception;
+    public void deduzirEstoque(Estoque estoque, double qtd) throws Exception;
+	public void alimentarEstoque(Estoque estoque, double qtd) throws Exception;
 	
 	
 
