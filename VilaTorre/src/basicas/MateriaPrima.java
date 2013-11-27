@@ -21,7 +21,7 @@ public class MateriaPrima extends ObjetoGeral{
 	
 		
 	
-	protected enum Unidade{g, kg, qtd}
+	public enum Unidade{g, kg, unidade}
 
 
 

@@ -13,6 +13,7 @@ import fachadas.Fachada;
 import util.Datas;
 
 import basicas.*;
+import basicas.Usuario.TipoUser;
 
 @ManagedBean
 public class FuncionarioBean {
@@ -27,6 +28,8 @@ public class FuncionarioBean {
 	private String salario;
 	private List<Cargo> cargos = new ArrayList<Cargo>();
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+	private TipoUser[] tipos;
+	private TipoUser tipouser;
 	
 	public String salvar(){
 		
@@ -105,7 +108,9 @@ public class FuncionarioBean {
 		return null;
 	}
 	
-				
+		public TipoUser[] getTipoUser(){
+			return TipoUser.values();
+		}		
 
 	
 	public String reset(){
