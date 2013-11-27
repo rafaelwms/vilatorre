@@ -23,37 +23,23 @@ public class Fachada implements IFachada {
 	}
 
 	@Override
-	public void inserirCliente(Cliente cliente) throws Exception {
-	
-			try {
-				negocioComum.inserirCliente(cliente);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				throw new Exception(e.getMessage());
-			}
-	
+	public void inserirCliente(Cliente cliente) throws Exception {	
+				negocioComum.inserirCliente(cliente);	
 	}
 
 	@Override
-	public void alterarCliente(Cliente cliente) throws Exception {
-	
-			negocioComum.alterarCliente(cliente);
-	
+	public void alterarCliente(Cliente cliente) throws Exception {	
+			negocioComum.alterarCliente(cliente);	
 	}
-
+	
 	@Override
-	public void removerCliente(Cliente cliente) throws Exception {
-	
-			negocioComum.remover(cliente);
-	
+	public void removerCliente(Cliente cliente) throws Exception {	
+			negocioComum.remover(cliente);	
 	}
 
 	@Override
 	public List<Cliente> consultarTodosCliente() throws Exception {
-
 			return negocioComum.consultarTodosClientes();
-	
-
 	}
 
 	public Cliente consultarPorIdCliente(Integer id) throws Exception {
@@ -188,6 +174,386 @@ public class Fachada implements IFachada {
 	public Cargo consultarCargoPorId(Integer id) throws Exception {
 		// TODO Auto-generated method stub
 		return negocioComum.consultarPorIdCargo(id);
+	}
+
+	@Override
+	public void inserirUsuario(Usuario usuario) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void alterarUsuario(Usuario usuario) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removerUsuario(Usuario usuario) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Usuario> consultarTodosUsuario() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Usuario consultarUsuarioPorId(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void inserirFornecedor(Fornecedor fornecedor) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void alterarFornecedor(Fornecedor fornecedor) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removerFornecedor(Fornecedor fornecedor) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Fornecedor> consultarTodosFornecedor() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Fornecedor consultarFornecedorPorId(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Fornecedor> listarFornecedoresPorProduto(MateriaPrima materia)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void inserirMateriaPrima(MateriaPrima materia) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void alterarMateriaPrima(MateriaPrima materia) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removerMateriaPrima(MateriaPrima materia) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<MateriaPrima> consultarTodosMateriaPrima() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MateriaPrima consultarMateriaPrimaPorId(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void inserirIngrediente(Ingrediente ingrediente) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void alterarIngrediente(Ingrediente ingrediente) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removerIngrediente(Ingrediente ingrediente) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Ingrediente> consultarTodosIngrediente() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Ingrediente consultarIngredientePorId(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void inserirProduto(Produto produto) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void alterarProduto(Produto produto) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removerProduto(Produto produto) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Produto> consultarTodosProduto() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Produto consultarProdutoPorId(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Produto> procurarProdutosPorIngrediente(Ingrediente ingrediente)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Produto> procurarProdutoPorPreco(double preco) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Produto> procurarProdutosPorCategoria(String cat)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void inserirItemPedido(ItemPedido item) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void alterarItemPedido(ItemPedido item) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removerItemPedido(ItemPedido item) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<ItemPedido> consultarTodosItemPedido() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ItemPedido consultarItemPedidoPorId(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ItemPedido> listarItemsDoPedido(Pedido pedido) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void inserirPedido(Pedido pedido) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void alterarPedido(Pedido pedido) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removerPedido(Pedido pedido) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Pedido> consultarTodosPedido() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Pedido consultarPedidoPorId(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removerItemPedido(Pedido pedido, ItemPedido item)
+			throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void adicionarItemPedido(Pedido pedido, ItemPedido item)
+			throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void inserirPagamento(Pagamento pagamento) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void alterarPagamento(Pagamento pagamento) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removerPagamento(Pagamento pagamento) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Pagamento> consultarTodosPagamento() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Pagamento consultarPagamentoPorId(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void inserirFornecimento(Fornecimento fornecimento) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void alterarFornecimento(Fornecimento fornecimento) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removerFornecimento(Fornecimento fornecimento) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Fornecimento> consultarTodosFornecimento() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Fornecimento consultarFornecimentoPorId(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Fornecimento> localizarFornecimentoMateria(MateriaPrima materia)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Fornecimento> localizarMateriasFornecedor(Fornecedor fornecedor)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Fornecimento> localizarMateriasRangePreco(MateriaPrima materia,
+			double de, double ate) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void inserirEstoque(Estoque estoque) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void alterarEstoque(Estoque estoque) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removerEstoque(Estoque estoque) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Estoque> consultarTodosEstoque() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Estoque consultarEstoquePorId(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deduzirEstoque(MateriaPrima mat, double qtd) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void alimentarEstoque(MateriaPrima mat, double qtd) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

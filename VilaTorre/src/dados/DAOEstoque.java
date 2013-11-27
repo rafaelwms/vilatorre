@@ -6,13 +6,13 @@ import basicas.MateriaPrima;
 public class DAOEstoque extends DAOGenerico<Estoque> implements IDAOEstoque{
 
 	@Override
-	public void deduzirEstoque(MateriaPrima mat, double qtd) throws Exception {
+	public void deduzirEstoque(Estoque estoque, double qtd) throws Exception {
 		// TODO Auto-generated method stub
 	
 	}
 
 	@Override
-	public void alimentarEstoque(MateriaPrima mat, double qtd) throws Exception {
+	public void alimentarEstoque(Estoque estoque, double qtd) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}

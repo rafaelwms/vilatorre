@@ -58,6 +58,7 @@ public interface IFachada{
 	public void removerFornecedor(Fornecedor fornecedor)throws Exception;
 	public List<Fornecedor> consultarTodosFornecedor()throws Exception;
 	public Fornecedor consultarFornecedorPorId(Integer id)throws Exception;	
+	public List<Fornecedor> listarFornecedoresPorProduto(MateriaPrima materia) throws Exception;
 	
 	//métodos pertinentes a classe MateriaPrimar
 	public void inserirMateriaPrima(MateriaPrima materia)throws Exception;
@@ -79,6 +80,53 @@ public interface IFachada{
 	public void removerProduto(Produto produto)throws Exception;
 	public List<Produto> consultarTodosProduto()throws Exception;
 	public Produto consultarProdutoPorId(Integer id)throws Exception;
+	public List<Produto> procurarProdutosPorIngrediente(Ingrediente ingrediente) throws Exception;
+	public List<Produto> procurarProdutoPorPreco(double preco) throws Exception;
+	public List<Produto> procurarProdutosPorCategoria(String cat) throws Exception;
+	
+	//metodos pertinentes a ItemPedido
+	public void inserirItemPedido(ItemPedido item)throws Exception;
+	public void alterarItemPedido(ItemPedido item)throws Exception;	
+	public void removerItemPedido(ItemPedido item)throws Exception;
+	public List<ItemPedido> consultarTodosItemPedido()throws Exception;
+	public ItemPedido consultarItemPedidoPorId(Integer id)throws Exception;
+	public List<ItemPedido> listarItemsDoPedido(Pedido pedido) throws Exception;
 
+	//metodos pertinentes a classe Pedido
+	public void inserirPedido(Pedido pedido)throws Exception;
+	public void alterarPedido(Pedido pedido)throws Exception;	
+	public void removerPedido(Pedido pedido)throws Exception;
+	public List<Pedido> consultarTodosPedido()throws Exception;
+	public Pedido consultarPedidoPorId(Integer id)throws Exception;
+	public void removerItemPedido(Pedido pedido, ItemPedido item) throws Exception;
+	public void adicionarItemPedido(Pedido pedido, ItemPedido item) throws Exception;
+	
+	//métodos pertinentes a classe Pagamento
+	public void inserirPagamento(Pagamento pagamento)throws Exception;
+	public void alterarPagamento(Pagamento pagamento)throws Exception;	
+	public void removerPagamento(Pagamento pagamento)throws Exception;
+	public List<Pagamento> consultarTodosPagamento()throws Exception;
+	public Pagamento consultarPagamentoPorId(Integer id)throws Exception;
+	
+	//metodos pertinentes a classe Fornecimento
+	public void inserirFornecimento(Fornecimento fornecimento)throws Exception;
+	public void alterarFornecimento(Fornecimento fornecimento)throws Exception;	
+	public void removerFornecimento(Fornecimento fornecimento)throws Exception;
+	public List<Fornecimento> consultarTodosFornecimento()throws Exception;
+	public Fornecimento consultarFornecimentoPorId(Integer id)throws Exception;
+    public List<Fornecimento> localizarFornecimentoMateria(MateriaPrima materia)throws Exception; 
+	public List<Fornecimento> localizarMateriasFornecedor(Fornecedor fornecedor)throws Exception; 
+	public List<Fornecimento> localizarMateriasRangePreco(MateriaPrima materia, double de, double ate)throws Exception;
+	
+	//metodos pertinentes a classe Estoque
+	public void inserirEstoque(Estoque estoque)throws Exception;
+	public void alterarEstoque(Estoque estoque)throws Exception;	
+	public void removerEstoque(Estoque estoque)throws Exception;
+	public List<Estoque> consultarTodosEstoque()throws Exception;
+	public Estoque consultarEstoquePorId(Integer id)throws Exception;
+    public void deduzirEstoque(MateriaPrima mat, double qtd) throws Exception;
+	public void alimentarEstoque(MateriaPrima mat, double qtd) throws Exception;
+	
+	
 
 }
