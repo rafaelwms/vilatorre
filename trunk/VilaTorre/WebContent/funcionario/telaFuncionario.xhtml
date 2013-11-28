@@ -35,7 +35,7 @@
               <f:selectItem itemLabel="Masculino" itemValue="1" />  
               <f:selectItem itemLabel="Feminino" itemValue="0" />  
        		  </p:selectOneButton>
-			<h:outputText for="nasc" value="Data Nasc.:"/><p:calendar tabindex="2" id="nasc" value="#{funcionarioBean.nasc}"/>
+			<h:outputText for="nasc" value="Data Nasc.:"/><p:inputMask tabindex="2" mask="99/99/9999" id="nasc" value="#{funcionarioBean.nasc}"/>
 			<h:outputText for="rg" value="RG:  "/><p:inputText tabindex="3" required="true" requiredMessage="É necessário informar o rg." label="RG" id="rg" value="#{funcionarioBean.func.rg}"/>
 			<h:outputText for="cpf" value="CPF: "/><p:inputMask tabindex="4" required="true"  requiredMessage="É necessário informar o cpf." mask="999.999.999-99"  id="cpf" value="#{funcionarioBean.func.cpf}"/>
 			<h:outputText for="fone" value="Fone: "/><p:inputMask tabindex="5" required="true" requiredMessage="É necessário informar o fone."  mask="(99)9999-9999"  id="fone" value="#{funcionarioBean.func.fone}"/>
@@ -79,8 +79,9 @@
 			
 			<p:panel>
 			<div style="float: none;" align="center">
-			<p:commandButton value="Salvar" action="#{clienteBeans.salvar}" ajax="false" /> 
-			<p:commandButton value="Limpar" action="reset" ajax="false" />
+			<p:commandButton value="Salvar" action="#{funcionarioBean.salvar}"  ajax="false" icon="ui-icon-disk"/> 
+			<p:commandButton value="Limpar" type="reset" icon="ui-icon-arrowreturnthick-1-w" immediate="true"/>
+			<p:commandButton value="Voltar" action="/index.xhml?faces-redirect=true"  ajax="false" immediate="true" icon="ui-icon-home"/> 
 			</div>
 			</p:panel>
 			

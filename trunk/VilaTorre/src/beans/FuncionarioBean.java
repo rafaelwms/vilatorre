@@ -44,6 +44,8 @@ public class FuncionarioBean {
 			func.setAdmissao(Datas.criarData(admissao));
 			func.setDemissao(Datas.criarData(demissao));
 			func.setNasc(Datas.criarData(nasc));
+			salario.replaceAll(".", "");
+			salario.replaceAll(",", ".");
 			func.setSalario(Double.parseDouble(salario));
 			func.setCargo(cargoEscolhido);
 			func.setUsuario(usuario);
