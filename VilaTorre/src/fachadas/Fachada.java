@@ -2,6 +2,7 @@ package fachadas;
 
 import java.util.List;
 
+import negocio.NegocioCalculos;
 import negocio.NegocioComum;
 
 import basicas.*;
@@ -10,9 +11,10 @@ public class Fachada implements IFachada {
 
 	private static IFachada fachada;
 	private  NegocioComum negocioComum;
-
+	private  NegocioCalculos negocioCalculos;
 	private Fachada() {
 		this.negocioComum = new NegocioComum();
+		this.negocioCalculos = new NegocioCalculos();
 	}
 
 	public static IFachada getInstancia() {
