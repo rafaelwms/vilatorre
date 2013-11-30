@@ -35,7 +35,8 @@ public class NegocioComum {
 	private IDAOPessoa daoPessoa;
 	private IDAOProduto daoProduto;
 	private IDAOUsuario daoUsuario;
-
+	
+	private NegocioCalculos calculo;
 
 	
 	public NegocioComum() {
@@ -54,6 +55,7 @@ public class NegocioComum {
 		this.daoProduto = new DAOProduto();
 		this.daoUsuario = new DAOUsuario();
 		
+		this.calculo = new NegocioCalculos();
 	}
 
 	
@@ -689,7 +691,7 @@ public class NegocioComum {
 		
 		/*
 		 * **********************************
-		 *   MÉTODOS REFERENTES A PEDIDO
+		 *   MÉTODOS REFERENTES A PAGAMENTO
 		 * **********************************
 		 */
 		public void inserirPagamento(Pagamento pagamento)throws Exception{
@@ -839,7 +841,8 @@ public class NegocioComum {
 		}
 	    public void deduzirEstoque(Estoque estoque, double qtd) throws Exception{
 	    	try {
-				daoEstoque.deduzirEstoque(estoque, qtd);
+	    		
+				daoEstoque.alterar(calculo.deduzirEstoque(estoque, qtd));
 			} catch (Exception e) {
 				
 			}
@@ -847,7 +850,7 @@ public class NegocioComum {
 		public void alimentarEstoque(Estoque estoque, double qtd) throws Exception{
 			
 			try {
-				daoEstoque.alimentarEstoque(estoque, qtd);
+				daoEstoque.alterar(calculo.alimentarEstoque(estoque, qtd));
 			} catch (Exception e) {
 				
 			}
