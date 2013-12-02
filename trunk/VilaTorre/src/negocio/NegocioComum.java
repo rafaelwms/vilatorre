@@ -173,10 +173,25 @@ public class NegocioComum {
 
 	public void inserirFuncionario(Funcionario entidade) throws Exception {
 		try {
-			this.verificarCpf(entidade.getCpf());
-			this.verificarRg(entidade.getRg());
+
+			if (daoPessoa.verificarCpf(entidade.getCpf()) != null) {
+				throw new Exception("O CPF \"" + entidade.getCpf()
+						+ "\" já está cadastrado.");
+			}
+			if (daoPessoa.verificarRg(entidade.getRg()) != null) {
+				throw new Exception("O RG \"" + entidade.getRg()
+						+ "\" já está cadastrado.");
+			}
+			
+			if(daoPessoa.verificarFone(entidade.getFone()) != null){
+				throw new Exception("O fone \"" + entidade.getFone()
+						+ "\" já está cadastrado.");
+			}
+			
 			if (!entidade.getUsuario().getLogin().trim().equals("")) {
-				this.verificarLogin(entidade.getUsuario().getLogin());
+				if (daoPessoa.verificarLogin(entidade.getUsuario().getLogin()) != null){
+					throw new Exception("O login \"" + entidade.getUsuario().getLogin() + "\" já está cadastrado.");
+				}
 			}
 			daoFuncionario.inserir(entidade);
 		} catch (Exception x) {

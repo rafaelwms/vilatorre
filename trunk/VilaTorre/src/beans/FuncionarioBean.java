@@ -5,7 +5,6 @@ import java.util.*;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 
 import negocio.ValidacoesDeTela;
 
@@ -35,17 +34,16 @@ public class FuncionarioBean {
 	public String salvar(){
 		
 		try{
-			ValidacoesDeTela.validarString(func.getNome(), "func", "nome", 6, 130, "o", "o");
-			ValidacoesDeTela.validarString(func.getFone(), "func", "fone", 13, 13, "o", "o");
-			ValidacoesDeTela.validarString(func.getCpf(), "func", "cpf", 14, 14, "o", "o");
-			ValidacoesDeTela.validarString(func.getUsuario().getLogin(), "func", "login", 6, 30, "o", "o");
-			ValidacoesDeTela.validarString(func.getUsuario().getSenha(), "func", "senha", 6, 30, "o", "a");
+
 	
-			func.setAdmissao(Datas.criarData(admissao));
-			func.setDemissao(Datas.criarData(demissao));
+			
+			if(demissao != null){
+				func.setDemissao(Datas.criarData(demissao));
+			}
+			func.setAdmissao(Datas.criarData(admissao));	
 			func.setNasc(Datas.criarData(nasc));
-			salario.replaceAll(".", "");
-			salario.replaceAll(",", ".");
+			salario = salario.replace(".", "");
+			salario = salario.replace(",", ".");
 			func.setSalario(Double.parseDouble(salario));
 			func.setCargo(cargoEscolhido);
 			func.setUsuario(usuario);
@@ -54,8 +52,16 @@ public class FuncionarioBean {
 			func.setEndereco(endereco);
 			
 			
+			ValidacoesDeTela.validarString(func.getNome(), "func", "nome", 6, 130, "o", "o");
+			ValidacoesDeTela.validarString(func.getFone(), "func", "fone", 13, 13, "o", "o");
+			ValidacoesDeTela.validarString(func.getCpf(), "func", "cpf", 14, 14, "o", "o");
+			ValidacoesDeTela.validarString(func.getUsuario().getLogin(), "func", "login", 6, 30, "o", "o");
+			ValidacoesDeTela.validarString(func.getUsuario().getSenha(), "func", "senha", 6, 30, "o", "a");
 			
-			if(func.getId() == null || func.getId() ==0){
+			
+			if(func.getId() == null || func.getId()< 1){
+				
+				this.func.setId(null);
 				
 				Fachada.getInstancia().inserirFuncionario(func);
 				FacesContext.getCurrentInstance().addMessage("cadastroFunc", new FacesMessage("Cadadstro de " + func.getNome() + " efetuado com sucesso."));
@@ -64,8 +70,12 @@ public class FuncionarioBean {
 				endereco = new Endereco();
 				cargoEscolhido = new Cargo();
 				usuario = new Usuario();
-				
+				salario = new String();
+				nasc = new String();
+				admissao = new String();
+				demissao = new String();
 				return  null;
+			
 			}else{
 				
 				Fachada.getInstancia().alterarFuncionario(func);
@@ -75,7 +85,10 @@ public class FuncionarioBean {
 				endereco = new Endereco();
 				cargoEscolhido = new Cargo();
 				usuario = new Usuario();
-				
+				salario = new String();
+				nasc = new String();
+				admissao = new String();
+				demissao = new String();				
 				return  null;
 				
 			}				
@@ -88,20 +101,23 @@ public class FuncionarioBean {
 		return null;
 	}
 	
-	public String  remover(){
+	public String  remover(Funcionario funcParam){
 		try{
-		if (func.getId() != null && func.getId() > 0) {
+		if (funcParam.getId() != null && funcParam.getId() > 0) {
 
-			Fachada.getInstancia().removerFuncionario(func);
+			Fachada.getInstancia().removerFuncionario(funcParam);
 			FacesContext.getCurrentInstance().addMessage("cadastroCli", new FacesMessage("Cadastro de removido com sucesso."));
 			func = new Funcionario();
 			usuario = new Usuario();
 			endereco = new Endereco();
-			nasc = "";
+			salario = new String();
+			nasc = new String();
+			admissao = new String();
+			demissao = new String();
 			return null;
 
 		}else{
-			FacesContext.getCurrentInstance().addMessage("cadastroCli", new FacesMessage("Seleicione um func para remoção."));
+			FacesContext.getCurrentInstance().addMessage("cadastroCli", new FacesMessage("Seleicione um funconário para exclusão."));
 			return null;
 		}
 		}catch(Exception ex){
@@ -116,7 +132,22 @@ public class FuncionarioBean {
 		    return TipoUser.values();
 		  }
 			
-				
+	public void editar(Funcionario funcParam){
+		this.func = funcParam;
+		this.endereco = funcParam.getEndereco();
+		this.usuario = funcParam.getUsuario();
+		this.cargoEscolhido = funcParam.getCargo();
+		this.nasc = Datas.formatarData(funcParam.getNasc());
+		this.admissao = Datas.formatarData(funcParam.getAdmissao());
+		this.salario = Datas.double2MoneyString(funcParam.getSalario());
+		System.out.println(func);
+		System.out.println(endereco);
+		System.out.println(usuario);
+		System.out.println(cargoEscolhido);
+		System.out.println(nasc);
+		System.out.println(admissao);
+		System.out.println(salario);
+	}			
 
 	
 	public String reset(){
@@ -124,7 +155,10 @@ public class FuncionarioBean {
 		endereco = new Endereco();
 		cargoEscolhido = new Cargo();
 		usuario = new Usuario();
-		
+		salario = new String();
+		nasc = new String();
+		admissao = new String();
+		demissao = new String();
 		return  null;
 	}
 	
@@ -149,11 +183,11 @@ public class FuncionarioBean {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public Cargo getCargo() {
+	public Cargo getCargoEscolhido() {
 		return cargoEscolhido;
 	}
-	public void setCargo(Cargo cargo) {
-		this.cargoEscolhido = cargo;
+	public void setCargoEscolhido(Cargo cargoEscolhido) {
+		this.cargoEscolhido = cargoEscolhido;
 	}
 	public String getAdmissao() {
 		return admissao;

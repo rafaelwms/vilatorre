@@ -41,11 +41,13 @@ public class CargoBean {
 				this.cargo.setId(null);
 				Fachada.getInstancia().inserirCargo(cargo);
 				FacesContext.getCurrentInstance().addMessage("cadastroCargo", new FacesMessage("Cargo "+cargo.getNome()+" cadastrado com êxito."));
+				cargo = new Cargo();
 				return null;
 			} else{
 				
 				Fachada.getInstancia().alterarCargo(cargo);
 				FacesContext.getCurrentInstance().addMessage("cadastroCargo", new FacesMessage("Cargo "+cargo.getNome()+" alterado com êxito."));
+				cargo = new Cargo();
 				return null;
 				
 			}

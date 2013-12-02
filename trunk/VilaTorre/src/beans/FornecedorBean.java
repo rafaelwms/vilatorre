@@ -1,7 +1,7 @@
 package beans;
 
 import java.text.ParseException;
-import java.util.Date;
+import java.util.*;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -19,23 +19,22 @@ public class FornecedorBean {
 
 	private Fornecedor fornecedor = new Fornecedor();
 	private Endereco endereco = new Endereco();
+	private List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 
 	private String nasc;
 	private String parceiro;
-	private Date nascimento;
-	private Date parceria;
+
 
 	public String salvar() {
 
 		try {
-			nascimento = Datas.criarData(nasc);
-			parceria = Datas.criarData(parceiro);
+
 			endereco.setCidade("Recife");
 			endereco.setUf("PE");
 			fornecedor.setEndereco(endereco);
 			fornecedor.setUsuario(null);
-			fornecedor.setNasc(nascimento);
-			fornecedor.setInicioParceria(parceria);
+			fornecedor.setNasc(Datas.criarData(nasc));
+			fornecedor.setInicioParceria(Datas.criarData(parceiro));
 			
 			
 			ValidacoesDeTela.validarString(fornecedor.getNome(), "fornecedor", "nome", 6, 130, "o", "o");
@@ -43,13 +42,14 @@ public class FornecedorBean {
 			ValidacoesDeTela.validarString(fornecedor.getCpf(), "fornecedor", "cpf", 14, 14, "o", "o");
 			
 			
-			if (fornecedor.getId() == null || fornecedor.getId() == 0) {
-
+			if (fornecedor.getId() == null || fornecedor.getId() < 1) {
+				this.fornecedor.setId(null);
 				Fachada.getInstancia().inserirFornecedor(fornecedor);
 				FacesContext.getCurrentInstance().addMessage("cadastroForn", new FacesMessage("Cadastro de " + fornecedor.getNome() + " efetuado com sucesso."));
 				fornecedor = new Fornecedor();
 				endereco = new Endereco();
-				nasc = "";
+				nasc = new String();
+				parceiro = new String();
 				return null;
 
 			} else {
@@ -57,6 +57,9 @@ public class FornecedorBean {
 				Fachada.getInstancia().alterarFornecedor(fornecedor);
 				FacesContext.getCurrentInstance().addMessage("alterForn", new FacesMessage("Cadastro de " + fornecedor.getNome() + " alterado com sucesso."));
 				fornecedor = new Fornecedor();
+				endereco = new Endereco();
+				nasc = new String();
+				parceiro = new String();
 				return null;
 			}
 		} catch (ParseException px){
@@ -72,19 +75,36 @@ public class FornecedorBean {
 	public String reset() {
 		fornecedor = new Fornecedor();
 		endereco = new Endereco();
-		nasc = "";
+		nasc = new String();
+		parceiro = new String();
 		return null;
 	}
 	
-	public String  remover(){
+	public String editar(Fornecedor forn){
+		
+		this.fornecedor = forn;
+		this.endereco = forn.getEndereco();
+		this.nasc = Datas.formatarData(forn.getNasc());
+		this.parceiro = Datas.formatarData(forn.getInicioParceria());	
+		
+		System.out.println(fornecedor);
+		System.out.println(endereco);
+		System.out.println(nasc);
+		System.out.println(parceiro);
+		return null;
+	}
+	
+	public String  remover(Fornecedor forn){
 		try{
-		if (fornecedor.getId() != null && fornecedor.getId() > 0) {
+			
+		if (forn.getId() != null && forn.getId() < 1) {
 
-			Fachada.getInstancia().removerFornecedor(fornecedor);
-			FacesContext.getCurrentInstance().addMessage("cadastroForn", new FacesMessage("Cadastro de removido com sucesso."));
+			Fachada.getInstancia().removerFornecedor(forn);
+			FacesContext.getCurrentInstance().addMessage("cadastroForn", new FacesMessage("Cadastro removido com sucesso."));
 			fornecedor = new Fornecedor();
 			endereco = new Endereco();
-			nasc = "";
+			nasc = new String();
+			parceiro = new String();
 			return null;
 
 		}else{
@@ -122,21 +142,8 @@ public class FornecedorBean {
 		this.nasc = nasc;
 	}
 
-	public Date getMomento() {
-		return parceria;
-	}
 
-	public void setMomento(Date momento) {
-		this.parceria = momento;
-	}
-
-	public Date getNascimento() {
-		return nascimento;
-	}
-
-	public void setNascimento(Date nascimento) {
-		this.nascimento = nascimento;
-	}
+	
 
 	public String getParceiro() {
 		return parceiro;
@@ -144,6 +151,21 @@ public class FornecedorBean {
 
 	public void setParceiro(String parceiro) {
 		this.parceiro = parceiro;
+	}
+
+	public List<Fornecedor> getFornecedores() {
+		try {
+			fornecedores = Fachada.getInstancia().consultarTodosFornecedor();
+			return fornecedores;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public void setFornecedores(List<Fornecedor> fornecedores) {
+		this.fornecedores = fornecedores;
 	}
 
 }

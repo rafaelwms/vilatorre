@@ -52,11 +52,9 @@
 			<p:panel header="Lista dos cargos" toggleable="true">
 				
 
-					<p:dataTable id="dataTable" var="cargo" value="#{cargoBean.cargos}"
+					<p:dataTable id="cargoTable" var="cargo" value="#{cargoBean.cargos}"
 						emptyMessage="Nenhum cargo cadastrado.">
-						<!--         <f:facet name="header">   -->
-						<!--            Ajax Sorting   -->
-						<!--         </f:facet>   -->
+						
 						<h:inputHidden value="#{cargoBean.cargo.id}"/>
 						<p:column headerText="Cargo">
 							<h:outputText value="#{cargo.nome}" />

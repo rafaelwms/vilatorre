@@ -177,8 +177,21 @@ public class Datas {
 		Date data2 = Datas.criarData("2005-09-29");
 		System.out.println("Data2 formatada: " + Datas.formatarData(data2));
 		
-				 
 	}
+	
+	
+	
+	
+	public static String double2MoneyString(double valor){
+		
+		String temp = String.valueOf(valor);
+		
+		temp = temp.replace(".", ",");
+		
+		return temp;
+	}
+	
+	
 }
 
 
