@@ -9,26 +9,19 @@ public class Testes {
 	 */
 	public static void main(String[] args) {
 		
-		
-		IDAOCargo daoCargo = new DAOCargo();
-		IDAOFuncionario daoFunc = new DAOFuncionario();
-		IDAOFornecedor daoForn = new DAOFornecedor();
-		
-		try{
-			for(Cargo c : Fachada.getInstancia().consultarTodosCargo()){
-				
-				System.out.println(c.getNome());
-				
-			}
+			String teste = "1.000,00";
 			
+			teste = teste.replace(".", "");
+			teste = teste.replace("," ,".");
 			
-			
-		}catch(Exception ex){
-			System.out.println(ex.getMessage());
-		}
+			System.out.println(teste);
 		
-		
-		
+			String   testeString = "Substituir ' por * ";
+			String   tempString = testeString.replace( '\'', '*' );
+			System.out.println( "Original = " + testeString );
+			System.out.println( "Resultado   = " + tempString ); 
+
+		//	Leia mais em: Substituindo e removendo caracteres http://www.devmedia.com.br/substituindo-e-removendo-caracteres/2831#ixzz2m9rNfGWX
 
 	}
 
