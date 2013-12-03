@@ -12,7 +12,7 @@ public class Ingrediente extends ObjetoGeral{
 	@Enumerated(EnumType.STRING)
 	public Medida medida;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="materia", referencedColumnName="id")
 	private MateriaPrima materiaPrima;
 	

@@ -26,60 +26,74 @@
 				</div>
 			</p:panel>
 
-			<h:form id="formMateria">
+			<h:form id="formIngrediente">
 			<p:growl life="3000"/>
-			<p:panel header="Informações da Matéria Prima" id="dadosMateria">
+			<p:panel header="Informações do Ingrediente">
 				<h:panelGrid columns="2">
 					
-					<h:outputText for="nomeMateria" value="Nome:" />
-					<p:inputText id="nomeMateria" value="#{materiaPrimaBean.materia.nome}"
+					<h:outputText for="nomeIngrediente" value="Nome:" />
+					<p:inputText id="nomeIngrediente" value="#{ingredienteBean.ingrediente.nome}"
 						tabindex="1" size="70" />
+						
+						<h:outputText for="materias" value="Materia Prima:"/> 
+			<p:selectOneMenu value="#{ingredienteBean.materia}" id="materias" tabindex="2" converter="materiaConverter">  				
+        	      <f:selectItem noSelectionOption="true" itemLabel="Selecione uma matéria prima"></f:selectItem>
+           		  <f:selectItems value="#{ingredienteBean.materias}" var="mat" itemLabel="#{mat.nome}"><h:inputHidden value="#{mat.id}" /></f:selectItems>
+       		 </p:selectOneMenu> 
+       		 			
+       		 			<h:outputText for="qtdIngrediente" value="Quantidade:" />
+					<p:inputText id="qtdIngrediente" tabindex="3" value="#{ingredienteBean.ingrediente.quantidade}"/>
+       		 
 					
-					<h:outputText for="unidMateria" value="Unidade:"/>
-					<p:selectOneMenu value="#{materiaPrimaBean.unid}"  id="unidMateria">  
-        	    		  <f:selectItem noSelectionOption="true" itemLabel="Selecione uma unidade."></f:selectItem>
-           		 		  <f:selectItems value="#{materiaPrimaBean.unidades}"/>
+					<h:outputText for="medidaIngre" value="Medida:"/>
+					<p:selectOneMenu value="#{ingredienteBean.medida}"  tabindex="4" id="medidaIngre">  
+        	    		  <f:selectItem noSelectionOption="true" itemLabel="Selecione uma medida."></f:selectItem>
+           		 		  <f:selectItems value="#{ingredienteBean.medidas}"/>
        				</p:selectOneMenu> 
 					
 						
-					<h:outputText for="descMateria" value="Descrição:" />
-					<p:inputTextarea id="descMateria"
-						value="#{materiaPrimaBean.materia.descricao}" tabindex="2" />
-						<h:inputHidden value="#{materiaPrimaBean.materia.id}"/>
+					<h:outputText for="descIngrediente" value="Descrição:" />
+					<p:inputTextarea id="descIngrediente"
+						value="#{ingredienteBean.ingrediente.descricao}" tabindex="5" />
+						<h:inputHidden value="#{ingredienteBean.ingrediente.id}"/>
 				</h:panelGrid>
 			</p:panel>
 
 			<p:panel>
 				<div style="float: none;" align="center">
-					<p:commandButton value="Salvar" action="#{materiaPrimaBean.salvar}"
-						ajax="false" icon="ui-icon-disk" />
-					<p:commandButton value="Limpar" type="reset" ajax="false" immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
+					<p:commandButton value="Salvar" action="#{ingredienteBean.salvar}"
+						ajax="false" icon="ui-icon-disk" tabindex="6"/>
+					<p:commandButton value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
 				</div>
 			</p:panel>
 			
-			<p:panel header="Lista das Materias Primas" toggleable="true">
+			<p:panel header="Lista dos Ingredientes" toggleable="true">
 				
 
-					<p:dataTable id="cargoTable" var="mat" value="#{materiaPrimaBean.materias}"
-						emptyMessage="Nenhuma matéria prima cadastrado.">
+					<p:dataTable id="igrediTable" var="ing" value="#{ingredienteBean.ingredientes}"
+						emptyMessage="Nenhum ingrediente cadastrado.">
 						
-						<h:inputHidden value="#{materiaPrimaBean.materia.id}"/>
-						<p:column headerText="Matéria Prima">
-							<h:outputText value="#{mat.nome}" />
+						<h:inputHidden value="#{ingredienteBean.ingrediente.id}"/>
+						<p:column headerText="Ingrediente">
+							<h:outputText value="#{ing.nome}" />
 						</p:column>
 						
-						<p:column headerText="Unidade">
-							<h:outputText value="#{mat.unidade}" />
+						<p:column headerText="Materia">
+							<h:outputText value="#{ing.materia.nome}" />
 						</p:column>
 
-						<p:column  headerText="Descrição">
-							<h:outputText value="#{mat.descricao}" />
+						<p:column  headerText="Quantidade">
+							<h:outputText value="#{ing.quantidade}" />
+						</p:column>
+						
+						<p:column  headerText="Medida">
+							<h:outputText value="#{ing.medida}" />
 						</p:column>
 						
 						<p:column headerText="Ações">
-							<p:commandButton  title="Editar" actionListener="#{materiaPrimaBean.editar(mat)}" update=":formMateria" icon="ui-icon-pencil"/>
+							<p:commandButton  title="Editar" actionListener="#{ingredienteBean.editar(ing)}" update=":formIngrediente" icon="ui-icon-pencil"/>
 					&nbsp;&nbsp;
-					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão da matéria prima #{mat.nome}?')" action="#{materiaPrimaBean.remover(mat)}" icon="ui-icon-trash" />
+					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão da matéria prima #{ing.nome}?')" action="#{ingredienteBean.excluir(ing)}" icon="ui-icon-trash" />
 						</p:column>
 
 					</p:dataTable>

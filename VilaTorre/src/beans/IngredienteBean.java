@@ -22,12 +22,13 @@ public class IngredienteBean {
 	private MateriaPrima materia;
 	private List<MateriaPrima> materias;
 	
-	
+	public IngredienteBean(){}
 	
 	public String salvar(){
 		try {
 			
 			ingrediente.setMateriaPrima(materia);
+			
 			
 			
 			if(ingrediente.getId() == null || ingrediente.getId() < 1){
@@ -47,6 +48,7 @@ public class IngredienteBean {
 			return null;
 		}
 	}
+	
 	
 	
 	public String editar(Ingrediente param){
