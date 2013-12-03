@@ -42,7 +42,7 @@
        		 </p:selectOneMenu> 
        		 			
        		 			<h:outputText for="qtdIngrediente" value="Quantidade:" />
-					<p:inputText id="qtdIngrediente" tabindex="3" value="#{ingredienteBean.ingrediente.quantidade}"/>
+					<p:inputText onkeypress="mascara(this,numeros)"  id="qtdIngrediente" tabindex="3" value="#{ingredienteBean.ingrediente.quantidade}"/>
        		 
 					
 					<h:outputText for="medidaIngre" value="Medida:"/>
