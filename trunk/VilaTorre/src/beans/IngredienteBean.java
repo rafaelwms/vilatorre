@@ -13,14 +13,14 @@ import java.util.*;
 @ManagedBean
 public class IngredienteBean {
 
-	private Ingrediente ingrediente;
-	private List<Ingrediente> ingredientes;
+	private Ingrediente ingrediente = new Ingrediente();
+	private List<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
 	
 	private Medida medida;
 	private Medida[] medidas;
 	
-	private MateriaPrima materia;
-	private List<MateriaPrima> materias;
+	private MateriaPrima materia = new MateriaPrima();
+	private List<MateriaPrima> materias = new ArrayList<MateriaPrima>();
 	
 	public IngredienteBean(){}
 	
@@ -35,11 +35,14 @@ public class IngredienteBean {
 			ingrediente.setId(null);
 			Fachada.getInstancia().inserirIngrediente(ingrediente);	
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ingrediente "+ingrediente.getNome()+" cadastrado com êxito."));
+			ingrediente = new Ingrediente();
+			materia = new MateriaPrima();
 			return null;
 			}else{
 				Fachada.getInstancia().alterarIngrediente(ingrediente);	
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ingrediente "+ingrediente.getNome()+" alterado com êxito."));
-			
+				ingrediente = new Ingrediente();
+				materia = new MateriaPrima();
 			return null;
 			}
 		} catch (Exception e) {
