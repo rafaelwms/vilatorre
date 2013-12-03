@@ -10,20 +10,20 @@ public class Ingrediente extends ObjetoGeral{
 	private int qtd;
 	
 	@Enumerated(EnumType.STRING)
-	private Unidade unidade;
+	public Medida medida;
 	
 	@OneToOne
 	@JoinColumn(name="materia", referencedColumnName="id")
 	private MateriaPrima materiaPrima;
 	
-	private enum Unidade{gramas, unidade, porção}
+	public enum Medida{gramas, unidade, porção}
 	
 	public Ingrediente(){}
 	
-	public Ingrediente(int qtd, MateriaPrima materiaPrima, Unidade unidade){
+	public Ingrediente(int qtd, MateriaPrima materiaPrima, Medida medida){
 		this.setQuantidade(qtd);
 		this.setMateriaPrima(materiaPrima);
-		this.setUnidade(unidade);
+		this.setMedida(medida);
 	}
 
 	public int getQuantidade() {
@@ -34,12 +34,12 @@ public class Ingrediente extends ObjetoGeral{
 		this.qtd = quantidade;
 	}
 
-	public Unidade getUnidade() {
-		return unidade;
+	public Medida getMedida() {
+		return medida;
 	}
 
-	public void setUnidade(Unidade unidade) {
-		this.unidade = unidade;
+	public void setMedida(Medida medida) {
+		this.medida = medida;
 	}
 
 	public MateriaPrima getMateriaPrima() {

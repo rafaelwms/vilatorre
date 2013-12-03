@@ -50,8 +50,29 @@ public class MateriaPrimaBean {
 	
 	}
 	
+	public String editar(MateriaPrima param){
+		this.materia = param;
+		this.unid = param.getUnidade();
+		
+		System.out.println(materia);
+		System.out.println(unid);
+		
+		return null;
+	}
 	
-	
+	public String remover(MateriaPrima param){
+		try{
+			
+			Fachada.getInstancia().removerMateriaPrima(param);
+			FacesContext.getCurrentInstance().addMessage("cadastroMat", new FacesMessage("Materia prima "+materia.getNome()+" removida com êxito."));
+			
+		}catch(Exception ex){
+			
+		}
+		
+		
+		return null;
+	}
 	
 	public MateriaPrima getMateria() {
 		return materia;
