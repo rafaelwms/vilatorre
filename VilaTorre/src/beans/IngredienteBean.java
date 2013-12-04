@@ -28,7 +28,7 @@ public class IngredienteBean {
 		try {
 			
 			ingrediente.setMateriaPrima(materia);
-			
+			ingrediente.setMedida(medida);
 			
 			
 			if(ingrediente.getId() == null || ingrediente.getId() < 1){
