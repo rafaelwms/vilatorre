@@ -1,5 +1,7 @@
 package basicas;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -12,15 +14,12 @@ public class Produto extends ObjetoGeral  {
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 	
-	/*
-	 * A questão de dedução do estoque ficou em Stand By segundo Chico. 
-	 * Pois, este era o motivo da lista de ingredientes.
-	 */
-	//private List<Ingrediente> ingredientes;
+	@ManyToMany
+	@JoinTable(name="produto_ingrediente")
+	private List<Ingrediente> ingredientes;
 	
 	public enum Categoria{Bebidas, Burgers, SuperBurgers, Salgados, Sobremesa}
-
-
+	
 	public Produto(){}
 	
 	public Produto(String nome, String desc, double preco){}
@@ -42,6 +41,14 @@ public class Produto extends ObjetoGeral  {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public List<Ingrediente> getIngredientes() {
+		return ingredientes;
+	}
+
+	public void setIngredientes(List<Ingrediente> ingredientes) {
+		this.ingredientes = ingredientes;
 	}
 
 
