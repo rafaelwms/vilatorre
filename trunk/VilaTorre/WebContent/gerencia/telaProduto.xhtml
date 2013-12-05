@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link type="text/css" rel="stylesheet" href="../css/custom.css" />
+	<script language="JavaScript" src="../script/money.js" />
+</h:head>
+<h:body>
+
+
+	
+
+
+		<p:dialog header=".: Gerenciar Produto :." widgetVar="dlg"
+			showEffect="clip" width="600" modal="true" visible="true"
+			resizable="false" closable="false" draggable="false">
+			<p:panel>
+				<div align="center">
+					<img src="../Imagens/Vila Torre - LOGO - 200.png" /><br />
+				</div>
+			</p:panel>
+
+			<h:form id="formProduto">
+			<p:growl life="3000"/>
+			<p:panel header="Informações do Produto">
+				<h:panelGrid columns="2">
+					
+					<h:outputText for="nomeProduto" value="Nome:" />
+					<p:inputText id="nomeProduto" value="#{produtoBean.produto.nome}"
+						tabindex="1" size="70" />		 
+					
+					<h:outputText for="categoriaProduto" value="Categoria:"/>
+					<p:selectOneMenu value="#{produtoBean.categoria}"  tabindex="2" id="categoriaProduto">  
+        	    		  <f:selectItem noSelectionOption="true" itemLabel="Selecione uma categoria."></f:selectItem>
+           		 		  <f:selectItems value="#{produtoBean.categorias}"/>
+       				</p:selectOneMenu> 
+					<h:outputText value="Ingredientes" />  
+       					 
+       					 <p:selectManyMenu id="scroll" value="#{produtoBean.ingredientes}" converter="ingredienteConverter" showCheckbox="true">  
+         			   <f:selectItem noSelectionOption="true" itemLabel="Selecione os ingredientes."></f:selectItem>
+         			   <f:selectItems value="#{produtoBean.todosIngredientes}" var="ingre" itemLabel="#{ingre.nome}" ><h:inputHidden value="ingre.id"/> </f:selectItems>  
+     				   </p:selectManyMenu>
+						
+					<h:outputText for="descProduto" value="Descrição:" />
+					<p:inputTextarea id="descProduto"
+						value="#{produtoBean.produto.descricao}" tabindex="5" />
+						<h:inputHidden value="#{produtoBean.produto.id}"/>
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel>
+				<div style="float: none;" align="center">
+					<p:commandButton value="Salvar" action="#{produtoBean.salvar}"
+						ajax="false" icon="ui-icon-disk" tabindex="6"/>
+					<p:commandButton value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
+				</div>
+			</p:panel>
+			
+			<p:panel header="Lista dos Produtos" toggleable="true">
+				
+
+					<p:dataTable id="igrediTable" var="ing" value="#{produtoBean.produtos}"
+						emptyMessage="Nenhum produto cadastrado.">
+						
+						<h:inputHidden value="#{produtoBean.produto.id}"/>
+						<p:column headerText="Produto">
+							<h:outputText value="#{ing.nome}" />
+						</p:column>
+						
+						<p:column headerText="Materia">
+							<h:outputText value="#{ing.materiaPrima.nome}" />
+						</p:column>
+
+						<p:column  headerText="Quantidade">
+							<h:outputText value="#{ing.quantidade}" />
+						</p:column>
+						
+						<p:column  headerText="Medida">
+							<h:outputText value="#{ing.medida}" />
+						</p:column>
+						
+						<p:column headerText="Ações">
+							<p:commandButton  title="Editar" actionListener="#{produtoBean.editar(ing)}" update=":formProduto" icon="ui-icon-pencil"/>
+					&nbsp;&nbsp;
+					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão da matéria prima #{ing.nome}?')" action="#{produtoBean.excluir(ing)}" icon="ui-icon-trash" />
+						</p:column>
+
+					</p:dataTable>
+					</p:panel>
+
+				</h:form>
+
+			
+
+
+
+
+		</p:dialog>
+
+
+
+	
+
+
+</h:body>
+</html>
