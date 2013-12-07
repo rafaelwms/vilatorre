@@ -32,25 +32,20 @@
 				<h:panelGrid columns="2">
 					
 					<h:outputText for="nomeProduto" value="Nome:" />
-					<p:inputText id="nomeProduto" value="#{produtoBean.produto.nome}"
-						tabindex="1" size="70" />		 
+					<p:inputText id="nomeProduto" value="#{produtoBean.produto.nome}" tabindex="1" size="70" />		 
 					
 					<h:outputText for="categoriaProduto" value="Categoria:"/>
 					<p:selectOneMenu value="#{produtoBean.categoria}"  tabindex="2" id="categoriaProduto">  
-        	    		  <f:selectItem noSelectionOption="true" itemLabel="Selecione uma categoria."></f:selectItem>
+        	    		  <f:selectItem noSelectionOption="true" itemLabel="Selecione uma categoria."/>
            		 		  <f:selectItems value="#{produtoBean.categorias}"/>
        				</p:selectOneMenu> 
-					<h:outputText value="Ingredientes" />  
-       					 
-       					 <p:selectManyMenu id="scroll" value="#{produtoBean.ingredientes}" converter="ingredienteConverter" showCheckbox="true">  
-         			   <f:selectItem noSelectionOption="true" itemLabel="Selecione os ingredientes."></f:selectItem>
-         			   <f:selectItems value="#{produtoBean.todosIngredientes}" var="ingre" itemLabel="#{ingre.nome}" ><h:inputHidden value="ingre.id"/> </f:selectItems>  
-     				   </p:selectManyMenu>
+     				   
+     				   <h:outputText  for="preco" value="Preço R$:"/>
+     				   <p:inputText id="preco" onkeypress="mascara(this,moeda)" value="#{produtoBean.preco}"/>
 						
-					<h:outputText for="descProduto" value="Descrição:" />
-					<p:inputTextarea id="descProduto"
-						value="#{produtoBean.produto.descricao}" tabindex="5" />
-						<h:inputHidden value="#{produtoBean.produto.id}"/>
+					   <h:outputText for="descProduto" value="Descrição:" />
+					   <p:inputTextarea id="descProduto" value="#{produtoBean.produto.descricao}" tabindex="5" />
+					   <h:inputHidden value="#{produtoBean.produto.id}"/>
 				</h:panelGrid>
 			</p:panel>
 
@@ -65,30 +60,26 @@
 			<p:panel header="Lista dos Produtos" toggleable="true">
 				
 
-					<p:dataTable id="igrediTable" var="ing" value="#{produtoBean.produtos}"
+					<p:dataTable id="produtoTable" var="prod" value="#{produtoBean.produtos}"
 						emptyMessage="Nenhum produto cadastrado.">
 						
 						<h:inputHidden value="#{produtoBean.produto.id}"/>
 						<p:column headerText="Produto">
-							<h:outputText value="#{ing.nome}" />
+							<h:outputText value="#{prod.nome}" />
 						</p:column>
 						
-						<p:column headerText="Materia">
-							<h:outputText value="#{ing.materiaPrima.nome}" />
-						</p:column>
-
-						<p:column  headerText="Quantidade">
-							<h:outputText value="#{ing.quantidade}" />
+						<p:column  headerText="Preço">
+							<h:outputText value="#{prod.preco}" />
 						</p:column>
 						
-						<p:column  headerText="Medida">
-							<h:outputText value="#{ing.medida}" />
+						<p:column  headerText="Descrição">
+							<h:outputText value="#{prod.descricao}" />
 						</p:column>
 						
 						<p:column headerText="Ações">
-							<p:commandButton  title="Editar" actionListener="#{produtoBean.editar(ing)}" update=":formProduto" icon="ui-icon-pencil"/>
+							<p:commandButton  title="Editar" actionListener="#{produtoBean.editar(prod)}" update=":formProduto" icon="ui-icon-pencil"/>
 					&nbsp;&nbsp;
-					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão da matéria prima #{ing.nome}?')" action="#{produtoBean.excluir(ing)}" icon="ui-icon-trash" />
+					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão do produto #{prod.nome}?')" action="#{produtoBean.excluir(prod)}" icon="ui-icon-trash" />
 						</p:column>
 
 					</p:dataTable>
