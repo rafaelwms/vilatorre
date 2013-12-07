@@ -27,10 +27,7 @@ public class ProdutoBean {
 	
 	private Categoria[] categorias;
 	
-	private List<Ingrediente> todosIngredientes = new ArrayList<Ingrediente>();
-	
-	private List<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
-	
+
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
 	
@@ -40,15 +37,15 @@ public class ProdutoBean {
 			preco = preco.replace(".", "");
 			preco = preco.replace(",", ".");
 			produto.setPreco(Double.parseDouble(preco));
-			produto.setIngredientes(ingredientes);
 			produto.setCategoria(categoria);
 			
 			if(produto.getId() == null || produto.getId() < 1){
 				
+				
+				
 				Fachada.getInstancia().inserirProduto(produto);
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produto "+produto.getNome()+" cadastrado com êxito."));
 				produto = new Produto();
-				ingredientes = new ArrayList<Ingrediente>();
 				preco = new String();
 				return null;
 				
@@ -57,7 +54,6 @@ public class ProdutoBean {
 				Fachada.getInstancia().alterarProduto(produto);
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produto "+produto.getNome()+" cadastrado com êxito."));
 				produto = new Produto();
-				ingredientes = new ArrayList<Ingrediente>();
 				preco = new String();
 				return null;
 				
@@ -73,12 +69,10 @@ public class ProdutoBean {
 		
 		this.produto = param;
 		this.categoria = param.getCategoria();
-		this.ingredientes = param.getIngredientes();
 		this.preco =  Datas.double2MoneyString(param.getPreco());
 		
 		System.out.println(produto);
 		System.out.println(categoria);
-		System.out.println(ingredientes);
 		System.out.println(preco);
 		return null;
 	}
@@ -87,11 +81,9 @@ public class ProdutoBean {
 	public String excluir(Produto param){
 
 		try{
-			
 			Fachada.getInstancia().removerProduto(param);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produto "+produto.getNome()+" removido com êxito."));
 			produto = new Produto();
-			ingredientes = new ArrayList<Ingrediente>();
 			preco = new String();
 		return null;	
 		}catch(Exception ex){
@@ -128,17 +120,8 @@ public class ProdutoBean {
 		}
 	}
 
-	public void setTodosIngredientes(List<Ingrediente> todosIngredientes) {
-		this.todosIngredientes = todosIngredientes;
-	}
-
-	public List<Ingrediente> getIngredientes() {
-		return ingredientes;
-	}
-
-	public void setIngredientes(List<Ingrediente> ingredientes) {
-		this.ingredientes = ingredientes;
-	}
+	
+	
 	
 	public Categoria[] getCategorias(){
 		return Categoria.values();

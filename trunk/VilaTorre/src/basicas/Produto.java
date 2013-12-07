@@ -1,6 +1,6 @@
 package basicas;
 
-import java.util.List;
+
 
 import javax.persistence.*;
 
@@ -14,9 +14,6 @@ public class Produto extends ObjetoGeral  {
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 	
-	@ManyToMany
-	@JoinTable(name="produto_ingrediente")
-	private List<Ingrediente> ingredientes;
 	
 	public enum Categoria{Bebidas, Burgers, SuperBurgers, Salgados, Sobremesa}
 	
@@ -42,14 +39,5 @@ public class Produto extends ObjetoGeral  {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-
-	public List<Ingrediente> getIngredientes() {
-		return ingredientes;
-	}
-
-	public void setIngredientes(List<Ingrediente> ingredientes) {
-		this.ingredientes = ingredientes;
-	}
-
 
 }
