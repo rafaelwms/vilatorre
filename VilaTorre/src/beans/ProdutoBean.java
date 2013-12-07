@@ -25,10 +25,16 @@ public class ProdutoBean {
 	
 	private String preco;
 	
-	private Categoria[] categorias;
-	
+	private Categoria[] categorias;	
 
-	private List<Produto> produtos = new ArrayList<Produto>();
+	private List<Produto> produtos = new ArrayList<Produto>();	
+	
+	private List<Ingrediente> todosIngredientes = new ArrayList<Ingrediente>();
+	
+	private List<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
+	
+	
+	public ProdutoBean(){}
 	
 	
 	public String salvar(){
@@ -38,11 +44,11 @@ public class ProdutoBean {
 			preco = preco.replace(",", ".");
 			produto.setPreco(Double.parseDouble(preco));
 			produto.setCategoria(categoria);
+			produto.setIngredientes(ingredientes);
 			
 			if(produto.getId() == null || produto.getId() < 1){
 				
-				
-				
+				produto.setId(null);
 				Fachada.getInstancia().inserirProduto(produto);
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produto "+produto.getNome()+" cadastrado com êxito."));
 				produto = new Produto();
@@ -147,6 +153,21 @@ public class ProdutoBean {
 
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
+	}
+
+
+	public List<Ingrediente> getIngredientes() {
+		return ingredientes;
+	}
+
+
+	public void setIngredientes(List<Ingrediente> ingredientes) {
+		this.ingredientes = ingredientes;
+	}
+
+
+	public void setTodosIngredientes(List<Ingrediente> todosIngredientes) {
+		this.todosIngredientes = todosIngredientes;
 	}
 	
 }

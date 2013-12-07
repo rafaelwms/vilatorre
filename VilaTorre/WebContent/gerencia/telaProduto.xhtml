@@ -39,6 +39,13 @@
         	    		  <f:selectItem noSelectionOption="true" itemLabel="Selecione uma categoria."/>
            		 		  <f:selectItems value="#{produtoBean.categorias}"/>
        				</p:selectOneMenu> 
+       				
+       				<h:outputText for="ingredientes"/>
+       				<p:selectManyMenu id="ingredientes" value="#{produtoBean.ingredientes}" converter="ingredienteConverter" style="width:150px;height:200px"  showCheckbox="true">  
+            			<f:selectItem noSelectionOption="true" itemLabel="Selecione"/>
+            			<f:selectItems value="#{produtoBean.todosIngredientes}" var="ing" itemLabel="#{ing.nome}"  />  
+       				 </p:selectManyMenu>
+       				
      				   
      				   <h:outputText  for="preco" value="Preço R$:"/>
      				   <p:inputText id="preco" onkeypress="mascara(this,moeda)" value="#{produtoBean.preco}"/>

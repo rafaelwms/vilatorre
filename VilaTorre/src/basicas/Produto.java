@@ -2,6 +2,8 @@ package basicas;
 
 
 
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -10,6 +12,10 @@ public class Produto extends ObjetoGeral  {
 	
 	@Column
 	private double preco;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="produto_ingredientes")
+	private List<Ingrediente> ingredientes;
 	
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
@@ -38,6 +44,14 @@ public class Produto extends ObjetoGeral  {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public List<Ingrediente> getIngredientes() {
+		return ingredientes;
+	}
+
+	public void setIngredientes(List<Ingrediente> ingredientes) {
+		this.ingredientes = ingredientes;
 	}
 
 }
