@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link type="text/css" rel="stylesheet" href="../css/custom.css" />
+	<script language="JavaScript" src="../script/money.js" />
+</h:head>
+<h:body>
+
+
+	
+
+
+		<p:dialog header=".: Gerenciar Estoque :." widgetVar="dlg"
+			showEffect="clip" width="600" modal="true" visible="true"
+			resizable="false" closable="false" draggable="false">
+			<p:panel>
+				<div align="center">
+					<img src="../Imagens/Vila Torre - LOGO - 200.png" /><br />
+				</div>
+			</p:panel>
+
+			<h:form id="formEstoque">
+			<p:growl life="3000"/>
+			<p:panel header="Informações do Estoque">
+				<h:panelGrid columns="2">
+					
+      			     
+      			     <h:outputText value="MateriaPrima:" />  
+  				     <p:selectOneMenu value="#{estoqueBeans.materia}" converter="materiaConverter"  filter="true" filterMatchMode="startsWith">  
+        			    <f:selectItem  noSelectionOption="true" itemLabel="Selecione a materia prima."  />  
+           				<f:selectItems value="#{estoqueBeans.materias}" var="mat" itemLabel="#{mat.nome}" />  
+      			     </p:selectOneMenu>
+       				
+     				   
+     				   <h:outputText  for="min" value="Quantidade Mínima:"/>
+     				   <p:inputText id="min" onkeypress="mascara(this,numeros)" value="#{estoqueBeans.min}"/>
+     				   
+     				   <h:outputText  for="max" value="Quantidade Máxima:"/>
+     				   <p:inputText id="max" onkeypress="mascara(this,numeros)" value="#{estoqueBeans.max}"/>
+						
+					   <h:outputText  for="now" value="Quantidade Atual:"/>
+     				   <p:inputText id="now" onkeypress="mascara(this,numeros)" value="#{estoqueBeans.quantidade}"/>
+					   <h:inputHidden value="#{estoqueBeans.estoque.id}"/>
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel>
+				<div style="float: none;" align="center">
+					<p:commandButton value="Salvar" action="#{estoqueBeans.salvar}"
+						ajax="false" icon="ui-icon-disk" tabindex="6"/>
+					<p:commandButton value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
+				</div>
+			</p:panel>
+			
+			<p:panel header="Estoque" toggleable="true">
+				
+
+					<p:dataTable id="estoqueTable" var="estq" value="#{estoqueBeans.estoques}"
+						emptyMessage="Nenhum estoque registrado.">
+						
+						<h:inputHidden value="#{estq.id}"/>
+						<p:column headerText="Matéria Prima">
+							<h:outputText value="#{estq.materia.nome}" />
+						</p:column>
+						
+						<p:column  headerText="Situação">
+						 <p:progressBar value="#{estoqueBeans.percentual(estq)}"  labelTemplate="{value}%" displayOnly="true"/>	
+						</p:column>
+						
+						<p:column  headerText="Última Atualização">
+						 <h:outputText value="#{estq.atualizacao}&nbsp;#{estq.login}"/>
+						</p:column>
+						
+						
+						<p:column headerText="Ações">
+							<p:commandButton  title="Editar" actionListener="#{estoqueBeans.editar(estq)}" update=":formEstoque" icon="ui-icon-pencil"/>
+					&nbsp;&nbsp;
+					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão do estoque selecionado?')" action="#{estoqueBeans.excluir(estq)}" icon="ui-icon-trash" />
+						</p:column>
+
+					</p:dataTable>
+					</p:panel>
+
+				</h:form>
+		</p:dialog>
+
+
+
+	
+
+
+</h:body>
+</html>
