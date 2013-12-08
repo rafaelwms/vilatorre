@@ -5,26 +5,25 @@ import javax.persistence.*;
 @Entity
 public class Fornecimento {
 	
-	@EmbeddedId
-	private MateriaPrimaEFornecedor chaveComp;
+	@Id
+	@GeneratedValue
+	private Integer id;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="fornecedor", referencedColumnName="id_fornecedor")
+	private Fornecedor fornecedor;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="materia", referencedColumnName="id")
+	private MateriaPrima materia;
+
 	
 	@Column(nullable=false)
 	private double preco;
 	
 	public Fornecimento(){}
 	
-	public Fornecimento(MateriaPrimaEFornecedor mpf, double preco){
-		this.setChaveComp(mpf);
-		this.setPreco(preco);
-	}
 
-	public MateriaPrimaEFornecedor getChaveComp() {
-		return chaveComp;
-	}
-
-	public void setChaveComp(MateriaPrimaEFornecedor chaveComp) {
-		this.chaveComp = chaveComp;
-	}
 
 	public double getPreco() {
 		return preco;
@@ -32,6 +31,42 @@ public class Fornecimento {
 
 	public void setPreco(double preco) {
 		this.preco = preco;
+	}
+
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+
+
+	public MateriaPrima getMateria() {
+		return materia;
+	}
+
+
+
+	public void setMateria(MateriaPrima materia) {
+		this.materia = materia;
 	}
 
 
