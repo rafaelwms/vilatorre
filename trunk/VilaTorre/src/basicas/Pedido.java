@@ -34,7 +34,7 @@ public class Pedido{
 	@JoinColumn(name="cliente_id", referencedColumnName="id_cliente")
 	private Cliente cliente;
 	
-	private enum TipoPedido{Mesa, Viagem, DeliveryFone, DeliverySite}
+	public enum TipoPedido{Mesa, Viagem, DeliveryFone, DeliverySite}
 	
 	
 	private double valor_total;
