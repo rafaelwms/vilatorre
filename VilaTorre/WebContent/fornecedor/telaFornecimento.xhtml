@@ -1,17 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/adminTemplate.xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-	<link type="text/css" rel="stylesheet" href="../css/custom.css" />
-	<script language="JavaScript" src="../script/money.js" />
-</h:head>
-<h:body>
+	<ui:define name="titulo">Sistema de Gerenciamento de Músicas - Home</ui:define>
+	<ui:define name="principal">
 
 
 	
@@ -19,16 +14,12 @@
 
 		<p:dialog header=".: Gerenciar Fornecimento :." widgetVar="dlg"
 			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="false" draggable="false">
-			<p:panel>
-				<div align="center">
-					<img src="../Imagens/Vila Torre - LOGO - 200.png" /><br />
-				</div>
-			</p:panel>
+			resizable="false" closable="true" draggable="false">
+
 
 			<h:form id="formFornecimento">
 			<p:growl life="3000"/>
-			<p:panel header="InformaÃ§Ãµes do Fornecimento">
+			<p:panel header="Informações do Fornecimento">
 				<h:panelGrid columns="2">
 					
 					 <h:outputText value="Fornecedor:" />  
@@ -44,7 +35,7 @@
       			     </p:selectOneMenu>
        				
      				   
-     				   <h:outputText  for="preco" value="PreÃ§o R$:"/>
+     				   <h:outputText  for="preco" value="Preço R$:"/>
      				   <p:inputText id="preco" onkeypress="mascara(this,moeda)" value="#{fornecimentoBean.valor}"/>
 						
 					  
@@ -53,11 +44,13 @@
 			</p:panel>
 
 			<p:panel>
+		
 				<div style="float: none;" align="center">
 					<p:commandButton value="Salvar" action="#{fornecimentoBean.salvar}"
 						ajax="false" icon="ui-icon-disk" tabindex="6"/>
 					<p:commandButton value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
 				</div>
+				
 			</p:panel>
 			
 			<p:panel header="Lista dos Fornecimentos" toggleable="true">
@@ -75,14 +68,14 @@
 							<h:outputText value="#{cimento.materia.nome}" />
 						</p:column>
 						
-						<p:column  headerText="PreÃ§o R$">
+						<p:column  headerText="Preço R$">
 							<h:outputText value="#{cimento.preco}" />
 						</p:column>
 						
-						<p:column headerText="AÃ§Ãµes">
+						<p:column headerText="Ações">
 							<p:commandButton  title="Editar" actionListener="#{fornecimentoBean.editar(cimento)}" update=":formFornecimento" icon="ui-icon-pencil"/>
 					&nbsp;&nbsp;
-					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusÃ£o do fornecimento selecionado?')" action="#{fornecimentoBean.excluir(cimento)}" icon="ui-icon-trash" />
+					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão do fornecimento selecionado?')" action="#{fornecimentoBean.excluir(cimento)}" icon="ui-icon-trash" />
 						</p:column>
 
 					</p:dataTable>
@@ -96,5 +89,5 @@
 	
 
 
-</h:body>
-</html>
+</ui:define>
+</ui:composition>

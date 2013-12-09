@@ -1,25 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/adminTemplate.xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-	<link type="text/css" rel="stylesheet" href="../css/custom.css" />
-	<script language="JavaScript" src="../script/money.js" />
-</h:head>
-<h:body>
-
+	<ui:define name="titulo">Sistema de Gerenciamento de Músicas - Home</ui:define>
+	<ui:define name="principal">
 
 	
 
 
 		<p:dialog header=".: Gerenciar Cargos :." widgetVar="dlg"
 			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="false" draggable="false">
+			resizable="false" closable="true" draggable="false">
 			<p:panel>
 				<div align="center">
 					<img src="../Imagens/Vila Torre - LOGO - 200.png" /><br />
@@ -28,13 +22,13 @@
 
 			<h:form id="formCargo">
 			
-			<p:panel header="InformaÃ§Ãµes do cargo" id="dadosCargo">
+			<p:panel header="Informações do cargo" id="dadosCargo">
 				<h:panelGrid columns="2">
 					
 					<h:outputText for="nomeCargo" value="Nome:" />
 					<p:inputText id="nomeCargo" value="#{cargoBean.cargo.nome}"
 						tabindex="1" size="70" />
-					<h:outputText for="descCargo" value="DescriÃ§Ã£o:" />
+					<h:outputText for="descCargo" value="Descrição:" />
 					<p:inputTextarea id="descCargo"
 						value="#{cargoBean.cargo.descricao}" tabindex="2" />
 						<h:inputHidden value="#{cargoBean.cargo.id}"/>
@@ -60,14 +54,14 @@
 							<h:outputText value="#{cargo.nome}" />
 						</p:column>
 
-						<p:column  headerText="DescriÃ§Ã£o">
+						<p:column  headerText="Descrição">
 							<h:outputText value="#{cargo.descricao}" />
 						</p:column>
 						
-						<p:column headerText="AÃ§Ãµes">
+						<p:column headerText="Ações">
 							<p:commandButton  title="Editar" actionListener="#{cargoBean.editar(cargo)}" update=":formCargo:dadosCargo" icon="ui-icon-pencil"/>
 					&nbsp;&nbsp;
-					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusÃ£o do cargo #{cargo.nome}?')" action="#{cargoBean.excluir(cargo)}" icon="ui-icon-trash" />
+					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão do cargo #{cargo.nome}?')" action="#{cargoBean.excluir(cargo)}" icon="ui-icon-trash" />
 						</p:column>
 
 					</p:dataTable>
@@ -87,5 +81,5 @@
 	
 
 
-</h:body>
-</html>
+</ui:define>
+</ui:composition>

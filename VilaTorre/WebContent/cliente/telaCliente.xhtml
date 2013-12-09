@@ -1,28 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/adminTemplate.xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">Sistema de Gerenciamento de Músicas - Home</ui:define>
+	<ui:define name="principal">
+		
 
-<h:head>
-<link type="text/css" rel="stylesheet" href="../css/custom.css"/>
-</h:head>
-<h:body >
-
-	<h:form>
+	<h:form id="clienteForm">
 	<p:growl></p:growl>
-	<p:dialog  header=".: Cliente :." widgetVar="dlg"
+	<p:dialog  header=".:Novo Cliente :." widgetVar="dlg"
 			showEffect="clip" width="500" modal="true" visible="true"
-			resizable="false" closable="false" draggable="false">
-		<p:panel>
-			<div align="center">
-			<img src="../Imagens/Vila Torre - LOGO - 200.png"/><br/>
-			</div>
-			</p:panel>
-			
+			resizable="false" closable="true" appendToBody="true" draggable="false">
+					
 			
 			<p:panel header="Dados Pessoais">
 			<h:panelGrid columns="2" >
@@ -37,36 +29,68 @@
 			<h:outputText for="cpf" value="CPF: "/><p:inputMask required="true" requiredMessage="Digite o cpf." tabindex="4"  mask="999.999.999-99"  id="cpf" value="#{clienteBean.cliente.cpf}"/>
 			<h:outputText for="fone" value="Fone: "/><p:inputMask required="true" requiredMessage="Digite o fone." tabindex="5"   mask="(99)9999-9999"  id="fone" value="#{clienteBean.cliente.fone}"/>
 			<h:outputText for="email" value="E-mail: "/><p:inputText required="true" requiredMessage="Digite o e-mail." tabindex="6"   id="email" value="#{clienteBean.cliente.email}"/>
+			<h:inputHidden vlaue="#{clienteBean.cliente.id}"></h:inputHidden>
 			</h:panelGrid>
 			</p:panel>
 			
-			<p:panel header="Dados de UsuÃ¡rio">
+			<p:panel header="Dados de Usuário">
 			<h:panelGrid columns="2">
 			<h:outputText for="login" value="Login:"/><p:inputText tabindex="7"  maxlength="130"  id="login" value="#{clienteBean.usuario.login}"/>
-			<h:outputText for="senha" value="Senha:"/><p:password tabindex="8" feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="RazoÃ¡vel" strongLabel="Forte" id="senha" value="#{clienteBean.usuario.senha}"/>
+			<h:outputText for="senha" value="Senha:"/><p:password tabindex="8" feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="Razoável" strongLabel="Forte" id="senha" value="#{clienteBean.usuario.senha}"/>
 			<h:outputText for="senha2" value="Confirm. Senha:"/><p:password tabindex="9" feedback="false" required="false" id="senha2"/>
 			</h:panelGrid>
 			</p:panel>
 			
-			<p:panel header="EndereÃ§o">
+			<p:panel header="Endereço">
 			<h:panelGrid columns="2">
 			<h:outputText for="logradouro" value="Logradouro:"/><p:inputText required="true" requiredMessage="Digite o lagradouro." tabindex="10" size="70"  maxlength="130"  id="logradouro" value="#{clienteBean.endereco.logradouro}"/>
-			<h:outputText for="numero" value="Numero:"/><p:inputText required="true" requiredMessage="Digite o nÃºmero." tabindex="11" id="numero" value="#{clienteBean.endereco.numero}"/>
+			<h:outputText for="numero" value="Numero:"/><p:inputText required="true" requiredMessage="Digite o número." tabindex="11" id="numero" value="#{clienteBean.endereco.numero}"/>
 			<h:outputText for="complemento" value="Complemento:"/><p:inputText tabindex="12"  required="false" id="complemento" value="#{clienteBean.endereco.complemento}"/>
 			<h:outputText for="bairro" value="Bairro:"/><p:inputText required="true" requiredMessage="Digite o bairro." tabindex="13" id="bairro" value="#{clienteBean.endereco.bairro}"/>
 			</h:panelGrid>
 			</p:panel>
 			
-			<p:panel>
-			<div style="float: none;" align="center">
+			
+			<p:panel >
+			<h:panelGrid columns="3">
 			<p:commandButton value="Salvar" action="#{clienteBean.salvar}"  ajax="false" icon="ui-icon-disk"/> 
 			<p:commandButton value="Limpar" type="reset" icon="ui-icon-arrowreturnthick-1-w" immediate="true"/>
 			<p:commandButton value="Voltar" action="/index.xhml?faces-redirect=true"   immediate="true" ajax="false" icon="ui-icon-home"/> 
-			</div>
+			</h:panelGrid>
 			</p:panel>
+				<p:panel header="Lista dos Clientes" toggleable="true"  toggleTitle="Clique aqui pra visualizar os clientes cadastrados.">
+				
+
+					<p:dataTable id="cliTable" var="cli" value="#{clienteBean.clientes}"	emptyMessage="Nenhum cliente cadastrado.">
+						
+						<h:inputHidden value="#{clienteBean.cliente.id}"/>
+						<p:column headerText="Cliente">
+							<h:outputText value="#{cli.nome}" />
+						</p:column>
+
+						<p:column  headerText="Fone">
+							<h:outputText value="#{cli.fone}" />
+						</p:column>
+						
+						<p:column  headerText="Bairro">
+							<h:outputText value="#{cli.endereco.bairro}" />
+						</p:column>
+
+										
+						<p:column headerText="Ações">
+							<p:commandButton  title="Editar" actionListener="#{clienteBean.editar(cli)}" update=":clienteForm" icon="ui-icon-pencil"/>
+					&nbsp;&nbsp;
+					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão do cliente #{cli.nome}?')" action="#{clienteBean.remover(fun)}" icon="ui-icon-trash" />
+						</p:column>
+
+					</p:dataTable>
+					</p:panel>
+
 			<div align="center">
-			<p:panel header="Vila Torre Original Burger SystemÂ© 2013 All Rigths Reserved - Rafael WMSÂ®" />
+			<p:panel header="Vila Torre Original Burger System© 2013 All Rigths Reserved - Rafael WMS®" />
 			</div>
+			
+			
 			
 		
 		</p:dialog>
@@ -76,5 +100,6 @@
 	</h:form>
 	
 
-</h:body>
-</html>
+
+	</ui:define>
+</ui:composition>

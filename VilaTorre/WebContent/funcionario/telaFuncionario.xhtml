@@ -1,52 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/adminTemplate.xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-<link type="text/css" rel="stylesheet" href="../css/custom.css"/>
-<script language="JavaScript" src="../script/money.js"/>
-</h:head>
-<h:body >
+	<ui:define name="titulo">Sistema de Gerenciamento de Músicas - Home</ui:define>
+	<ui:define name="principal">
 
 
 	<h:form id="funcForm">
 
 	<p:growl life="3000" />
-	<p:dialog  header="Gerenciar FuncionÃ¡rio." widgetVar="dlg"
+	<p:dialog  header="Gerenciar Funcionário." widgetVar="dlg"
 			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="false" draggable="false">
-		<p:panel>
-			<div align="center">
-			<img src="../Imagens/Vila Torre - LOGO - 200.png"/><br/>
-			</div>
-			</p:panel>
-			
-			
+			resizable="false" closable="true" draggable="false">
+				
 			<p:panel header="Dados Pessoais" id="dadosPessoais">
 			<h:panelGrid columns="2">
-			<h:outputText for="nome" value="Nome:"/><p:inputText tabindex="1" size="70" maxlength="130" required="false" requiredMessage="Ã‰ necessÃ¡rio informar o nome." id="nome" value="#{funcionarioBean.func.nome}"/>
+			<h:outputText for="nome" value="Nome:"/><p:inputText tabindex="1" size="70" maxlength="130" required="false" requiredMessage="É necessário informar o nome." id="nome" value="#{funcionarioBean.func.nome}"/>
 			<h:outputText for="sexo" value="Sexo:"/>        
 			<p:selectOneButton  id="sexo" value="#{funcionarioBean.func.sexo}" >  
               <f:selectItem itemLabel="Masculino" itemValue="1" />  
               <f:selectItem itemLabel="Feminino" itemValue="0" />  
        		  </p:selectOneButton>
 			<h:outputText for="nasc" value="Data Nasc.:"/><p:inputMask tabindex="2" mask="99/99/9999" id="nasc" value="#{funcionarioBean.nasc}"/>
-			<h:outputText for="rg" value="RG:  "/><p:inputText tabindex="3" required="false" requiredMessage="Ã‰ necessÃ¡rio informar o rg." label="RG" id="rg" value="#{funcionarioBean.func.rg}"/>
-			<h:outputText for="cpf" value="CPF: "/><p:inputMask tabindex="4" required="false"  requiredMessage="Ã‰ necessÃ¡rio informar o cpf." mask="999.999.999-99"  id="cpf" value="#{funcionarioBean.func.cpf}"/>
-			<h:outputText for="fone" value="Fone: "/><p:inputMask tabindex="5" required="false" requiredMessage="Ã‰ necessÃ¡rio informar o fone."  mask="(99)9999-9999"  id="fone" value="#{funcionarioBean.func.fone}"/>
+			<h:outputText for="rg" value="RG:  "/><p:inputText tabindex="3" required="false" requiredMessage="É necessário informar o rg." label="RG" id="rg" value="#{funcionarioBean.func.rg}"/>
+			<h:outputText for="cpf" value="CPF: "/><p:inputMask tabindex="4" required="false"  requiredMessage="É necessário informar o cpf." mask="999.999.999-99"  id="cpf" value="#{funcionarioBean.func.cpf}"/>
+			<h:outputText for="fone" value="Fone: "/><p:inputMask tabindex="5" required="false" requiredMessage="É necessário informar o fone."  mask="(99)9999-9999"  id="fone" value="#{funcionarioBean.func.fone}"/>
 			<h:inputHidden value="#{funcionarioBean.func.id}" />
 			</h:panelGrid>
 			
 			</p:panel>
 			<p:panel header="Dados Trabalhistas" id="dadosTrab">
 			<h:panelGrid columns="2">
-			<h:outputText for="admissao" value="Data de AdmissÃ£o:"/><p:inputMask tabindex="6"  required="false" id="admissao" mask="99/99/9999" value="#{funcionarioBean.admissao}"/>
-			<h:outputText for="salario" value="SalÃ¡rio R$"/><p:inputText id="salario" tabindex="7" onkeypress="mascara(this,moeda)" value="#{funcionarioBean.salario}"/>
+			<h:outputText for="admissao" value="Data de Admissão:"/><p:inputMask tabindex="6"  required="false" id="admissao" mask="99/99/9999" value="#{funcionarioBean.admissao}"/>
+			<h:outputText for="salario" value="Salário R$"/><p:inputText id="salario" tabindex="7" onkeypress="mascara(this,moeda)" value="#{funcionarioBean.salario}"/>
 			
 			<h:outputText for="cargos" value="Cargo:"/> 
 			<p:selectOneMenu value="#{funcionarioBean.cargoEscolhido}" id="cargos" tabindex="8" converter="cargoConverter">  				
@@ -59,20 +48,20 @@
 			
 			</p:panel>
 			
-			<p:panel header="Dados de UsuÃ¡rio" id="dadosUser">
+			<p:panel header="Dados de Usuário" id="dadosUser">
 			<h:panelGrid columns="2">
-			<h:outputText for="login" value="Login:"/><p:inputText tabindex="9"  maxlength="130" required="false" requiredMessage="Ã‰ necessÃ¡rio informar o login." id="login" value="#{funcionarioBean.usuario.login}"/>
-			<h:outputText for="senha" value="Senha:"/><p:password tabindex="10" feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="RazoÃ¡vel" strongLabel="Forte" required="false" requiredMessage="Ã‰ necessÃ¡rio informar a senha." id="senha" value="#{funcionarioBean.usuario.senha}"/>
-			<h:outputText for="senha2" value="Confirm. Senha:"/><p:password tabindex="11" feedback="false" required="false"   requiredMessage="Ã‰ necessÃ¡rio confirmar a senha." id="senha2"/>
-			 <h:outputText for="tipos" value="NÃ­vel de Acesso:"/> 
+			<h:outputText for="login" value="Login:"/><p:inputText tabindex="9"  maxlength="130" required="false" requiredMessage="É necessário informar o login." id="login" value="#{funcionarioBean.usuario.login}"/>
+			<h:outputText for="senha" value="Senha:"/><p:password tabindex="10" feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="Razoável" strongLabel="Forte" required="false" requiredMessage="É necessário informar a senha." id="senha" value="#{funcionarioBean.usuario.senha}"/>
+			<h:outputText for="senha2" value="Confirm. Senha:"/><p:password tabindex="11" feedback="false" required="false"   requiredMessage="É necessário confirmar a senha." id="senha2"/>
+			 <h:outputText for="tipos" value="Nível de Acesso:"/> 
        		 <p:selectOneMenu value="#{funcionarioBean.usuario.tipoUser}" tabindex="12" id="tipos">  
-        	      <f:selectItem noSelectionOption="true" itemLabel="Selecione um NÃ­vel de Acesso"></f:selectItem>
+        	      <f:selectItem noSelectionOption="true" itemLabel="Selecione um Nível de Acesso"></f:selectItem>
            		  <f:selectItems value="#{funcionarioBean.tipoUser}"/>
        		 </p:selectOneMenu> 
 			</h:panelGrid>
 			</p:panel>
 			
-			<p:panel header="EndereÃ§o" id="dadosEnd">
+			<p:panel header="Endereço" id="dadosEnd">
 			<h:panelGrid columns="2">
 			<h:outputText for="logradouro" value="Logradouro:"/><p:inputText tabindex="13" size="70"  maxlength="130" required="false" id="logradouro" value="#{funcionarioBean.endereco.logradouro}"/>
 			<h:outputText for="numero" value="Numero:"/><p:inputText tabindex="14" required="false" id="numero" value="#{funcionarioBean.endereco.numero}"/>
@@ -82,17 +71,19 @@
 			</p:panel>
 			
 			<p:panel>
+			<p:panelGrid columns="3">
 			<div style="float: none;" align="center">
 			<p:commandButton value="Salvar" action="#{funcionarioBean.salvar}" tabindex="17" ajax="false" icon="ui-icon-disk"/> 
 			<p:commandButton value="Limpar" tabindex="18" type="reset" icon="ui-icon-arrowreturnthick-1-w" immediate="true"/>
 			<p:commandButton value="Voltar" action="/index.xhml?faces-redirect=true"  tabindex="19" ajax="false" immediate="true" icon="ui-icon-home"/> 
 			</div>
+			</p:panelGrid>
 			</p:panel>
 			
-			<p:panel header="Lista dos FuncionÃ¡rios" toggleable="true"  toggleTitle="Clique aqui pra visualizar os funcionÃ¡rios cadastrados.">
+			<p:panel header="Lista dos Funcionários" toggleable="true"  toggleTitle="Clique aqui pra visualizar os funcionários cadastrados.">
 				
 
-					<p:dataTable id="funcTable" var="fun" value="#{funcionarioBean.funcionarios}"	emptyMessage="Nenhum funcionÃ¡rio cadastrado.">
+					<p:dataTable id="funcTable" var="fun" value="#{funcionarioBean.funcionarios}"	emptyMessage="Nenhum funcionário cadastrado.">
 						
 						<h:inputHidden value="#{funcionarioBean.func.id}"/>
 						<p:column headerText="Funcionario">
@@ -114,17 +105,17 @@
 							<h:outputText value="#{fun.usuario.tipoUser}" />
 						</p:column>
 										
-						<p:column headerText="AÃ§Ãµes">
+						<p:column headerText="Ações">
 							<p:commandButton  title="Editar" actionListener="#{funcionarioBean.editar(fun)}" update=":funcForm" icon="ui-icon-pencil"/>
 					&nbsp;&nbsp;
-					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusÃ£o do cargo #{fun.nome}?')" action="#{funcionarioBean.remover(fun)}" icon="ui-icon-trash" />
+					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão do cargo #{fun.nome}?')" action="#{funcionarioBean.remover(fun)}" icon="ui-icon-trash" />
 						</p:column>
 
 					</p:dataTable>
 					</p:panel>
 
 			<div align="center">
-			<p:panel header="Vila Torre Original Burger SystemÂ© 2013 All Rigths Reserved - Rafael WMSÂ®" />
+			<p:panel header="Vila Torre Original Burger System© 2013 All Rigths Reserved - Rafael WMS®" />
 			</div>
 		
 		</p:dialog>
@@ -132,7 +123,5 @@
     
 	
 	</h:form>
-	
-
-</h:body>
-</html>
+	</ui:define>
+</ui:composition>
