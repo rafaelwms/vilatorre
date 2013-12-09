@@ -872,4 +872,15 @@ public class NegocioComum {
 			
 		}
 	
+		public Estoque localizarEstoqueMateria(MateriaPrima materia) throws Exception{
+			
+			try {
+				return daoEstoque.localizarEstoqueMateria(materia);
+			} catch (Exception e) {
+				return null;
+			}
+			
+		}
+		
+		
 }

@@ -33,6 +33,7 @@ public class MateriaPrimaBean {
 				Fachada.getInstancia().inserirMateriaPrima(materia);
 				FacesContext.getCurrentInstance().addMessage("cadastroMat", new FacesMessage("Materia prima "+materia.getNome()+" cadastrada com êxito."));
 				materia = new MateriaPrima();
+				unid.values();
 				return null;
 			}else{
 				
