@@ -53,10 +53,10 @@ public class LoginBean {
 	}
 	
 	
-	public String telaCliente(){
-		
-		return "cliente/telaCliente.xhtml?faces-redirect=true";
-	}
+//	public String telaCliente(){
+//		
+//		return "cliente/telaCliente.xhtml?faces-redirect=true";
+//	}
 	
 	
 
