@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link type="text/css" rel="stylesheet" href="../css/custom.css" />
+	<script language="JavaScript" src="../script/money.js" />
+</h:head>
+<h:body>
+
+
+	
+
+
+		<p:dialog header=".: Gerenciar Vendas LOCAL :." widgetVar="dlg"
+			showEffect="clip" width="600" modal="true" visible="true"
+			resizable="false" closable="false" draggable="false">
+			<p:panel>
+				<div align="center">
+					<img src="../Imagens/Vila Torre - LOGO - 200.png" /><br />
+				</div>
+			</p:panel>
+
+			<h:form id="formPagamento">
+			<p:growl life="3000"/>
+			<p:panel header="Lista dos Pedidos Abertos" toggleable="true">
+
+					<p:dataTable id="aPagar" var="ped" value="#{pagamentoBean.pedidosAbertos}"
+						emptyMessage="Nenhum produto cadastrado.">
+						
+						<h:inputHidden value="#{ped.id}"/>
+						<p:column headerText="Abertura do pedido">
+							<h:outputText value="#{ped.abertura_pedido}" />
+						</p:column>
+
+						<p:column  headerText="Mesa">
+							<h:outputText value="#{ped.num_mesa}" />
+						</p:column>
+						
+						<p:column  headerText="Valor total">
+							<h:outputText value="#{ped.valor_total}" />
+						</p:column>
+						
+						<p:column headerText="Ações">
+							<p:commandButton  title="Adicionar Item ao Pedido" actionListener="#{pagamentoBean.pagar(ped)}" update=":formPagamento:aPagar" immediate="true" icon="ui-icon-pencil"/>
+					&nbsp;&nbsp;
+					<p:commandButton title="Detalhar Pedido"  actionListener="#" update=":formPagamento" icon="ui-icon-trash" />
+						</p:column>
+  						</p:dataTable>
+					</p:panel>
+			
+			
+			
+				<p:panel header="Detalhes do Pagamento" id="info">
+				<h:panelGrid columns="4">
+
+      			 <h:outputText value="Forma de Pagamento:" for="formapgto"/>
+      			 <p:selectOneMenu id="formapgto" value="#{pagamentoBean.forma}">
+      			 <f:selectItem noSelectionOption="true" itemLabel="Selecione..."/>
+      			 <f:selectItems value="#{pagamentoBean.formas}"/>
+      			 </p:selectOneMenu>
+      			 
+      			 <h:outputText value="Bandeira:" for="band"/>
+      			 <p:selectOneMenu id="band" value="#{pagamentoBean.bandeira}">
+      			 <f:selectItem noSelectionOption="true" itemLabel="Selecione..."/>
+      			 <f:selectItems value="#{pagamentoBean.bandeiras}"/>
+      			 </p:selectOneMenu>
+      			 
+      			 <h:outputText value="Desconto R$:" for="desc"/>
+      			 <p:inputText  value="#{pagamentoBean.desconto}" onkeypress="mascara(this, moeda)"/>  
+			
+				</h:panelGrid>
+			</p:panel>
+			
+			
+			
+						
+			<p:panel header="Lista dos Pedidos Fechados" toggleable="true">
+
+					<p:dataTable id="pagos" var="pag" value="#{pagamentoBean.pagamentos}"
+						emptyMessage="Nenhum pagamento efetuado.">
+						
+						<h:inputHidden value="#{pag.id}"/>
+						<p:column headerText="Abertura">
+							<h:outputText value="#{pag.pedido.abertura}" />
+						</p:column>
+
+    					<p:column  headerText="Forma Pgto">
+							<h:outputText value="#{pag.forma_pagamento}" />
+						</p:column>
+						
+						<p:column  headerText="Valor Pago R$">
+							<h:outputText value="#{pag.valor_pago}" />
+						</p:column>
+						
+						<p:column  headerText="Fechamento">
+							<h:outputText value="#{pag.pedido.fechamento}" />
+						</p:column>
+					</p:dataTable>
+					</p:panel>
+			
+			
+			
+			
+
+				</h:form>
+
+			
+
+
+
+
+		</p:dialog>
+
+
+
+	
+
+
+</h:body>
+</html>

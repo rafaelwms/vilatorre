@@ -9,10 +9,11 @@ import javax.persistence.*;
 public class Pagamento{
 	
 	@Id
-	private Integer id_pedido;
+	@GeneratedValue
+	private Integer id;
 	
 	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name="pedido")
 	private Pedido pedido;
 	
 	@Column(nullable=false)
@@ -109,12 +110,12 @@ public class Pagamento{
 		this.hora_pagamento = hora_pagamento;
 	}
 
-	public Integer getId_pedido() {
-		return id_pedido;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId_pedido(Integer id_pedido) {
-		this.id_pedido = id_pedido;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

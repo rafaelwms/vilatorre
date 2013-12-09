@@ -559,4 +559,8 @@ public class Fachada implements IFachada {
 		negocioComum.alimentarEstoque(estoque, qtd);
 	}
 
+	public Estoque localizarEstoqueMateria(MateriaPrima materia) throws Exception{
+		return negocioComum.localizarEstoqueMateria(materia);
+	}
+	
 }

@@ -12,7 +12,7 @@ import javax.faces.context.FacesContext;
 import fachadas.Fachada;
 
 import basicas.*;
-import basicas.Pedido.TipoPedido;;
+import basicas.Pedido.TipoPedido;
 
 @ManagedBean
 public class PedidoLocalBean {
@@ -46,23 +46,28 @@ public class PedidoLocalBean {
 		
 		try{
 			pedido.setId_pedido(null);
+			item.setId_item(null);
 			item.setProduto(produto);	
 			item.setQtd(qtd);
 			item.setNumOrdem(1);
-			item.setTotalItem(item.getProduto().getPreco() * item.getQtd());
-			Fachada.getInstancia().inserirItemPedido(item);
-			
-			
+			item.setTotalItem(item.getProduto().getPreco() * item.getQtd());			
 			pedido.setAbertura_pedido(new Date());
 			tipoPedido = TipoPedido.Mesa;
 			pedido.setNum_mesa(mesa);
+			pedido.setStatus_aberto(true);
 			pedido.setTipo_pedido(tipoPedido);
-			pedido.getLista_itens().add(item);
+			itemsPedido.add(item);
+			pedido.setLista_itens(itemsPedido);
 			pedido.setValor_total(item.getTotalItem());
+			item.setPedido(pedido);
 			Fachada.getInstancia().inserirPedido(pedido);
-			
-			
-			
+			Fachada.getInstancia().inserirItemPedido(item);
+			produto = new Produto();
+			pedido = new Pedido();
+			item = new ItemPedido();
+			itemsPedido = new ArrayList<ItemPedido>();
+			mesa = 0;
+			qtd = 0;
 			return null;
 		}catch(Exception ex){
 			
@@ -73,23 +78,56 @@ public class PedidoLocalBean {
 	
 	public String addItem(Pedido para1){
 		try{
-		item.setNumOrdem(para1.getLista_itens().size() + 1);
+		item.setId_item(null);
+		item.setPedido(para1);
+		itemsPedido = new ArrayList<ItemPedido>();
+		itemsPedido = para1.getLista_itens();
+		
+		item.setNumOrdem(itemsPedido.size() + 1);
 		item.setProduto(produto);	
 		item.setQtd(qtd);
 		item.setTotalItem(item.getProduto().getPreco() * item.getQtd());
+		itemsPedido.add(item);
 		
-		para1.getLista_itens().add(item);
+		
+		para1.setLista_itens(itemsPedido);
+		
+		for (ItemPedido it : para1.getLista_itens()){
+			
+			para1.setValor_total(para1.getValor_total() + it.getProduto().getPreco());
+			
+		}
+		
 		Fachada.getInstancia().alterarPedido(para1);
-		produto = new Produto();
-		item = new ItemPedido();
-		qtd = 0;
+		Fachada.getInstancia().inserirItemPedido(item);
+
 		
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Item adicionado com êxito."));
+		produto = new Produto();
+		pedido = new Pedido();
+		item = new ItemPedido();
+		itemsPedido = new ArrayList<ItemPedido>();
+		mesa = 0;
+		qtd = 0;
 		return null;
 		}catch(Exception ex){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
 			return null;
 		}
+	}
+	
+	
+	public String listarItems(Pedido param){
+		itemsPedido = new ArrayList<ItemPedido>();
+		
+		try {
+			itemsPedido = Fachada.getInstancia().listarItemsDoPedido(param);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	
