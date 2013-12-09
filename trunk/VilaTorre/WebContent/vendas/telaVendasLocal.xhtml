@@ -1,25 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/adminTemplate.xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-	<link type="text/css" rel="stylesheet" href="../css/custom.css" />
-	<script language="JavaScript" src="../script/money.js" />
-</h:head>
-<h:body>
-
+	<ui:define name="titulo">Sistema de Gerenciamento de Músicas - Home</ui:define>
+	<ui:define name="principal">
 
 	
 
 
 		<p:dialog header=".: Gerenciar Vendas LOCAL :." widgetVar="dlg"
 			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="false" draggable="false">
+			resizable="false" closable="true" draggable="false">
 			<p:panel>
 				<div align="center">
 					<img src="../Imagens/Vila Torre - LOGO - 200.png" /><br />
@@ -28,7 +22,7 @@
 
 			<h:form id="formPedidoLocal">
 			<p:growl life="3000"/>
-			<p:panel header="InformaÃ§Ãµes do Pedido" id="info">
+			<p:panel header="Informações do Pedido" id="info">
 				<h:panelGrid columns="2">
 				
 				<h:outputText value="Produto:" for="produtos"/>
@@ -73,7 +67,7 @@
 							<h:outputText value="#{ped.valor_total}" />
 						</p:column>
 						
-						<p:column headerText="AÃ§Ãµes">
+						<p:column headerText="Ações">
 							<p:commandButton  title="Adicionar Item ao Pedido" actionListener="#{pedidoLocalBean.addItem(ped)}" update=":formPedidoLocal" immediate="true" icon="ui-icon-pencil"/>
 					&nbsp;&nbsp;
 					<p:commandButton title="Detalhar Pedido"  actionListener="#{pedidoLocalBean.listarItems(ped)}" update=":formPedidoLocal:itemsPedidoTable" icon="ui-icon-trash" />
@@ -86,7 +80,7 @@
 				
 
 					<p:dataTable id="itemsPedidoTable" var="it" value="#{pedidoLocalBean.itemsPedido}"
-						emptyMessage="Nenhuma SolicitaÃ§Ã£o.">
+						emptyMessage="Nenhuma Solicitação.">
 						
 						<h:inputHidden value="#{it.id}"/>
 						<p:column headerText="Produto">
@@ -105,7 +99,7 @@
 							<h:outputText value="#{it.totalItem}" />
 						</p:column>
 						
-						<p:column headerText="AÃ§Ãµes">
+						<p:column headerText="Ações">
 							<p:commandButton  title="Adicionar Item ao Pedido" actionListener="#" update=":formPedidoLocal" immediate="true" icon="ui-icon-pencil"/>
 					&nbsp;&nbsp;
 					<p:commandButton title="Detalhar Pedido"  actionListener="#"  icon="ui-icon-trash" />
@@ -128,5 +122,5 @@
 	
 
 
-</h:body>
-</html>
+</ui:define>
+</ui:composition>

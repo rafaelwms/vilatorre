@@ -1,26 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/adminTemplate.xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-<link type="text/css" rel="stylesheet" href="../css/custom.css"/>
-</h:head>
-<h:body >
+	<ui:define name="titulo">Sistema de Gerenciamento de Músicas - Home</ui:define>
+	<ui:define name="principal">
 
 	<h:form id="fornecForm">
 	<p:growl></p:growl>
-	<p:dialog  header=".: Gerenciar Fornecedor :." widgetVar="dlg" showEffect="clip" width="500" modal="true" visible="true" resizable="false" closable="false" draggable="false">
-		<p:panel>
-			<div align="center">
-			<img src="../Imagens/Vila Torre - LOGO - 200.png"/><br/>
-			</div>
-			</p:panel>
-			
+	<p:dialog  header=".: Gerenciar Fornecedor :." widgetVar="dlg" showEffect="clip" width="500" modal="true" visible="true" resizable="false" closable="true" draggable="false">
+		
 			
 			<p:panel header="Dados Pessoais">
 			<h:panelGrid columns="2" >
@@ -38,22 +29,24 @@
 			</h:panelGrid>
 			</p:panel>
 			
-			<p:panel header="EndereÃ§o">
+			<p:panel header="Endereço">
 			<h:panelGrid columns="2">
 			<h:outputText for="logradouro" value="Logradouro:"/><p:inputText required="false" requiredMessage="Digite o lagradouro." tabindex="7" size="70"  maxlength="130"  id="logradouro" value="#{fornecedorBean.endereco.logradouro}"/>
-			<h:outputText for="numero" value="Numero:"/><p:inputText required="false" requiredMessage="Digite o nÃºmero." tabindex="8" id="numero" value="#{fornecedorBean.endereco.numero}"/>
+			<h:outputText for="numero" value="Numero:"/><p:inputText required="false" requiredMessage="Digite o número." tabindex="8" id="numero" value="#{fornecedorBean.endereco.numero}"/>
 			<h:outputText for="complemento" value="Complemento:"/><p:inputText tabindex="9"  required="false" id="complemento" value="#{fornecedorBean.endereco.complemento}"/>
 			<h:outputText for="bairro" value="Bairro:"/><p:inputText required="false" requiredMessage="Digite o bairro." tabindex="10" id="bairro" value="#{fornecedorBean.endereco.bairro}"/>
 			</h:panelGrid>
 			</p:panel>
 			
 			<p:panel>
+			<p:panelGrid columns="3">
 			<div style="float: none;" align="center">
 			<p:commandButton value="Salvar" action="#{fornecedorBean.salvar}"  ajax="false" icon="ui-icon-disk"/> 
 			<p:commandButton value="Limpar" type="reset" icon="ui-icon-arrowreturnthick-1-w"/>
 			<p:commandButton value="Voltar" action="/index.xhml?faces-redirect=true"  ajax="false" icon="ui-icon-home"/> 
-			
-			<p:panel header="Lista dos Fornecedores" toggleable="true"  toggleTitle="Clique aqui pra visualizar os funcionÃ¡rios cadastrados.">
+			</div>
+			</p:panelGrid>
+			<p:panel header="Lista dos Fornecedores" toggleable="true"  toggleTitle="Clique aqui pra visualizar os funcionários cadastrados.">
 				
 
 					<p:dataTable id="fornecTable" var="fornec" value="#{fornecedorBean.fornecedores}"	emptyMessage="Nenhum fornecedor cadastrado.">
@@ -72,19 +65,19 @@
 							<h:outputText value="#{fornec.endereco.bairro}" />
 						</p:column>
 										
-						<p:column headerText="AÃ§Ãµes">
+						<p:column headerText="Ações">
 							<p:commandButton  title="Editar" actionListener="#{fornecedorBean.editar(fornec)}" update=":fornecForm" icon="ui-icon-pencil"/>
 					&nbsp;&nbsp;
-					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusÃ£o do fornecedor #{fornec.nome}?')" action="#{fornecedorBean.remover(fun)}" icon="ui-icon-trash" />
+					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão do fornecedor #{fornec.nome}?')" action="#{fornecedorBean.remover(fun)}" icon="ui-icon-trash" />
 						</p:column>
 
 					</p:dataTable>
 					</p:panel>
 			
-			</div>
+			
 			</p:panel>
 			<div align="center">
-			<p:panel header="Vila Torre Original Burger SystemÂ© 2013 All Rigths Reserved - Rafael WMSÂ®" />
+			<p:panel header="Vila Torre Original Burger System© 2013 All Rigths Reserved - Rafael WMS®" />
 			</div>
 			
 		
@@ -95,5 +88,5 @@
 	</h:form>
 	
 
-</h:body>
-</html>
+</ui:define>
+</ui:composition>

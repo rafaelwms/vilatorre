@@ -1,34 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/adminTemplate.xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-	<link type="text/css" rel="stylesheet" href="../css/custom.css" />
-	<script language="JavaScript" src="../script/money.js" />
-</h:head>
-<h:body>
-
-
+	<ui:define name="titulo">Sistema de Gerenciamento de Músicas - Home</ui:define>
+	<ui:define name="principal">
 	
 
 
 		<p:dialog header=".: Gerenciar Produto :." widgetVar="dlg"
 			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="false" draggable="false">
-			<p:panel>
-				<div align="center">
-					<img src="../Imagens/Vila Torre - LOGO - 200.png" /><br />
-				</div>
-			</p:panel>
+			resizable="false" closable="true" draggable="false">
+
 
 			<h:form id="formProduto">
 			<p:growl life="3000"/>
-			<p:panel header="InformaÃ§Ãµes do Produto">
+			<p:panel header="Informações do Produto">
 				<h:panelGrid columns="2">
 					
 					<h:outputText for="nomeProduto" value="Nome:" />
@@ -47,10 +36,10 @@
        				 </p:selectManyMenu>
        				
      				   
-     				   <h:outputText  for="preco" value="PreÃ§o R$:"/>
+     				   <h:outputText  for="preco" value="Preço R$:"/>
      				   <p:inputText id="preco" onkeypress="mascara(this,moeda)" value="#{produtoBean.preco}"/>
 						
-					   <h:outputText for="descProduto" value="DescriÃ§Ã£o:" />
+					   <h:outputText for="descProduto" value="Descrição:" />
 					   <p:inputTextarea id="descProduto" value="#{produtoBean.produto.descricao}" tabindex="5" />
 					   <h:inputHidden value="#{produtoBean.produto.id}"/>
 				</h:panelGrid>
@@ -75,18 +64,18 @@
 							<h:outputText value="#{prod.nome}" />
 						</p:column>
 						
-						<p:column  headerText="PreÃ§o">
+						<p:column  headerText="Preço">
 							<h:outputText value="#{prod.preco}" />
 						</p:column>
 						
-						<p:column  headerText="DescriÃ§Ã£o">
+						<p:column  headerText="Descrição">
 							<h:outputText value="#{prod.descricao}" />
 						</p:column>
 						
-						<p:column headerText="AÃ§Ãµes">
+						<p:column headerText="Ações">
 							<p:commandButton  title="Editar" actionListener="#{produtoBean.editar(prod)}" update=":formProduto" icon="ui-icon-pencil"/>
 					&nbsp;&nbsp;
-					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusÃ£o do produto #{prod.nome}?')" action="#{produtoBean.excluir(prod)}" icon="ui-icon-trash" />
+					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão do produto #{prod.nome}?')" action="#{produtoBean.excluir(prod)}" icon="ui-icon-trash" />
 						</p:column>
 
 					</p:dataTable>
@@ -106,5 +95,5 @@
 	
 
 
-</h:body>
-</html>
+</ui:define>
+</ui:composition>

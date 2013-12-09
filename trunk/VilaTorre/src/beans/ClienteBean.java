@@ -1,7 +1,9 @@
 package beans;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -22,6 +24,7 @@ public class ClienteBean {
 	private Cliente cliente = new Cliente();
 	private Usuario usuario = new Usuario();
 	private Endereco endereco = new Endereco();
+	private List<Cliente> clientes = new ArrayList<Cliente>();
 
 	private String nasc;
 	private Date nascimento;
@@ -52,7 +55,7 @@ public class ClienteBean {
 			}
 
 			if (cliente.getId() == null || cliente.getId() == 0) {
-
+				cliente.setId(null);
 				Fachada.getInstancia().inserirCliente(cliente);
 				FacesContext.getCurrentInstance().addMessage("cadastroCli", new FacesMessage("Cadastro de " + cliente.getNome() + " efetuado com sucesso."));
 				cliente = new Cliente();
@@ -76,6 +79,19 @@ public class ClienteBean {
 			return null;
 		}
 
+	}
+	
+	public String editar(Cliente param){
+		
+	cliente = param;
+	usuario = param.getUsuario();
+	nasc = Datas.formatarData(param.getNasc());
+	
+	System.out.println(cliente);
+	System.out.println(usuario);
+	System.out.println(nasc);
+	
+		return null;
 	}
 
 	public String reset() {
@@ -155,6 +171,20 @@ public class ClienteBean {
 
 	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
+	}
+
+	public List<Cliente> getClientes() {
+		try {
+			return Fachada.getInstancia().consultarTodosCliente();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
 	}
 
 }

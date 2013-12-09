@@ -1,17 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/adminTemplate.xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-	<link type="text/css" rel="stylesheet" href="../css/custom.css" />
-	<script language="JavaScript" src="../script/money.js" />
-</h:head>
-<h:body>
+	<ui:define name="titulo">Sistema de Gerenciamento de Músicas - Home</ui:define>
+	<ui:define name="principal">
 
 
 	
@@ -19,7 +14,7 @@
 
 		<p:dialog header=".: Gerenciar Ingrediente :." widgetVar="dlg"
 			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="false" draggable="false">
+			resizable="false" closable="true" draggable="false">
 			<p:panel>
 				<div align="center">
 					<img src="../Imagens/Vila Torre - LOGO - 200.png" /><br />
@@ -28,7 +23,7 @@
 
 			<h:form id="formIngrediente">
 			<p:growl life="3000"/>
-			<p:panel header="InformaÃ§Ãµes do Ingrediente">
+			<p:panel header="Informações do Ingrediente">
 				<h:panelGrid columns="2">
 					
 					<h:outputText for="nomeIngrediente" value="Nome:" />
@@ -37,7 +32,7 @@
 						
 						<h:outputText for="materias" value="Materia Prima:"/> 
 			<p:selectOneMenu value="#{ingredienteBean.materia}" id="materias" tabindex="2" converter="materiaConverter">  				
-        	      <f:selectItem noSelectionOption="true" itemLabel="Selecione uma matÃ©ria prima"></f:selectItem>
+        	      <f:selectItem noSelectionOption="true" itemLabel="Selecione uma matéria prima"></f:selectItem>
            		  <f:selectItems value="#{ingredienteBean.materias}" var="mat" itemLabel="#{mat.nome}"><h:inputHidden value="#{mat.id}" /></f:selectItems>
        		 </p:selectOneMenu> 
        		 			
@@ -52,7 +47,7 @@
        				</p:selectOneMenu> 
 					
 						
-					<h:outputText for="descIngrediente" value="DescriÃ§Ã£o:" />
+					<h:outputText for="descIngrediente" value="Descrição:" />
 					<p:inputTextarea id="descIngrediente"
 						value="#{ingredienteBean.ingrediente.descricao}" tabindex="5" />
 						<h:inputHidden value="#{ingredienteBean.ingrediente.id}"/>
@@ -90,10 +85,10 @@
 							<h:outputText value="#{ing.medida}" />
 						</p:column>
 						
-						<p:column headerText="AÃ§Ãµes">
+						<p:column headerText="Ações">
 							<p:commandButton  title="Editar" actionListener="#{ingredienteBean.editar(ing)}" update=":formIngrediente" icon="ui-icon-pencil"/>
 					&nbsp;&nbsp;
-					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusÃ£o do ingrediente #{ing.nome}?')" action="#{ingredienteBean.excluir(ing)}" icon="ui-icon-trash" />
+					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão do ingrediente #{ing.nome}?')" action="#{ingredienteBean.excluir(ing)}" icon="ui-icon-trash" />
 						</p:column>
 
 					</p:dataTable>
@@ -113,5 +108,5 @@
 	
 
 
-</h:body>
-</html>
+</ui:define>
+</ui:composition>

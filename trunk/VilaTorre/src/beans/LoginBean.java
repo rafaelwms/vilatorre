@@ -36,7 +36,7 @@ public class LoginBean {
 		 FacesContext.getCurrentInstance().addMessage("loginTry", new FacesMessage("Bem vindo "+logado.getNome()+"."));
 		 
 		 if(logado.getUsuario().getTipoUser() == TipoUser.ADMINISTRADOR)
-			 retorno = "engine/admin.xhtml?faces-redirect=true";
+			 retorno = "template/adminTemplate.xhtml?faces-redirect=true";
 		 
 		 if(logado.getUsuario().getTipoUser() == TipoUser.USUÁRIO)
 			 retorno = "engine/user.xhtml?faces-redirect=true";
@@ -59,6 +59,12 @@ public class LoginBean {
 //	}
 	
 	
+	public String efetuarLogoff(){
+		
+		logado = null;
+		
+		return "../index.xhtml?faces-redirect=true";
+	}
 
 	
 	

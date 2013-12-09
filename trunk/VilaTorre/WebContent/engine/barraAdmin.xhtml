@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<p:growl id="messages" />
+		<p:menubar>
+			<p:submenu label="Cadastro">
+				<p:menuitem value="Cliente" url="/cliente/telaCliente.xhtml?faces-redirect=true" />
+				
+			</p:submenu>
+			<p:submenu label="Material">
+				<p:menuitem value="MateriaPrima" url="/gerencia/telaMateriaPrima.xhtml?faces-redirect=true"/>
+				<p:menuitem value="Fornecimento" url="/fornecedor/telaFornecimento.xhtml?faces-redirect=true"/>
+				<p:menuitem value="Estoque" url="/fornecedor/telaEstoque.xhtml?faces-redirect=true"/>			
+			</p:submenu>
+			<p:submenu label="Produção">
+				<p:menuitem value="Ingrediente" url="/gerencia/telaIngrediente.xhtml?faces-redirect=true"/>
+				<p:menuitem value="Produto" url="/gerencia/telaProduto.xhtml?faces-redirect=true"/>		
+			</p:submenu>
+			
+			<p:submenu label="Vendas">
+				<p:menuitem value="Local" url="/vendas/telaVendasLocal.xhtml?faces-redirect=true"/>
+				<p:menuitem value="Local" url="/vendas/telaPagamento.xhtml?faces-redirect=true"/>
+			</p:submenu>
+			<p:submenu label="Administrativo">
+				<p:menuitem value="Funcionário" url="/funcionario/telaFuncionario.xhtml?faces-redirect=true"/>
+				<p:menuitem value="Fornecedor" url="/fornecedor/telaFornecedor.xhtml?faces-redirect=true"/>
+				<p:menuitem value="Cargo" url="/gerencia/telaCargo.xhtml?faces-redirect=true"/>
+			</p:submenu>
+			
+			<f:facet name="options">
+				<p:outputLabel rendered="#{not empty loginBean.logado}"
+					value="Usuário logado: #{loginBean.logado.usuario.login}"></p:outputLabel>
+					&nbsp;
+					<p:commandButton action="#{loginBean.efetuarLogoff}"
+					immediate="true" rendered="#{not empty loginBean.logado}"
+					value="Logout" icon="ui-icon-extlink" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+</ui:fragment>
