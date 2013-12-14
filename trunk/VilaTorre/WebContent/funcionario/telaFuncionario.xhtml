@@ -12,17 +12,14 @@
 	<h:form id="funcForm">
 
 	<p:growl life="3000" />
-	<p:dialog  header="Gerenciar Funcionário." widgetVar="dlg"
-			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="true" draggable="false">
-				
-			<p:panel header="Dados Pessoais" id="dadosPessoais">
+		
+			<div>
+			<p:panel header="Dados Pessoais" id="dadosPessoais" >
 			<h:panelGrid columns="2">
 			<h:outputText for="nome" value="Nome:"/><p:inputText tabindex="1" size="70" maxlength="130" required="false" requiredMessage="É necessário informar o nome." id="nome" value="#{funcionarioBean.func.nome}"/>
 			<h:outputText for="sexo" value="Sexo:"/>        
-			<p:selectOneButton  id="sexo" value="#{funcionarioBean.func.sexo}" >  
-              <f:selectItem itemLabel="Masculino" itemValue="1" />  
-              <f:selectItem itemLabel="Feminino" itemValue="0" />  
+			<p:selectOneButton  id="sexo" value="#{funcionarioBean.func.sexo}"  >  
+              <f:selectItem itemLabel="Masculino" itemValue="1" /> <f:selectItem itemLabel="Feminino" itemValue="0" />  
        		  </p:selectOneButton>
 			<h:outputText for="nasc" value="Data Nasc.:"/><p:inputMask tabindex="2" mask="99/99/9999" id="nasc" value="#{funcionarioBean.nasc}"/>
 			<h:outputText for="rg" value="RG:  "/><p:inputText tabindex="3" required="false" requiredMessage="É necessário informar o rg." label="RG" id="rg" value="#{funcionarioBean.func.rg}"/>
@@ -30,8 +27,10 @@
 			<h:outputText for="fone" value="Fone: "/><p:inputMask tabindex="5" required="false" requiredMessage="É necessário informar o fone."  mask="(99)9999-9999"  id="fone" value="#{funcionarioBean.func.fone}"/>
 			<h:inputHidden value="#{funcionarioBean.func.id}" />
 			</h:panelGrid>
-			
 			</p:panel>
+			</div>
+			<p:panelGrid columns="2">
+			<div id="smallleft">
 			<p:panel header="Dados Trabalhistas" id="dadosTrab">
 			<h:panelGrid columns="2">
 			<h:outputText for="admissao" value="Data de Admissão:"/><p:inputMask tabindex="6"  required="false" id="admissao" mask="99/99/9999" value="#{funcionarioBean.admissao}"/>
@@ -42,12 +41,13 @@
         	      <f:selectItem noSelectionOption="true" itemLabel="Selecione um cargo"></f:selectItem>
            		  <f:selectItems value="#{funcionarioBean.cargos}" var="carg" itemLabel="#{carg.nome}"><h:inputHidden value="#{carg.id}" /></f:selectItems>
        		 </p:selectOneMenu> 
-       		
-       		 
-			</h:panelGrid>
-			
+       		 <h:outputText for="espaco" value=""/>  <h:outputText id="espaco" value=""/>
+ 			</h:panelGrid>
 			</p:panel>
-			
+			</div>
+
+
+			<div id="smallright">
 			<p:panel header="Dados de Usuário" id="dadosUser">
 			<h:panelGrid columns="2">
 			<h:outputText for="login" value="Login:"/><p:inputText tabindex="9"  maxlength="130" required="false" requiredMessage="É necessário informar o login." id="login" value="#{funcionarioBean.usuario.login}"/>
@@ -60,7 +60,10 @@
        		 </p:selectOneMenu> 
 			</h:panelGrid>
 			</p:panel>
+			</div>
+			</p:panelGrid>
 			
+			<div>
 			<p:panel header="Endereço" id="dadosEnd">
 			<h:panelGrid columns="2">
 			<h:outputText for="logradouro" value="Logradouro:"/><p:inputText tabindex="13" size="70"  maxlength="130" required="false" id="logradouro" value="#{funcionarioBean.endereco.logradouro}"/>
@@ -69,6 +72,8 @@
 			<h:outputText for="bairro" value="Bairro:"/><p:inputText  tabindex="16" required="false" id="bairro" value="#{funcionarioBean.endereco.bairro}"/>
 			</h:panelGrid>
 			</p:panel>
+			</div>
+			
 			
 			<p:panel>
 			<p:panelGrid columns="3">
@@ -83,7 +88,7 @@
 			<p:panel header="Lista dos Funcionários" toggleable="true"  toggleTitle="Clique aqui pra visualizar os funcionários cadastrados.">
 				
 
-					<p:dataTable id="funcTable" var="fun" value="#{funcionarioBean.funcionarios}"	emptyMessage="Nenhum funcionário cadastrado.">
+					<p:dataTable id="tabela" var="fun" value="#{funcionarioBean.funcionarios}" rowStyleClass="linhas"	emptyMessage="Nenhum funcionário cadastrado.">
 						
 						<h:inputHidden value="#{funcionarioBean.func.id}"/>
 						<p:column headerText="Funcionario">
@@ -117,11 +122,7 @@
 			<div align="center">
 			<p:panel header="Vila Torre Original Burger System© 2013 All Rigths Reserved - Rafael WMS®" />
 			</div>
-		
-		</p:dialog>
-		  
-    
-	
+
 	</h:form>
 	</ui:define>
 </ui:composition>

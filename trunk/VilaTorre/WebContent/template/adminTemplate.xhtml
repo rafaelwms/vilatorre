@@ -6,19 +6,21 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title><ui:insert name="titulo"></ui:insert></title>
-	<link type="text/css" rel="stylesheet" href="../css/custom.css"/>
+	<link type="text/css" rel="stylesheet" href="../css/ui-lightnesss/custom.css"/>
+	<link type="text/css" rel="stylesheet" href="../css/template/template.css"/>
+	<script type="text/javascript" src="../script/money.js" />
 </h:head>
-<h:body styleClass="ui-picklist">
-	<p:fieldset  legend="Vila Torre Original Burger">
-		<div class="ui-widget">
+<h:body styleClass="ui-picklist" align="center">
+		<div align="center" id="container">
+		<div id="barra" class="ui-widget">
 			<ui:include src="../engine/barraAdmin.xhtml"></ui:include>
 		</div>
-		<div class="ui-widget" style="height: 100%; ">
+		<div id="conteudo" class="ui-widget">
 			<ui:insert name="principal" />
 		</div>
 		<div class="ui-widget" style="height: 25px;text-align:center">
 			Vila Torre Original Burger System - @Copyright 2013 by Rafael WMS®, All Rights Reserved
 		</div>
-	</p:fieldset>
+		</div>
   </h:body>
 </html>
