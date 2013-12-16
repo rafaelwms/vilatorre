@@ -7,12 +7,12 @@
 
 	<h:form>
 		<p:growl id="messages" />
-		<p:menubar>
+		<p:menu>
 			<p:submenu label="Cadastro">
-				<p:menuitem value="Cliente" url="/cliente/telaCliente.xhtml?faces-redirect=true" />
+				<p:menuitem  value="Cliente" url="/cliente/telaCliente.xhtml?faces-redirect=true" />
 				
 			</p:submenu>
-			<p:submenu label="Material">
+			<p:submenu label="Material" icon="ui-icon-person">
 				<p:menuitem value="MateriaPrima" url="/gerencia/telaMateriaPrima.xhtml?faces-redirect=true"/>
 				<p:menuitem value="Fornecimento" url="/fornecedor/telaFornecimento.xhtml?faces-redirect=true"/>
 				<p:menuitem value="Estoque" url="/fornecedor/telaEstoque.xhtml?faces-redirect=true"/>			
@@ -40,7 +40,7 @@
 					immediate="true" rendered="#{not empty loginBean.logado}"
 					value="Logout" icon="ui-icon-extlink" />
 			</f:facet>
-		</p:menubar>
+		</p:menu>
 	</h:form>
 
 </ui:fragment>
