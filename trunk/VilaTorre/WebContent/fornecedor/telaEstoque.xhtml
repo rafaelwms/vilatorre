@@ -9,14 +9,6 @@
 	<ui:define name="principal">
 
 
-	
-
-
-		<p:dialog header=".: Gerenciar Estoque :." widgetVar="dlg"
-			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="true" draggable="false">
-
-
 			<h:form id="formEstoque">
 			<p:growl life="3000"/>
 			<p:panel header="Informações do Estoque">
@@ -44,10 +36,10 @@
 
 			<p:panel>
 			
-				<div style="float: none;" align="center">
-					<p:commandButton value="Salvar" action="#{estoqueBeans.salvar}" ajax="false" icon="ui-icon-disk" tabindex="6"/>
-					<p:commandButton value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
-				</div>
+				<p:menuButton value="Ações">
+					<p:menuitem value="Salvar" action="#{estoqueBeans.salvar}" ajax="false"  tabindex="6"/>
+					<p:menuitem value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true"  />
+			   </p:menuButton>
 				
 			</p:panel>
 			
@@ -81,12 +73,6 @@
 					</p:panel>
 
 				</h:form>
-		</p:dialog>
-
-
-
-	
-
 
 </ui:define>
 </ui:composition>

@@ -10,15 +10,6 @@
 	
 
 
-		<p:dialog header=".: Gerenciar Matéria Prima :." widgetVar="dlg"
-			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="true" draggable="false">
-			<p:panel>
-				<div align="center">
-					<img src="../Imagens/Vila Torre - LOGO - 200.png" /><br />
-				</div>
-			</p:panel>
-
 			<h:form id="formMateria">
 			<p:growl life="3000"/>
 			<p:panel header="Informações da Matéria Prima" id="dadosMateria">
@@ -43,13 +34,12 @@
 			</p:panel>
 
 			<p:panel>
-			<p:panelGrid columns="2">
-				<div style="float: none;" align="center">
-					<p:commandButton value="Salvar" action="#{materiaPrimaBean.salvar}"
-						ajax="false" icon="ui-icon-disk" />
-					<p:commandButton value="Limpar" type="reset" ajax="false" immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
-				</div>
-				</p:panelGrid>
+		
+					<p:menuButton value="Ações">
+						<p:menuitem value="Salvar" action="#{materiaPrimaBean.salvar}" ajax="false" />
+						<p:menuitem value="Limpar" type="reset" ajax="false" immediate="true" />
+					</p:menuButton>
+			
 			</p:panel>
 			
 			<p:panel header="Lista das Materias Primas" toggleable="true">
@@ -81,18 +71,6 @@
 					</p:panel>
 
 				</h:form>
-
-			
-
-
-
-
-		</p:dialog>
-
-
-
-	
-
 
 </ui:define>
 </ui:composition>

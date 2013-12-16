@@ -12,10 +12,6 @@
 	
 
 
-		<p:dialog header=".: Gerenciar Fornecimento :." widgetVar="dlg"
-			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="true" draggable="false">
-
 
 			<h:form id="formFornecimento">
 			<p:growl life="3000"/>
@@ -45,11 +41,10 @@
 
 			<p:panel>
 		
-				<div style="float: none;" align="center">
-					<p:commandButton value="Salvar" action="#{fornecimentoBean.salvar}"
-						ajax="false" icon="ui-icon-disk" tabindex="6"/>
-					<p:commandButton value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
-				</div>
+				<p:menuButton value="Ações">
+					<p:menuitem value="Salvar" action="#{fornecimentoBean.salvar}" ajax="false" tabindex="6"/>
+					<p:menuitem value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true" />
+				</p:menuButton>
 				
 			</p:panel>
 			
@@ -82,12 +77,6 @@
 					</p:panel>
 
 				</h:form>
-		</p:dialog>
-
-
-
-	
-
 
 </ui:define>
 </ui:composition>

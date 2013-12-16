@@ -9,12 +9,6 @@
 	<ui:define name="principal">
 	
 
-
-		<p:dialog header=".: Gerenciar Produto :." widgetVar="dlg"
-			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="true" draggable="false">
-
-
 			<h:form id="formProduto">
 			<p:growl life="3000"/>
 			<p:panel header="Informações do Produto">
@@ -29,7 +23,7 @@
            		 		  <f:selectItems value="#{produtoBean.categorias}"/>
        				</p:selectOneMenu> 
        				
-       				<h:outputText for="ingredientes"/>
+       				<h:outputText value="Ingredientes:" for="ingredientes"/>
        				<p:selectManyMenu id="ingredientes" value="#{produtoBean.ingredientes}" converter="ingredienteConverter" style="width:150px;height:200px"  showCheckbox="true">  
             			<f:selectItem noSelectionOption="true" itemLabel="Selecione"/>
             			<f:selectItems value="#{produtoBean.todosIngredientes}" var="ing" itemLabel="#{ing.nome}"  />  
@@ -46,11 +40,10 @@
 			</p:panel>
 
 			<p:panel>
-				<div style="float: none;" align="center">
-					<p:commandButton value="Salvar" action="#{produtoBean.salvar}"
-						ajax="false" icon="ui-icon-disk" tabindex="6"/>
-					<p:commandButton value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
-				</div>
+				<p:menuButton value="Ações">
+					<p:menuitem value="Salvar" action="#{produtoBean.salvar}" ajax="false" tabindex="6"/>
+					<p:menuitem value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true"/>
+				</p:menuButton>
 			</p:panel>
 			
 			<p:panel header="Lista dos Produtos" toggleable="true">
@@ -83,16 +76,6 @@
 
 				</h:form>
 
-			
-
-
-
-
-		</p:dialog>
-
-
-
-	
 
 
 </ui:define>

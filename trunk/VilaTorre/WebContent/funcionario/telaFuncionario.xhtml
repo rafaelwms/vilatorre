@@ -14,26 +14,28 @@
 	<p:growl life="3000" />
 		
 			<div>
-			<p:panel header="Dados Pessoais" id="dadosPessoais" >
+			<p:panel header=".: FUNCIONÁRIO :. - Dados Pessoais" id="dadosPessoais" >
 			
-			<p:panelGrid columns="2">
+			<h:panelGrid columns="2">
 			<h:outputText for="nome" value="Nome:"/><p:inputText tabindex="1" size="70" maxlength="130" required="false" requiredMessage="É necessário informar o nome." id="nome" value="#{funcionarioBean.func.nome}"/>
 			<h:outputText for="sexo" value="Sexo:"/>        
 			<p:selectOneRadio  id="sexo" value="#{funcionarioBean.func.sexo}"   >  
-              <f:selectItem itemLabel="Masculino" itemValue="1" /> <f:selectItem itemLabel="Feminino" itemValue="0" />  
+              <f:selectItem itemLabel="Masculino" itemValue="0" /> <f:selectItem itemLabel="Feminino" itemValue="1" />  
        	    </p:selectOneRadio>
-       	    </p:panelGrid>
-       	    <p:panelGrid columns="2">
-       	    <p:panelGrid columns="2">
+       	    </h:panelGrid>
+       	    <h:panelGrid columns="2">
+       	    <h:panelGrid columns="2">
 			<h:outputText for="nasc" value="Data Nasc.:"/><p:inputMask tabindex="2" mask="99/99/9999" id="nasc" value="#{funcionarioBean.nasc}"/>
 			<h:outputText for="rg" value="RG:  "/><p:inputText tabindex="3" required="false" requiredMessage="É necessário informar o rg." label="RG" id="rg" value="#{funcionarioBean.func.rg}"/>
-			</p:panelGrid>
-			<p:panelGrid columns="2">
+		
+			</h:panelGrid>
+		
+			<h:panelGrid columns="2">
 			<h:outputText for="cpf" value="CPF: "/><p:inputMask tabindex="4" required="false"  requiredMessage="É necessário informar o cpf." mask="999.999.999-99"  id="cpf" value="#{funcionarioBean.func.cpf}"/>
 			<h:outputText for="fone" value="Fone: "/><p:inputMask tabindex="5" required="false" requiredMessage="É necessário informar o fone."  mask="(99)9999-9999"  id="fone" value="#{funcionarioBean.func.fone}"/>
+			</h:panelGrid>
 			
-			</p:panelGrid>
-			</p:panelGrid>
+			</h:panelGrid>
 			<h:inputHidden value="#{funcionarioBean.func.id}" />
 			</p:panel>
 			</div>
@@ -91,13 +93,13 @@
 			
 			
 			<p:panel>
-			<p:panelGrid columns="3">
-			
-			<p:commandButton value="Salvar" action="#{funcionarioBean.salvar}" tabindex="17" ajax="false" icon="ui-icon-disk"/> 
-			<p:commandButton value="Limpar" tabindex="18" type="reset" icon="ui-icon-arrowreturnthick-1-w" immediate="true"/>
-			<p:commandButton value="Voltar" action="/index.xhml?faces-redirect=true"  tabindex="19" ajax="false" immediate="true" icon="ui-icon-home"/> 
 		
-			</p:panelGrid>
+			<p:menuButton value="Ações">
+			<p:menuitem value="Salvar" action="#{funcionarioBean.salvar}"  ajax="false" /> 
+			<p:menuitem  value="Limpar" type="reset"  immediate="true"/>
+			</p:menuButton>
+		
+	
 			</p:panel>
 			
 			<p:panel header="Lista dos Funcionários" toggleable="true"  toggleTitle="Clique aqui pra visualizar os funcionários cadastrados.">

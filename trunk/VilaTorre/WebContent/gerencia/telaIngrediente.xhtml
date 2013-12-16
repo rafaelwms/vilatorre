@@ -9,18 +9,6 @@
 	<ui:define name="principal">
 
 
-	
-
-
-		<p:dialog header=".: Gerenciar Ingrediente :." widgetVar="dlg"
-			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="true" draggable="false">
-			<p:panel>
-				<div align="center">
-					<img src="../Imagens/Vila Torre - LOGO - 200.png" /><br />
-				</div>
-			</p:panel>
-
 			<h:form id="formIngrediente">
 			<p:growl life="3000"/>
 			<p:panel header="Informações do Ingrediente">
@@ -55,11 +43,10 @@
 			</p:panel>
 
 			<p:panel>
-				<div style="float: none;" align="center">
-					<p:commandButton value="Salvar" action="#{ingredienteBean.salvar}"
-						ajax="false" icon="ui-icon-disk" tabindex="6"/>
-					<p:commandButton value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
-				</div>
+				<p:menuButton value="Ações">
+					<p:menuitem value="Salvar" action="#{ingredienteBean.salvar}" ajax="false" tabindex="6"/>
+					<p:menuitem value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true" />
+				</p:menuButton>
 			</p:panel>
 			
 			<p:panel header="Lista dos Ingredientes" toggleable="true">
@@ -95,17 +82,6 @@
 					</p:panel>
 
 				</h:form>
-
-			
-
-
-
-
-		</p:dialog>
-
-
-
-	
 
 
 </ui:define>

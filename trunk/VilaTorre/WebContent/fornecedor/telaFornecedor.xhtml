@@ -10,22 +10,33 @@
 
 	<h:form id="fornecForm">
 	<p:growl></p:growl>
-	<p:dialog  header=".: Gerenciar Fornecedor :." widgetVar="dlg" showEffect="clip" width="500" modal="true" visible="true" resizable="false" closable="true" draggable="false">
+
 		
 			
-			<p:panel header="Dados Pessoais">
+			<p:panel header=".: FORNECEDOR :. - Dados Pessoais">
 			<h:panelGrid columns="2" >
 			<h:outputText for="nome" value="Nome:"/><p:inputText required="false" requiredMessage="Digite o nome." tabindex="1" size="70" maxlength="130" id="nome" value="#{fornecedorBean.fornecedor.nome}"/>
-			<h:outputText for="sexo" value="Sexo:"/>        
-			<p:selectOneButton  id="sexo" value="#{fornecedorBean.fornecedor.sexo}" >  
-              <f:selectItem itemLabel="Masculino" itemValue="1" />  
-              <f:selectItem itemLabel="Feminino" itemValue="0" />  
-       		  </p:selectOneButton>
+			<h:outputText for="sexo" value="Sexo:"/>
+    
+			<p:selectOneRadio  id="sexo" value="#{fornecedorBean.fornecedor.sexo}"  >  
+              <f:selectItem itemLabel="Masculino" itemValue="0"  />  
+              <f:selectItem itemLabel="Feminino" itemValue="1" />  
+       	    </p:selectOneRadio>
+       		</h:panelGrid>
+       		
+       		<h:panelGrid columns="2" >
+       		<h:panelGrid columns="2" >
 			<h:outputText for="nasc" value="Data Nasc.:"/><p:inputMask tabindex="2" id="nasc" mask="99/99/9999" value="#{fornecedorBean.nasc}"/>
 			<h:outputText for="rg" value="RG:  "/><p:inputText required="false" requiredMessage="Digite o rg." tabindex="3"  label="RG" id="rg" value="#{fornecedorBean.fornecedor.rg}"/>
+			</h:panelGrid>
+			<h:panelGrid columns="2" >
 			<h:outputText for="cpf" value="CPF: "/><p:inputMask required="false" requiredMessage="Digite o cpf." tabindex="4"  mask="999.999.999-99"  id="cpf" value="#{fornecedorBean.fornecedor.cpf}"/>
 			<h:outputText for="fone" value="Fone: "/><p:inputMask required="false" requiredMessage="Digite o fone." tabindex="5"   mask="(99)9999-9999"  id="fone" value="#{fornecedorBean.fornecedor.fone}"/>
-			<h:outputText for="parceria" value="Inicio da Parceria: "/><p:inputMask required="false" requiredMessage="Digite o e-mail." tabindex="6" mask="99/99/9999"   id="parceria" value="#{fornecedorBean.parceiro}"/>
+			</h:panelGrid>
+			
+			<h:panelGrid columns="2">
+			<h:outputText for="parceria" value="Início Parc.:"/><p:inputMask required="false" requiredMessage="Digite o e-mail." tabindex="6" mask="99/99/9999"   id="parceria" value="#{fornecedorBean.parceiro}"/>
+			</h:panelGrid>
 			</h:panelGrid>
 			</p:panel>
 			
@@ -39,13 +50,13 @@
 			</p:panel>
 			
 			<p:panel>
-			<p:panelGrid columns="3">
-			<div style="float: none;" align="center">
-			<p:commandButton value="Salvar" action="#{fornecedorBean.salvar}"  ajax="false" icon="ui-icon-disk"/> 
-			<p:commandButton value="Limpar" type="reset" icon="ui-icon-arrowreturnthick-1-w"/>
-			<p:commandButton value="Voltar" action="/index.xhml?faces-redirect=true"  ajax="false" icon="ui-icon-home"/> 
-			</div>
-			</p:panelGrid>
+		
+			<p:menuButton value="Ações">
+			<p:menuitem value="Salvar" action="#{fornecedorBean.salvar}"  ajax="false"/> 
+			<p:menuitem value="Limpar" type="reset" />
+			</p:menuButton>
+	
+		
 			<p:panel header="Lista dos Fornecedores" toggleable="true"  toggleTitle="Clique aqui pra visualizar os funcionários cadastrados.">
 				
 
@@ -81,8 +92,6 @@
 			</div>
 			
 		
-		</p:dialog>
-		  
     
 	
 	</h:form>
