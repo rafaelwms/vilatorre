@@ -11,18 +11,10 @@
 	
 
 
-		<p:dialog header=".: Gerenciar Vendas LOCAL :." widgetVar="dlg"
-			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="true" draggable="false">
-			<p:panel>
-				<div align="center">
-					<img src="../Imagens/Vila Torre - LOGO - 200.png" /><br />
-				</div>
-			</p:panel>
 
 			<h:form id="formPedidoLocal">
 			<p:growl life="3000"/>
-			<p:panel header="Informações do Pedido" id="info">
+			<p:panel header=".: PEDIDOS :. " id="info">
 				<h:panelGrid columns="2">
 				
 				<h:outputText value="Produto:" for="produtos"/>
@@ -41,11 +33,10 @@
 			</p:panel>
 
 			<p:panel>
-				<div style="float: none;" align="center">
-					<p:commandButton value="Novo Pedido" action="#{pedidoLocalBean.abrirPedido}"
-						ajax="false" icon="ui-icon-disk" tabindex="6"/>
-					<p:commandButton value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
-				</div>
+				<p:menuButton value="Ações">
+					<p:menuitem value="Novo Pedido" action="#{pedidoLocalBean.abrirPedido}" ajax="false"  tabindex="6"/>
+					<p:menuitem value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true"  />
+				</p:menuButton>
 			</p:panel>
 			
 			<p:panel header="Lista dos Pedidos Abertos" toggleable="true">
@@ -109,18 +100,6 @@
 					</p:panel>
 
 				</h:form>
-
-			
-
-
-
-
-		</p:dialog>
-
-
-
-	
-
 
 </ui:define>
 </ui:composition>

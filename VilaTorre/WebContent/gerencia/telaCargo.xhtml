@@ -10,16 +10,6 @@
 
 	
 
-
-		<p:dialog header=".: Gerenciar Cargos :." widgetVar="dlg"
-			showEffect="clip" width="600" modal="true" visible="true"
-			resizable="false" closable="true" draggable="false">
-			<p:panel>
-				<div align="center">
-					<img src="../Imagens/Vila Torre - LOGO - 200.png" /><br />
-				</div>
-			</p:panel>
-
 			<h:form id="formCargo">
 			
 			<p:panel header="Informações do cargo" id="dadosCargo">
@@ -36,11 +26,10 @@
 			</p:panel>
 
 			<p:panel>
-				<div style="float: none;" align="center">
-					<p:commandButton value="Salvar" action="#{cargoBean.salvar}"
-						ajax="false" icon="ui-icon-disk" />
-					<p:commandButton value="Limpar" type="reset" ajax="false" immediate="true" icon="ui-icon-arrowreturnthick-1-w" />
-				</div>
+				<p:menuButton value="Ações">
+					<p:menuitem value="Salvar" action="#{cargoBean.salvar}" ajax="false" />
+					<p:menuitem value="Limpar" type="reset" ajax="false" immediate="true" />
+				</p:menuButton>
 			</p:panel>
 			
 			<p:panel header="Lista dos cargos" toggleable="true">
@@ -68,18 +57,6 @@
 					</p:panel>
 
 				</h:form>
-
-			
-
-
-
-
-		</p:dialog>
-
-
-
-	
-
 
 </ui:define>
 </ui:composition>

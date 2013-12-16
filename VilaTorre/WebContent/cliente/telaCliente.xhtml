@@ -10,34 +10,46 @@
 		
 
 	<h:form id="clienteForm">
-	<p:growl></p:growl>
-	<p:dialog  header=".:Novo Cliente :." widgetVar="dlg"
-			showEffect="clip" width="500" modal="true" visible="true"
-			resizable="false" closable="true" appendToBody="true" draggable="false">
+	<p:growl life="3000"></p:growl>
+	
 					
 			
-			<p:panel header="Dados Pessoais">
+			<p:panel header=".:CLIENTE:. - Dados Pessoais">
+			<h:inputHidden vlaue="#{clienteBean.cliente.id}"></h:inputHidden>
 			<h:panelGrid columns="2" >
 			<h:outputText for="nome" value="Nome:"/><p:inputText required="true" requiredMessage="Digite o nome." tabindex="1" size="70" maxlength="130" id="nome" value="#{clienteBean.cliente.nome}"/>
 			<h:outputText for="sexo" value="Sexo:"/>        
-			<p:selectOneButton  id="sexo" value="#{clienteBean.cliente.sexo}" >  
-              <f:selectItem itemLabel="Masculino" itemValue="1" />  
-              <f:selectItem itemLabel="Feminino" itemValue="0" />  
-       		  </p:selectOneButton>
+			<p:selectOneRadio  id="sexo" value="#{clienteBean.cliente.sexo}" >  
+              <f:selectItem itemLabel="Masculino" itemValue="0" />  
+              <f:selectItem itemLabel="Feminino" itemValue="1" />  
+       		  </p:selectOneRadio>
+       		 </h:panelGrid>
+       		<h:panelGrid columns="2" >
+       		<h:panelGrid columns="2" >  
 			<h:outputText for="nasc" value="Data Nasc.:"/><p:inputMask tabindex="2" id="nasc" mask="99/99/9999" value="#{clienteBean.nasc}"/>
 			<h:outputText for="rg" value="RG:  "/><p:inputText required="true" requiredMessage="Digite o rg." tabindex="3"  label="RG" id="rg" value="#{clienteBean.cliente.rg}"/>
+			</h:panelGrid>
+			<h:panelGrid columns="2" > 
 			<h:outputText for="cpf" value="CPF: "/><p:inputMask required="true" requiredMessage="Digite o cpf." tabindex="4"  mask="999.999.999-99"  id="cpf" value="#{clienteBean.cliente.cpf}"/>
 			<h:outputText for="fone" value="Fone: "/><p:inputMask required="true" requiredMessage="Digite o fone." tabindex="5"   mask="(99)9999-9999"  id="fone" value="#{clienteBean.cliente.fone}"/>
-			<h:outputText for="email" value="E-mail: "/><p:inputText required="true" requiredMessage="Digite o e-mail." tabindex="6"   id="email" value="#{clienteBean.cliente.email}"/>
-			<h:inputHidden vlaue="#{clienteBean.cliente.id}"></h:inputHidden>
+			</h:panelGrid>
+			
+			</h:panelGrid>
+			<h:panelGrid columns="2" > 
+			<h:outputText for="email" value="E-mail: "/><p:inputText required="true" size="70" requiredMessage="Digite o e-mail." tabindex="6"   id="email" value="#{clienteBean.cliente.email}"/>
 			</h:panelGrid>
 			</p:panel>
 			
 			<p:panel header="Dados de Usuário">
 			<h:panelGrid columns="2">
+			<h:panelGrid columns="2">
 			<h:outputText for="login" value="Login:"/><p:inputText tabindex="7"  maxlength="130"  id="login" value="#{clienteBean.usuario.login}"/>
 			<h:outputText for="senha" value="Senha:"/><p:password tabindex="8" feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="Razoável" strongLabel="Forte" id="senha" value="#{clienteBean.usuario.senha}"/>
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+			<h:outputText value="    " for="espaco"/><h:inputHidden id="espaco"/>
 			<h:outputText for="senha2" value="Confirm. Senha:"/><p:password tabindex="9" feedback="false" required="false" id="senha2"/>
+			</h:panelGrid>
 			</h:panelGrid>
 			</p:panel>
 			
@@ -51,13 +63,14 @@
 			</p:panel>
 			
 			
-			<p:panel >
-			<h:panelGrid columns="3">
-			<p:commandButton value="Salvar" action="#{clienteBean.salvar}"  ajax="false" icon="ui-icon-disk"/> 
-			<p:commandButton value="Limpar" type="reset" icon="ui-icon-arrowreturnthick-1-w" immediate="true"/>
-			<p:commandButton value="Voltar" action="/index.xhml?faces-redirect=true"   immediate="true" ajax="false" icon="ui-icon-home"/> 
-			</h:panelGrid>
-			</p:panel>
+			
+			<p:panel>
+			
+			<p:menuButton value="Ações">
+			<p:menuitem value="Salvar" action="#{clienteBean.salvar}"  ajax="false" /> 
+			<p:menuitem value="Limpar" type="reset"  immediate="true"/>
+			</p:menuButton>
+		    </p:panel>
 				<p:panel header="Lista dos Clientes" toggleable="true"  toggleTitle="Clique aqui pra visualizar os clientes cadastrados.">
 				
 
@@ -80,7 +93,7 @@
 						<p:column headerText="Ações">
 							<p:commandButton  title="Editar" actionListener="#{clienteBean.editar(cli)}" update=":clienteForm" icon="ui-icon-pencil"/>
 					&nbsp;&nbsp;
-					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão do cliente #{cli.nome}?')" action="#{clienteBean.remover(fun)}" icon="ui-icon-trash" />
+					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão do cliente #{cli.nome}?')" action="#{clienteBean.remover(cli)}" icon="ui-icon-trash" />
 						</p:column>
 
 					</p:dataTable>
@@ -90,11 +103,7 @@
 			<p:panel header="Vila Torre Original Burger System© 2013 All Rigths Reserved - Rafael WMS®" />
 			</div>
 			
-			
-			
-		
-		</p:dialog>
-		  
+ 
     
 	
 	</h:form>
