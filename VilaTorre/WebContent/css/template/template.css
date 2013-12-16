@@ -1,12 +1,21 @@
 @CHARSET "ISO-8859-1";
 
 #barra{
-	width: 800px;
-	float: none;
+	width: 200px;
+	float: left;
+	position: fixed;
 }
 
-#conteudo{
+
+
+#container{
 	width: 800px;
+}
+
+
+#conteudo{
+	float: right;
+	width: 600px;
 }
 
 #smallleft{
