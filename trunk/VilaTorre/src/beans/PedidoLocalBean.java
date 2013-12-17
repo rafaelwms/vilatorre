@@ -19,6 +19,8 @@ public class PedidoLocalBean {
 	
 	private Pedido pedido = new Pedido();
 	
+	private Pagamento pagamento = new Pagamento();
+	
 	private List<Pedido> todosPedidos = new ArrayList<Pedido>();
 	
 	private List<Pedido> pedidosAbertos = new ArrayList<Pedido>();
@@ -245,6 +247,16 @@ public class PedidoLocalBean {
 
 	public void setMesa(int mesa) {
 		this.mesa = mesa;
+	}
+
+
+	public Pagamento getPagamento() {
+		return pagamento;
+	}
+
+
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
 	}
 	
 

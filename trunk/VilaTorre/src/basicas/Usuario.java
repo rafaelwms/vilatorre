@@ -18,7 +18,7 @@ public class Usuario {
 	@Enumerated(EnumType.STRING)
 	private TipoUser tipoUser;
 	
-	public enum TipoUser{ADMINISTRADOR, USUÁRIO, CLIENTE}
+	public enum TipoUser{Selecione, ADMINISTRADOR, USUÁRIO, CLIENTE}
 	
 	public Usuario(){}
 	

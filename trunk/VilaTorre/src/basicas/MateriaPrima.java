@@ -21,7 +21,7 @@ public class MateriaPrima extends ObjetoGeral{
 	
 		
 	
-	public enum Unidade{g, kg, unidade}
+	public enum Unidade{Selecione, g, kg, unidade}
 
 
 

@@ -21,7 +21,7 @@ public class Produto extends ObjetoGeral  {
 	private Categoria categoria;
 	
 	
-	public enum Categoria{Bebidas, Burgers, SuperBurgers, Salgados, Sobremesa}
+	public enum Categoria{Selecione, Bebidas, Burgers, Salgados, Sobremesa, SuperBurgers}
 	
 	public Produto(){}
 	
