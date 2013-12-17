@@ -30,12 +30,17 @@ public class NegocioCalculos {
 	}
 
 	
-	public static double calcularPedido(Pedido pedido){		
+	public static void calcularItem(ItemPedido item){
+		item.setTotalItem(item.getQtd() * item.getProduto().getPreco());
+	}
+		
+	
+	public static void calcularPedido(Pedido pedido){		
 		double total = 0;
 		for(ItemPedido item : pedido.getLista_itens()){			
-			total = total + (item.getProduto().getPreco() * item.getQtd());
+			total = total + item.getTotalItem();
 		}
-		return total;
+		pedido.setValor_total(total);
 	}
 	
 

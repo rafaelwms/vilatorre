@@ -37,9 +37,9 @@ public class Pagamento{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date hora_pagamento;
 	
-	public enum FormaPagamento{ESPÉCIE, DÉBITO, CRÉDITO, VOUCHER}
+	public enum FormaPagamento{Selecione, CRÉDITO, DÉBITO, ESPÉCIE, VOUCHER}
 	
-	public enum Bandeira{VISA, MASTER, AMEX, HIPERCARD, TR, DINNERS}
+	public enum Bandeira{Selecione, AMEX, DINNERS, HIPERCARD, MASTER, TR, VISA}
 	
 	public Pagamento(){}
 	
