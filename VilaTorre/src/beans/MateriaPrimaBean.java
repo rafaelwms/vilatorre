@@ -27,8 +27,10 @@ public class MateriaPrimaBean {
 	public String salvar(){
 		try{
 			
-			if (materia.getId() == null || materia.getId() < 0){
-				
+				materia.getId();
+			
+			if (materia.getId() == null || materia.getId() < 1){
+				materia.setId(null);
 				materia.setUnidade(unid);
 				Fachada.getInstancia().inserirMateriaPrima(materia);
 				FacesContext.getCurrentInstance().addMessage("cadastroMat", new FacesMessage("Materia prima "+materia.getNome()+" cadastrada com êxito."));
@@ -39,7 +41,7 @@ public class MateriaPrimaBean {
 				
 				materia.setUnidade(unid);
 				Fachada.getInstancia().alterarMateriaPrima(materia);
-				FacesContext.getCurrentInstance().addMessage("cadastroMat", new FacesMessage("Materia prima "+materia.getNome()+" cadastrada com êxito."));
+				FacesContext.getCurrentInstance().addMessage("cadastroMat", new FacesMessage("Materia prima "+materia.getNome()+" alterada com êxito."));
 				materia = new MateriaPrima();
 				return null;
 			}

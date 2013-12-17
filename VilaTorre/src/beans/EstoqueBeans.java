@@ -49,7 +49,7 @@ public class EstoqueBeans {
 		if(estoque.getId() == null || estoque.getId() < 1){
 			estoque.setId(null);
 			Fachada.getInstancia().inserirEstoque(estoque);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Estoque gerado com êxito."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Estoque para "+estoque.getMateria().getNome()+" gerado com êxito."));
 			estoque = new Estoque();
 			min = new String();
 			max = new String();
@@ -60,7 +60,7 @@ public class EstoqueBeans {
 		} else{
 			
 			Fachada.getInstancia().alterarEstoque(estoque);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Estoque gerado com êxito."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Estoque de " +estoque.getMateria().getNome()+ " alterado com êxito."));
 			estoque = new Estoque();
 			min = new String();
 			max = new String();
@@ -71,7 +71,7 @@ public class EstoqueBeans {
 		}
 		
 	}catch(Exception ex){
-		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
 		return null;
 	}
 

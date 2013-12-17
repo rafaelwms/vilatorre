@@ -1,5 +1,6 @@
 package dados;
 
+import negocio.NegocioCalculos;
 import basicas.ItemPedido;
 import basicas.Pedido;
 
@@ -9,6 +10,7 @@ public class DAOPedido extends DAOGenerico<Pedido> implements IDAOPedido{
 	public void removerItemPedido(Pedido pedido, ItemPedido item) throws Exception {
 		try{
 		pedido.getLista_itens().remove(item);
+		NegocioCalculos.calcularPedido(pedido);
 		this.alterar(pedido);
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());
@@ -20,6 +22,7 @@ public class DAOPedido extends DAOGenerico<Pedido> implements IDAOPedido{
 	public void adicionarItemPedido(Pedido pedido, ItemPedido item)	throws Exception {
 		try{
 			pedido.getLista_itens().add(item);
+			NegocioCalculos.calcularPedido(pedido);
 			this.alterar(pedido);
 			}catch(Exception ex){
 				System.out.println(ex.getMessage());

@@ -36,7 +36,7 @@ public class NegocioComum {
 	private IDAOProduto daoProduto;
 	private IDAOUsuario daoUsuario;
 	
-	private NegocioCalculos calculo;
+
 
 	
 	public NegocioComum() {
@@ -55,7 +55,7 @@ public class NegocioComum {
 		this.daoProduto = new DAOProduto();
 		this.daoUsuario = new DAOUsuario();
 		
-		this.calculo = new NegocioCalculos();
+
 	}
 
 	
@@ -452,7 +452,23 @@ public class NegocioComum {
 		 */
 		public void inserirMateriaPrima(MateriaPrima materia)throws Exception{
 			try {
+				boolean flag = false;
+				
+				List<MateriaPrima> lista = daoMateriaPrima.consultarTodos();
+				
+				for(MateriaPrima mat : lista){
+					
+					if(mat.getNome().toString().equals(materia.getNome().toString())){
+						flag = true;
+						break;
+					}
+					
+				}
+				if(flag == true){
+					throw new Exception("Já há um registro para a matéria prima "+materia.getNome()+".");
+				}else{
 				daoMateriaPrima.inserir(materia);
+				}
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());
 			}
@@ -655,6 +671,7 @@ public class NegocioComum {
 		 */
 		public void inserirPedido(Pedido pedido)throws Exception{
 			try {
+				NegocioCalculos.calcularPedido(pedido);
 				daoPedido.inserir(pedido);
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());
@@ -662,6 +679,9 @@ public class NegocioComum {
 		}
 		public void alterarPedido(Pedido pedido)throws Exception{
 			try {
+				
+				NegocioCalculos.calcularPedido(pedido);
+				
 				daoPedido.alterar(pedido);
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());
@@ -821,7 +841,23 @@ public class NegocioComum {
 		 */
 		public void inserirEstoque(Estoque estoque)throws Exception{
 			try {
+				
+				boolean flag = false;
+				
+				List<Estoque> lista = daoEstoque.consultarTodos();
+				
+				for (Estoque est : lista){
+					if(est.getMateria().getId() == estoque.getMateria().getId()){
+						flag = true;
+						break;
+					}
+				}
+				
+				if(flag == true){
+					throw new Exception("Matéria "+estoque.getMateria().getNome()+" já tem estoque registrado.");
+				}else{
 				daoEstoque.inserir(estoque);
+				}
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());
 			}
@@ -857,7 +893,9 @@ public class NegocioComum {
 	    public void deduzirEstoque(Estoque estoque, double qtd) throws Exception{
 	    	try {
 	    		
-				daoEstoque.alterar(calculo.deduzirEstoque(estoque, qtd));
+	    		estoque.setQuantidade((estoque.getQuantidade() - qtd));
+	    		
+				daoEstoque.alterar(estoque);
 			} catch (Exception e) {
 				
 			}
@@ -865,7 +903,10 @@ public class NegocioComum {
 		public void alimentarEstoque(Estoque estoque, double qtd) throws Exception{
 			
 			try {
-				daoEstoque.alterar(calculo.alimentarEstoque(estoque, qtd));
+				
+				estoque.setQuantidade((estoque.getQuantidade() + qtd));
+				
+				daoEstoque.alterar(estoque);
 			} catch (Exception e) {
 				
 			}
