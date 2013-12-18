@@ -33,12 +33,10 @@
 			</p:submenu>
 			
 			<f:facet name="options">
-				<p:outputLabel rendered="#{not empty loginBean.logado}"
-					value="Usuário logado: #{loginBean.logado.usuario.login}"></p:outputLabel>
+				<p:submenu rendered="#{not empty loginBean.logado}" label="Usuário logado: #{loginBean.logado.usuario.login}">
 					&nbsp;
-					<p:commandButton action="#{loginBean.efetuarLogoff}"
-					immediate="true" rendered="#{not empty loginBean.logado}"
-					value="Logout" icon="ui-icon-extlink" />
+				<p:menuitem action="#{loginBean.efetuarLogoff}" immediate="true" rendered="#{not empty loginBean.logado}" value="Logout" icon="ui-icon-extlink" />
+				</p:submenu>
 			</f:facet>
 		</p:menu>
 	</h:form>

@@ -23,8 +23,17 @@
            				<f:selectItems value="#{pedidoLocalBean.produtos}" var="prod" itemLabel="#{prod.nome} &nbsp;&nbsp; #{prod.preco} " />  
       			     </p:selectOneMenu>
       			 
+      			 
+      			 
       			 <h:outputText value="Quantidade:" for="qtd"/>
       			 <p:inputText id="qtd" value="#{pedidoLocalBean.qtd}" onkeypress="mascara(this, numeros)"/>    
+      			 
+      			 <h:outputText value="Tipo de pedido:" for="tipoPedido"/>
+      			 <p:selectOneMenu id="tipoPedido" value="#{pedidoLocalBean.tipoPedido}">        			    
+           				<f:selectItems value="#{pedidoLocalBean.tipos}"/>  
+      			     </p:selectOneMenu>
+      			 
+      			 
       			     
 				<h:outputText value="Mesa:" for="mesa"/>
       			 <p:inputText id="mesa" value="#{pedidoLocalBean.mesa}" onkeypress="mascara(this, numeros)"/>    	
@@ -45,7 +54,11 @@
 					<p:dataTable id="pedidoTable" var="ped" value="#{pedidoLocalBean.pedidosAbertos}"
 						emptyMessage="Nenhum produto cadastrado.">
 						
-						<h:inputHidden value="#{ped.id}"/>
+						
+						<p:column headerText="ID">
+							<h:outputText value="#{ped.id_pedido}" />
+						</p:column>
+						
 						<p:column headerText="Abertura do pedido">
 							<h:outputText value="#{ped.abertura_pedido}" />
 						</p:column>

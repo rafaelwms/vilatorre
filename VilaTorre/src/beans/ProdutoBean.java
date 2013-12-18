@@ -40,6 +40,10 @@ public class ProdutoBean {
 	public String salvar(){
 		try{
 			
+			if(categoria == Categoria.Selecione){
+				throw new Exception("É necessário selecionar uma categoria.");
+			}
+			
 			preco = preco.replace(".", "");
 			preco = preco.replace(",", ".");
 			produto.setPreco(Double.parseDouble(preco));
@@ -53,6 +57,8 @@ public class ProdutoBean {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produto "+produto.getNome()+" cadastrado com êxito."));
 				produto = new Produto();
 				preco = new String();
+				categoria = Categoria.Selecione;
+				ingredientes = new ArrayList<Ingrediente>();
 				return null;
 				
 			}else{
@@ -61,12 +67,14 @@ public class ProdutoBean {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Produto "+produto.getNome()+" cadastrado com êxito."));
 				produto = new Produto();
 				preco = new String();
+				categoria = Categoria.Selecione;
+				ingredientes = new ArrayList<Ingrediente>();
 				return null;
 				
 			}
 			
 		}catch(Exception ex){
-			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
 			return null;
 		}
 	}
@@ -76,10 +84,13 @@ public class ProdutoBean {
 		this.produto = param;
 		this.categoria = param.getCategoria();
 		this.preco =  Datas.double2MoneyString(param.getPreco());
+		this.ingredientes = param.getIngredientes();
+		
 		
 		System.out.println(produto);
 		System.out.println(categoria);
 		System.out.println(preco);
+		System.out.println(ingredientes);
 		return null;
 	}
 	
