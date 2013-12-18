@@ -673,6 +673,7 @@ public class NegocioComum {
 			try {
 				NegocioCalculos.calcularPedido(pedido);
 				daoPedido.inserir(pedido);
+				daoItemPedido.inserir(pedido.getLista_itens().get(0));
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());
 			}

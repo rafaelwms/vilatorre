@@ -19,13 +19,11 @@
 					
 					<h:outputText for="categoriaProduto" value="Categoria:"/>
 					<p:selectOneMenu value="#{produtoBean.categoria}"  tabindex="2" id="categoriaProduto">  
-        	    		  <f:selectItem noSelectionOption="true" itemLabel="Selecione uma categoria."/>
            		 		  <f:selectItems value="#{produtoBean.categorias}"/>
        				</p:selectOneMenu> 
        				
        				<h:outputText value="Ingredientes:" for="ingredientes"/>
-       				<p:selectManyMenu id="ingredientes" value="#{produtoBean.ingredientes}" converter="ingredienteConverter" style="width:150px;height:200px"  showCheckbox="true">  
-            			<f:selectItem noSelectionOption="true" itemLabel="Selecione"/>
+       				<p:selectManyMenu id="ingredientes"  value="#{produtoBean.ingredientes}" converter="ingredienteConverter" style="width:425px;height:150px"   showCheckbox="true">              			
             			<f:selectItems value="#{produtoBean.todosIngredientes}" var="ing" itemLabel="#{ing.nome}"  />  
        				 </p:selectManyMenu>
        				

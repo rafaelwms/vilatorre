@@ -47,23 +47,25 @@ public class PedidoLocalBean {
 	public String abrirPedido(){
 		
 		try{
+			
+			if (tipoPedido == TipoPedido.Selecione){
+				throw new Exception("É necessário selecionar o tipo de pedido.");
+			}
+			pedido.setTipo_pedido(tipoPedido);
+			
 			pedido.setId_pedido(null);
 			item.setId_item(null);
 			item.setProduto(produto);	
 			item.setQtd(qtd);
-			item.setNumOrdem(1);
-			item.setTotalItem(item.getProduto().getPreco() * item.getQtd());			
+			item.setNumOrdem(1);	
 			pedido.setAbertura_pedido(new Date());
-			tipoPedido = TipoPedido.Mesa;
 			pedido.setNum_mesa(mesa);
-			pedido.setStatus_aberto(true);
-			pedido.setTipo_pedido(tipoPedido);
+			pedido.setStatus_aberto(true);			
 			itemsPedido.add(item);
 			pedido.setLista_itens(itemsPedido);
 			pedido.setValor_total(item.getTotalItem());
 			item.setPedido(pedido);
 			Fachada.getInstancia().inserirPedido(pedido);
-			Fachada.getInstancia().inserirItemPedido(item);
 			produto = new Produto();
 			pedido = new Pedido();
 			item = new ItemPedido();
@@ -72,7 +74,7 @@ public class PedidoLocalBean {
 			qtd = 0;
 			return null;
 		}catch(Exception ex){
-			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
 			return null;	
 		}
 	}
@@ -100,11 +102,8 @@ public class PedidoLocalBean {
 			
 		}
 		
-		Fachada.getInstancia().alterarPedido(para1);
-		Fachada.getInstancia().inserirItemPedido(item);
-
+		Fachada.getInstancia().adicionarItemPedido(para1, item);
 		
-
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Item adicionado com êxito."));
 		produto = new Produto();
 		pedido = new Pedido();

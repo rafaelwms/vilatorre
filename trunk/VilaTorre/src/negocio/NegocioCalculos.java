@@ -37,7 +37,8 @@ public class NegocioCalculos {
 	
 	public static void calcularPedido(Pedido pedido){		
 		double total = 0;
-		for(ItemPedido item : pedido.getLista_itens()){			
+		for(ItemPedido item : pedido.getLista_itens()){
+			calcularItem(item);
 			total = total + item.getTotalItem();
 		}
 		pedido.setValor_total(total);

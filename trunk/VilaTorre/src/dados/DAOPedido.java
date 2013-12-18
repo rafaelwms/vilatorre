@@ -5,12 +5,15 @@ import basicas.ItemPedido;
 import basicas.Pedido;
 
 public class DAOPedido extends DAOGenerico<Pedido> implements IDAOPedido{
+	
+	DAOItemPedido daoItem = new DAOItemPedido();
 
 	@Override
 	public void removerItemPedido(Pedido pedido, ItemPedido item) throws Exception {
 		try{
 		pedido.getLista_itens().remove(item);
 		NegocioCalculos.calcularPedido(pedido);
+		daoItem.remover(item);
 		this.alterar(pedido);
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());
@@ -23,6 +26,7 @@ public class DAOPedido extends DAOGenerico<Pedido> implements IDAOPedido{
 		try{
 			pedido.getLista_itens().add(item);
 			NegocioCalculos.calcularPedido(pedido);
+			daoItem.inserir(item);
 			this.alterar(pedido);
 			}catch(Exception ex){
 				System.out.println(ex.getMessage());
