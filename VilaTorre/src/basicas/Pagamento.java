@@ -12,9 +12,6 @@ public class Pagamento{
 	@GeneratedValue
 	private Integer id;
 	
-	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name="pedido")
-	private Pedido pedido;
 	
 	@Column(nullable=false)
 	@Enumerated(EnumType.STRING)
@@ -43,24 +40,15 @@ public class Pagamento{
 	
 	public Pagamento(){}
 	
-	public Pagamento(Pedido pedido, FormaPagamento forma_pagamento, Bandeira bandeira, String cod_confirmacao, double desconto){
+	public Pagamento(FormaPagamento forma_pagamento, Bandeira bandeira, String cod_confirmacao, double desconto){
 		this.setHora_pagamento(new Date());
-		this.setPedido(pedido);
 		this.setForma_pagamento(forma_pagamento);
 		this.setBandeira(bandeira);
 		this.setCod_confirmacao(cod_confirmacao);
 		this.setDesconto(desconto);
-		this.setValor_pago((pedido.getValor_total() - desconto));
 		
 	}
 
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
 
 	public FormaPagamento getForma_pagamento() {
 		return forma_pagamento;

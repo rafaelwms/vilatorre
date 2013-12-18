@@ -76,10 +76,11 @@
 							<h:outputText value="#{fornec.endereco.bairro}" />
 						</p:column>
 										
-						<p:column headerText="Ações">
-							<p:commandButton  title="Editar" actionListener="#{fornecedorBean.editar(fornec)}" update=":fornecForm" icon="ui-icon-pencil"/>
-					&nbsp;&nbsp;
-					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão do fornecedor #{fornec.nome}?')" action="#{fornecedorBean.remover(fun)}" icon="ui-icon-trash" />
+						<p:column headerText="Ações" style="width:30px;">
+						<p:menuButton value="Selecione">
+							<p:menuitem  value="Editar" actionListener="#{fornecedorBean.editar(fornec)}" update=":fornecForm" icon="ui-icon-pencil"/>
+							<p:menuitem  value="Excluir" onclick="return confirm('Confirma a exclusão do fornecedor #{fornec.nome}?')" action="#{fornecedorBean.remover(fun)}" icon="ui-icon-trash" />
+						</p:menuButton>
 						</p:column>
 
 					</p:dataTable>

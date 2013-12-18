@@ -731,7 +731,7 @@ public class NegocioComum {
 		 * **********************************
 		 */
 		public void inserirPagamento(Pagamento pagamento)throws Exception{
-			try {
+			try {	
 				daoPagamento.inserir(pagamento);
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());
