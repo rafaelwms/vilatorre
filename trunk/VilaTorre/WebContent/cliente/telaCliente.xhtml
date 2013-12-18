@@ -90,10 +90,11 @@
 						</p:column>
 
 										
-						<p:column headerText="Ações">
-							<p:commandButton  title="Editar" actionListener="#{clienteBean.editar(cli)}" update=":clienteForm" icon="ui-icon-pencil"/>
-					&nbsp;&nbsp;
-					<p:commandButton title="Excluir" onclick="return confirm('Confirma a exclusão do cliente #{cli.nome}?')" action="#{clienteBean.remover(cli)}" icon="ui-icon-trash" />
+						<p:column headerText="Ações" style="width: 30px;">
+						<p:menuButton value="Selecione">
+							<p:menuitem  value="Editar" actionListener="#{clienteBean.editar(cli)}" update=":clienteForm" icon="ui-icon-pencil"/>
+							<p:menuitem  value="Excluir" onclick="return confirm('Confirma a exclusão do cliente #{cli.nome}?')" action="#{clienteBean.remover(cli)}" icon="ui-icon-trash" />
+						</p:menuButton>
 						</p:column>
 
 					</p:dataTable>

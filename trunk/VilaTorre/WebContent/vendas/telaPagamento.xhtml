@@ -11,12 +11,33 @@
 
 			<h:form id="formPagamento">
 			<p:growl life="3000"/>
-			<p:panel header="Lista dos Pedidos Abertos" toggleable="true">
+			
+			
+			
+			<p:panel header="Detalhes do Pagamento" id="infoPagamento">
+				<h:panelGrid columns="4">
 
+      			 <h:outputText value="Forma de Pagamento:" for="formapgto"/>
+      			 <p:selectOneMenu id="formapgto" value="#{pagamentoBean.forma}">
+      			 <f:selectItems value="#{pagamentoBean.formas}"/>
+      			 </p:selectOneMenu>
+      			 
+      			 <h:outputText value="Bandeira:" for="band"/>
+      			 <p:selectOneMenu id="band" value="#{pagamentoBean.bandeira}">
+      			 <f:selectItems value="#{pagamentoBean.bandeiras}"/>
+      			 </p:selectOneMenu>
+      			 
+      			 <h:outputText value="Desconto R$:" for="desc"/>
+      			 <p:inputText  value="#{pagamentoBean.desconto}" onkeypress="mascara(this, moeda)"/>  
+			
+				</h:panelGrid>
+			</p:panel>
+			
+					<p:panel header="Lista dos Pedidos Abertos" toggleable="true">
 					<p:dataTable id="aPagar" var="ped" value="#{pagamentoBean.pedidosAbertos}"
 						emptyMessage="Nenhum produto cadastrado.">
 						
-						<h:inputHidden value="#{ped.id}"/>
+						<h:inputHidden value="#{ped.id_pedido}"/>
 						<p:column headerText="Abertura do pedido">
 							<h:outputText value="#{ped.abertura_pedido}" />
 						</p:column>
@@ -30,37 +51,12 @@
 						</p:column>
 						
 						<p:column headerText="Ações">
-							<p:commandButton  title="Adicionar Item ao Pedido" actionListener="#{pagamentoBean.pagar(ped)}" update=":formPagamento:aPagar" immediate="true" icon="ui-icon-pencil"/>
+							<p:commandButton  title="Adicionar Item ao Pedido" action="#{pagamentoBean.pagar(ped)}" update=":formPagamento" icon="ui-icon-pencil"/>
 					&nbsp;&nbsp;
 					<p:commandButton title="Detalhar Pedido"  actionListener="#" update=":formPagamento" icon="ui-icon-trash" />
 						</p:column>
   						</p:dataTable>
-					</p:panel>
-			
-			
-			
-				<p:panel header="Detalhes do Pagamento" id="info">
-				<h:panelGrid columns="4">
-
-      			 <h:outputText value="Forma de Pagamento:" for="formapgto"/>
-      			 <p:selectOneMenu id="formapgto" value="#{pagamentoBean.forma}">
-      			 <f:selectItem noSelectionOption="true" itemLabel="Selecione..."/>
-      			 <f:selectItems value="#{pagamentoBean.formas}"/>
-      			 </p:selectOneMenu>
-      			 
-      			 <h:outputText value="Bandeira:" for="band"/>
-      			 <p:selectOneMenu id="band" value="#{pagamentoBean.bandeira}">
-      			 <f:selectItem noSelectionOption="true" itemLabel="Selecione..."/>
-      			 <f:selectItems value="#{pagamentoBean.bandeiras}"/>
-      			 </p:selectOneMenu>
-      			 
-      			 <h:outputText value="Desconto R$:" for="desc"/>
-      			 <p:inputText  value="#{pagamentoBean.desconto}" onkeypress="mascara(this, moeda)"/>  
-			
-				</h:panelGrid>
-			</p:panel>
-			
-			
+					</p:panel>		
 			
 						
 			<p:panel header="Lista dos Pedidos Fechados" toggleable="true">

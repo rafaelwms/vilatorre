@@ -46,20 +46,14 @@ public class PagamentoBean {
 		pagamento.setId(null);
 		pagamento.setForma_pagamento(forma);
 		pagamento.setBandeira(bandeira);
+		if(!desconto.trim().equals("")){
 		desconto = desconto.replace(".", "");
-		desconto = desconto.replace("", ".");
+		desconto = desconto.replace(",", ".");
 		pagamento.setDesconto(Double.parseDouble(desconto));
-		pagamento.setValor_pago(pedido.getValor_total() - pagamento.getDesconto());
-		Fachada.getInstancia().alterarPedido(pedido);
-		for(ItemPedido it : pedido.getLista_itens()){
-			for(Ingrediente ing : it.getProduto().getIngredientes()){
-				Estoque est = Fachada.getInstancia().localizarEstoqueMateria(ing.getMateriaPrima());
-				est.setQuantidade(est.getQuantidade() - (ing.getQuantidade() * it.getQtd()));
-				Fachada.getInstancia().alterarEstoque(est);
-			}
+		}else{
+			pagamento.setDesconto(0);
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Pedido finalizado com êxito."));
-		pagamento.setPedido(pedido);
+
 		Fachada.getInstancia().inserirPagamento(pagamento);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Pagamento efetuado com êxito."));
 		pedido = new Pedido();

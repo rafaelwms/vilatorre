@@ -31,8 +31,13 @@ public class Pedido{
 	private int num_mesa;
 	
 	@ManyToOne
-	@JoinColumn(name="cliente_id", referencedColumnName="id_cliente")
+	@JoinColumn(name="cliente_id", referencedColumnName="id_cliente", nullable=true)
 	private Cliente cliente;
+	
+	
+	@OneToMany
+	@JoinTable(name="pedido_pagamento")
+	private List<Pagamento> pagamentos;
 	
 	public enum TipoPedido{Selecione, DeliveryFone, DeliverySite, Mesa, Viagem}
 	
@@ -111,6 +116,14 @@ public class Pedido{
 
 	public void setId_pedido(Integer id_pedido) {
 		this.id_pedido = id_pedido;
+	}
+
+	public List<Pagamento> getPagamentos() {
+		return pagamentos;
+	}
+
+	public void setPagamentos(List<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
 	}
 	
 
