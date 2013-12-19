@@ -56,7 +56,7 @@
 						
 						
 						<p:column headerText="ID">
-							<h:outputText value="#{ped.id_pedido}" />
+							<p:commandButton title="Clique para detalhar" id="idi" value="#{ped.id_pedido}" type="button" />
 						</p:column>
 						
 						<p:column headerText="Abertura do pedido">
@@ -71,46 +71,49 @@
 							<h:outputText value="#{ped.valor_total}" />
 						</p:column>
 						
-						<p:column headerText="Ações">
-							<p:commandButton  title="Adicionar Item ao Pedido" actionListener="#{pedidoLocalBean.addItem(ped)}" update=":formPedidoLocal" immediate="true" icon="ui-icon-pencil"/>
-					&nbsp;&nbsp;
-					<p:commandButton title="Detalhar Pedido"  actionListener="#{pedidoLocalBean.listarItems(ped)}" update=":formPedidoLocal:itemsPedidoTable" icon="ui-icon-trash" />
+						<p:column headerText="Ações" style="width:30px;">
+							<p:commandButton  value="Listar" type="button"  actionListener="#{pedidoLocalBean.listarItems(ped)}" immediate="true"/>
+						
+							<p:overlayPanel  for="idi" showEffect="fade" hideEffect="fade">
+								<p:panel header="Pagamento">
+								<h:panelGrid columns="2">
+										
+									<h:outputText value="Condição de pagamento."/>
+									<p:selectOneRadio value="#{pedidoLocalBean.condicao}">
+										<f:selectItem itemLabel="Parcial" itemValue="0"/>
+										<f:selectItem itemLabel="Final" itemValue="1"/>
+									</p:selectOneRadio>		
+										
+      								 <h:outputText value="Forma de Pagamento:" for="formapgto"/>
+      								 <p:selectOneMenu id="formapgto" value="#{pedidoLocalBean.forma}">
+      								 <f:selectItems value="#{pedidoLocalBean.formas}"/>
+      								 </p:selectOneMenu>
+      			 
+      								 <h:outputText value="Bandeira:" for="band"/>
+      								 <p:selectOneMenu id="band" value="#{pedidoLocalBean.bandeira}">
+      								 <f:selectItems value="#{pedidoLocalBean.bandeiras}"/>
+      								 </p:selectOneMenu>
+      			 
+      								 <h:outputText value="Desconto R$:" for="desc"/>
+      								 <p:inputText id="desc" value="#{pedidoLocalBean.desconto}" onkeypress="mascara(this, moeda)"/>  
+										
+									<p:commandButton value="Confirmar"  action="#{pedidoLocalBean.pagar(ped)}" type="button" icon="ui-icon-check"/>
+								</h:panelGrid>		
+								</p:panel>
+							</p:overlayPanel>
+							
+							
+						
 						</p:column>
 
 					</p:dataTable>
-					</p:panel>
 					
-					<p:panel header="Lista dos Items Pedidos Abertos" toggleable="true">
-				
-
-					<p:dataTable id="itemsPedidoTable" var="it" value="#{pedidoLocalBean.itemsPedido}"
-						emptyMessage="Nenhuma Solicitação.">
 						
-						<h:inputHidden value="#{it.id}"/>
-						<p:column headerText="Produto">
-							<h:outputText value="#{it.produto.nome}" />
-						</p:column>
-
-						<p:column  headerText="Valor R$">
-							<h:outputText value="#{it.produto.preco}" />
-						</p:column>
-						
-						<p:column  headerText="Quantidade">
-							<h:outputText value="#{it.qtd}" />
-						</p:column>
-						
-						<p:column  headerText="Total R$">
-							<h:outputText value="#{it.totalItem}" />
-						</p:column>
-						
-						<p:column headerText="Ações">
-							<p:commandButton  title="Adicionar Item ao Pedido" actionListener="#" update=":formPedidoLocal" immediate="true" icon="ui-icon-pencil"/>
-					&nbsp;&nbsp;
-					<p:commandButton title="Detalhar Pedido"  actionListener="#"  icon="ui-icon-trash" />
-						</p:column>
-
-					</p:dataTable>
+					
+					
 					</p:panel>
+				
+					
 
 				</h:form>
 
