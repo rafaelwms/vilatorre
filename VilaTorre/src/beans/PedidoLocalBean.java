@@ -12,6 +12,8 @@ import javax.faces.context.FacesContext;
 import fachadas.Fachada;
 
 import basicas.*;
+import basicas.Pagamento.Bandeira;
+import basicas.Pagamento.FormaPagamento;
 import basicas.Pedido.TipoPedido;
 
 @ManagedBean
@@ -20,6 +22,18 @@ public class PedidoLocalBean {
 	private Pedido pedido = new Pedido();
 	
 	private Pagamento pagamento = new Pagamento();
+	
+	private int condicao;
+	
+	private FormaPagamento forma;
+	
+	private FormaPagamento[] formas;
+	
+	private Bandeira bandeira;
+	
+	private Bandeira[] bandeiras;
+	
+	private String desconto = new String();
 	
 	private List<Pedido> todosPedidos = new ArrayList<Pedido>();
 	
@@ -120,17 +134,70 @@ public class PedidoLocalBean {
 	
 	
 	public String listarItems(Pedido param){
-		itemsPedido = new ArrayList<ItemPedido>();
+	
 		
 		try {
-			itemsPedido = Fachada.getInstancia().listarItemsDoPedido(param);
+			
+			pedido = param;
+			
+			itemsPedido = pedido.getLista_itens();
+			System.out.println(itemsPedido);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Era pra pegar essa buceta."));
+			return null;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
 			e.printStackTrace();
+			return null;
 		}
-		return null;
+		
 	}
 	
+	
+	public String pagar(Pedido param){
+		try{
+			
+			if(forma == FormaPagamento.Selecione){
+				throw new Exception("É necessário selecionar uma forma de pagamento.");
+			}
+			
+			if((forma == FormaPagamento.CRÉDITO)  && (bandeira == Bandeira.Selecione)){
+				throw new Exception("Para pagamento em crédito é necessário escolher uma bandeira.");
+			}
+			
+			if((forma == FormaPagamento.DÉBITO)  && (bandeira == Bandeira.Selecione)){
+				throw new Exception("Para pagamento em débito é necessário escolher uma bandeira.");
+			}
+			
+			if(!desconto.trim().equals("")){
+				desconto = desconto.replace(".", "");
+				desconto = desconto.replace(",", ".");
+				pagamento.setDesconto(Double.parseDouble(desconto));				
+			}
+				pagamento.setId(null);
+				pagamento.setForma_pagamento(forma);
+				
+			if(forma == FormaPagamento.DÉBITO || forma == FormaPagamento.CRÉDITO){
+					pagamento.setBandeira(bandeira);
+			}else{
+					pagamento.setBandeira(null);
+			}
+				
+				param.getPagamentos().add(pagamento);
+				
+				Fachada.getInstancia().alterarPedido(param);
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Pagamento efetuado com êxito."));
+			if(condicao == 1){
+				param.setFechamento_pedido(new Date());
+				param.setStatus_aberto(false);
+			}
+
+
+			return null;
+		}catch(Exception ex){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
+			return null;
+		}
+	}
 	
 	
 
@@ -256,6 +323,56 @@ public class PedidoLocalBean {
 
 	public void setPagamento(Pagamento pagamento) {
 		this.pagamento = pagamento;
+	}
+
+
+	public FormaPagamento getForma() {
+		return forma;
+	}
+
+
+	public void setForma(FormaPagamento forma) {
+		this.forma = forma;
+	}
+
+
+	public Bandeira getBandeira() {
+		return bandeira;
+	}
+
+
+	public void setBandeira(Bandeira bandeira) {
+		this.bandeira = bandeira;
+	}
+
+
+	public String getDesconto() {
+		return desconto;
+	}
+
+
+	public void setDesconto(String desconto) {
+		this.desconto = desconto;
+	}
+
+
+	public FormaPagamento[] getFormas() {
+		return FormaPagamento.values();
+	}
+
+
+	public Bandeira[] getBandeiras() {
+		return Bandeira.values();
+	}
+
+
+	public int getCondicao() {
+		return condicao;
+	}
+
+
+	public void setCondicao(int condicao) {
+		this.condicao = condicao;
 	}
 	
 
