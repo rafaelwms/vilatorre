@@ -35,6 +35,10 @@ public class LoginBean {
 		 logado = Fachada.getInstancia().logarPessoa(login, senha);
 		 FacesContext.getCurrentInstance().addMessage("loginTry", new FacesMessage("Bem vindo "+logado.getNome()+"."));
 		 
+		 if(logado == null){
+			 throw new Exception("Login ou senha inválidos.");
+		 }
+		 
 		 if(logado.getUsuario().getTipoUser() == TipoUser.ADMINISTRADOR)
 			 retorno = "template/adminTemplate.xhtml?faces-redirect=true";
 		 
