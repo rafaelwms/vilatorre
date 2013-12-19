@@ -56,7 +56,8 @@
 						
 						
 						<p:column headerText="ID">
-							<p:commandButton title="Clique para detalhar" id="idi" value="#{ped.id_pedido}" type="button" />
+					
+							<p:commandButton value="#{ped.id_pedido}"  id="idi" type="button" />
 						</p:column>
 						
 						<p:column headerText="Abertura do pedido">
@@ -72,9 +73,13 @@
 						</p:column>
 						
 						<p:column headerText="Ações" style="width:30px;">
-							<p:commandButton  value="Listar" type="button"  actionListener="#{pedidoLocalBean.listarItems(ped)}" immediate="true"/>
+							<p:menuButton value="Selecione">
+							<p:menuitem  value="Listar" actionListener="#{pedidoLocalBean.listarItems(ped)}" immediate="true"/>
+							<p:menuitem value="Add Item" action="#{pedidoLocalBean.addItem(ped)}"/>
+							</p:menuButton>
 						
-							<p:overlayPanel  for="idi" showEffect="fade" hideEffect="fade">
+						
+						<p:overlayPanel id="pgto" for="idi" showEffect="fade" hideEffect="fade" dynamic="true">
 								<p:panel header="Pagamento">
 								<h:panelGrid columns="2">
 										
@@ -98,19 +103,14 @@
       								 <p:inputText id="desc" value="#{pedidoLocalBean.desconto}" onkeypress="mascara(this, moeda)"/>  
 										
 									<p:commandButton value="Confirmar"  action="#{pedidoLocalBean.pagar(ped)}" type="button" icon="ui-icon-check"/>
-								</h:panelGrid>		
+								</h:panelGrid>	
+								<h:inputHidden value="#{ped}"/>	
 								</p:panel>
 							</p:overlayPanel>
-							
-							
 						
 						</p:column>
-
-					</p:dataTable>
-					
 						
-					
-					
+					</p:dataTable>
 					</p:panel>
 				
 					
