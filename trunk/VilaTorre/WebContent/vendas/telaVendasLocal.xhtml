@@ -5,7 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	<ui:define name="titulo">Sistema de Gerenciamento de Músicas - Home</ui:define>
+	<ui:define name="titulo">.: Gerenciar Pedidos :.</ui:define>
 	<ui:define name="principal">
 
 	
@@ -14,11 +14,12 @@
 
 			<h:form id="formPedidoLocal">
 			<p:growl life="3000"/>
+
 			<p:panel header=".: PEDIDOS :. " id="info">
 				<h:panelGrid columns="2">
 				
 				<h:outputText value="Produto:" for="produtos"/>
-				<p:selectOneMenu id="produtos" value="#{pedidoLocalBean.produto}" converter="produtoConverter"  filter="true" filterMatchMode="startsWith">  
+					 <p:selectOneMenu id="produtos" value="#{pedidoLocalBean.produto}" converter="produtoConverter"  filter="true" filterMatchMode="startsWith">  
         			    <f:selectItem  noSelectionOption="true" itemLabel="Selecione um produto."  />  
            				<f:selectItems value="#{pedidoLocalBean.produtos}" var="prod" itemLabel="#{prod.nome} &nbsp;&nbsp; #{prod.preco} " />  
       			     </p:selectOneMenu>
@@ -33,6 +34,10 @@
            				<f:selectItems value="#{pedidoLocalBean.tipos}"/>  
       			     </p:selectOneMenu>
       			 
+      			 <h:outputText value="Cliente:" for="clientes"/>
+      			 <p:selectOneMenu id="clientes" value="#{pedidoLocalBean.cliente}" converter="cliConverter"  filter="true" filterMatchMode="startsWith" style="width: 300px;">
+      			 	<f:selectItems value="#{pedidoLocalBean.clientes}" var="cli" itemLabel="#{cli.nome}&nbsp;-&nbsp;#{cli.fone}"/>
+      			 </p:selectOneMenu>
       			 
       			     
 				<h:outputText value="Mesa:" for="mesa"/>
@@ -56,8 +61,7 @@
 						
 						
 						<p:column headerText="ID">
-					
-							<p:commandButton value="#{ped.id_pedido}"  id="idi" type="button" />
+							<h:outputText value="#{ped.id_pedido}" />
 						</p:column>
 						
 						<p:column headerText="Abertura do pedido">
@@ -72,47 +76,49 @@
 							<h:outputText value="#{ped.valor_total}" />
 						</p:column>
 						
-						<p:column headerText="Ações" style="width:30px;">
-							<p:menuButton value="Selecione">
-							<p:menuitem  value="Listar" actionListener="#{pedidoLocalBean.listarItems(ped)}" immediate="true"/>
-							<p:menuitem value="Add Item" action="#{pedidoLocalBean.addItem(ped)}"/>
-							</p:menuButton>
-						
-						
-						<p:overlayPanel id="pgto" for="idi" showEffect="fade" hideEffect="fade" dynamic="true">
-								<p:panel header="Pagamento">
-								<h:panelGrid columns="2">
-										
-									<h:outputText value="Condição de pagamento."/>
-									<p:selectOneRadio value="#{pedidoLocalBean.condicao}">
-										<f:selectItem itemLabel="Parcial" itemValue="0"/>
-										<f:selectItem itemLabel="Final" itemValue="1"/>
-									</p:selectOneRadio>		
-										
-      								 <h:outputText value="Forma de Pagamento:" for="formapgto"/>
-      								 <p:selectOneMenu id="formapgto" value="#{pedidoLocalBean.forma}">
-      								 <f:selectItems value="#{pedidoLocalBean.formas}"/>
-      								 </p:selectOneMenu>
-      			 
-      								 <h:outputText value="Bandeira:" for="band"/>
-      								 <p:selectOneMenu id="band" value="#{pedidoLocalBean.bandeira}">
-      								 <f:selectItems value="#{pedidoLocalBean.bandeiras}"/>
-      								 </p:selectOneMenu>
-      			 
-      								 <h:outputText value="Desconto R$:" for="desc"/>
-      								 <p:inputText id="desc" value="#{pedidoLocalBean.desconto}" onkeypress="mascara(this, moeda)"/>  
-										
-									<p:commandButton value="Confirmar"  action="#{pedidoLocalBean.pagar(ped)}" type="button" icon="ui-icon-check"/>
-								</h:panelGrid>	
-								<h:inputHidden value="#{ped}"/>	
-								</p:panel>
-							</p:overlayPanel>
-						
+						<p:column headerText="Add Item" style="width:30px;">
+							<p:commandButton value="+" action="#{pedidoLocalBean.addItem(ped)}"  immediate="true" update=":formPedidoLocal:pedidoTable" />
 						</p:column>
+						
+						<p:column headerText="Lista" style="width:30px;">
+							<p:commandButton  value="Listar" id="lst" actionListener="#{pedidoLocalBean.listarItems(ped)}" update=":formPedidoLocal:listaItems" immediate="true"/>
+						</p:column>
+						
+		
 						
 					</p:dataTable>
 					</p:panel>
+					<p:panel header="Detalhamento do pedido" >
+						<p:dataTable id="listaItems" value="#{pedidoLocalBean.itemsPedido}" var="it">
+							
+							<p:column headerText="Pedido">
+								<h:outputText value="#{pedidoLocalBean.pedido.id_pedido}" />
+							</p:column>
+							
+							<p:column headerText="Ordem">
+								<h:outputText value="#{it.numOrdem}" />
+							</p:column>
+						
+							<p:column headerText="Produto">
+								<h:outputText value="#{it.produto.nome}" />
+							</p:column>
+							
+							<p:column headerText="Preço R$">
+								<h:outputText value="#{it.produto.preco}" />
+							</p:column>
+							
+							<p:column headerText="Qtd">
+								<h:outputText value="#{it.qtd}" />
+							</p:column>
+							
+							<p:column headerText="Total R$">
+								<h:outputText value="#{it.totalItem}" />
+							</p:column>
+							
+						</p:dataTable>
+					</p:panel>
 				
+
 					
 
 				</h:form>

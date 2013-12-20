@@ -14,24 +14,34 @@
 			
 			
 			
-			<p:panel header="Detalhes do Pagamento" id="infoPagamento">
-				<h:panelGrid columns="4">
+<p:panel header="Pagamento">
 
-      			 <h:outputText value="Forma de Pagamento:" for="formapgto"/>
-      			 <p:selectOneMenu id="formapgto" value="#{pagamentoBean.forma}">
-      			 <f:selectItems value="#{pagamentoBean.formas}"/>
-      			 </p:selectOneMenu>
+	<h:panelGrid columns="2">
+	<h:panelGrid columns="2">
+		<h:outputText value="Condição:"/>
+		<p:selectOneRadio value="#{pedidoLocalBean.condicao}">
+			<f:selectItem itemLabel="Final" itemValue="0"/>
+			<f:selectItem itemLabel="Parcial" itemValue="1"/>	
+		</p:selectOneRadio>
+	
+    	<h:outputText value="Desconto R$:" for="desc"/>
+      	<p:inputText id="desc" value="#{pedidoLocalBean.desconto}" onkeypress="mascara(this, moeda)"/>  		
+	</h:panelGrid>
+	<h:panelGrid columns="2">
+        <h:outputText value="Forma de Pagamento:" for="formapgto"/>
+        <p:selectOneMenu id="formapgto" value="#{pedidoLocalBean.forma}">
+      		<f:selectItems value="#{pedidoLocalBean.formas}"/>
+      	</p:selectOneMenu>
       			 
-      			 <h:outputText value="Bandeira:" for="band"/>
-      			 <p:selectOneMenu id="band" value="#{pagamentoBean.bandeira}">
-      			 <f:selectItems value="#{pagamentoBean.bandeiras}"/>
-      			 </p:selectOneMenu>
-      			 
-      			 <h:outputText value="Desconto R$:" for="desc"/>
-      			 <p:inputText  value="#{pagamentoBean.desconto}" onkeypress="mascara(this, moeda)"/>  
-			
-				</h:panelGrid>
-			</p:panel>
+        <h:outputText value="Bandeira:" for="band"/>
+      	<p:selectOneMenu id="band" value="#{pedidoLocalBean.bandeira}">
+      		<f:selectItems value="#{pedidoLocalBean.bandeiras}"/>
+      	</p:selectOneMenu>
+     </h:panelGrid> 	
+	</h:panelGrid>	
+
+	
+</p:panel>
 			
 					<p:panel header="Lista dos Pedidos Abertos" toggleable="true">
 					<p:dataTable id="aPagar" var="ped" value="#{pagamentoBean.pedidosAbertos}"
@@ -50,23 +60,22 @@
 							<h:outputText value="#{ped.valor_total}" />
 						</p:column>
 						
-						<p:column headerText="Ações">
-							<p:commandButton  title="Adicionar Item ao Pedido" action="#{pagamentoBean.pagar(ped)}" update=":formPagamento" icon="ui-icon-pencil"/>
-					&nbsp;&nbsp;
-					<p:commandButton title="Detalhar Pedido"  actionListener="#" update=":formPagamento" icon="ui-icon-trash" />
+						<p:column headerText="Pagar">
+							<p:commandButton  value="$" title="Clique para pagar de acordo com os dados acima." action="#{pedidoLocalBean.pagar(ped)}" update=":formPagamento" />
+
 						</p:column>
   						</p:dataTable>
 					</p:panel>		
 			
 						
-			<p:panel header="Lista dos Pedidos Fechados" toggleable="true">
+			<p:panel header="Lista dos Pagamentos Efetuados" toggleable="true">
 
 					<p:dataTable id="pagos" var="pag" value="#{pagamentoBean.pagamentos}"
 						emptyMessage="Nenhum pagamento efetuado.">
 						
 						<h:inputHidden value="#{pag.id}"/>
-						<p:column headerText="Abertura">
-							<h:outputText value="#{pag.pedido.abertura}" />
+						<p:column headerText="Pedido ID">
+							<h:outputText value="#{pag.pedido.id_pedido}" />
 						</p:column>
 
     					<p:column  headerText="Forma Pgto">
@@ -78,7 +87,7 @@
 						</p:column>
 						
 						<p:column  headerText="Fechamento">
-							<h:outputText value="#{pag.pedido.fechamento}" />
+							<h:outputText value="#{pag.pedido.fechamento_pedido}" />
 						</p:column>
 					</p:dataTable>
 					</p:panel>

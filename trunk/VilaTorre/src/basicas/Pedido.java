@@ -35,11 +35,7 @@ public class Pedido{
 	private Cliente cliente;
 	
 	
-	@OneToMany
-	@JoinTable(name="pedido_pagamento")
-	private List<Pagamento> pagamentos;
-	
-	public enum TipoPedido{Selecione, DeliveryFone, DeliverySite, Mesa, Viagem}
+	public enum TipoPedido{Selecione, Delivery, Mesa, Viagem}
 	
 	
 	private double valor_total;
@@ -118,13 +114,7 @@ public class Pedido{
 		this.id_pedido = id_pedido;
 	}
 
-	public List<Pagamento> getPagamentos() {
-		return pagamentos;
-	}
 
-	public void setPagamentos(List<Pagamento> pagamentos) {
-		this.pagamentos = pagamentos;
-	}
 	
 
 

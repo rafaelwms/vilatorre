@@ -29,6 +29,10 @@ public class PedidoLocalBean {
 	
 	private FormaPagamento[] formas;
 	
+	private Cliente cliente = new Cliente();
+	
+	private List<Cliente> clientes = new ArrayList<Cliente>();
+	
 	private Bandeira bandeira;
 	
 	private Bandeira[] bandeiras;
@@ -65,6 +69,17 @@ public class PedidoLocalBean {
 			if (tipoPedido == TipoPedido.Selecione){
 				throw new Exception("É necessário selecionar o tipo de pedido.");
 			}
+			
+			if(tipoPedido == TipoPedido.Delivery){
+				if(cliente == null){
+					throw new Exception("É necessário selecionar um cliente para o Delivery.");
+				}
+			}
+			
+			if(qtd < 1){
+				throw new Exception("Quantidade inválida.");
+			}
+			
 			pedido.setTipo_pedido(tipoPedido);
 			
 			pedido.setId_pedido(null);
@@ -83,12 +98,22 @@ public class PedidoLocalBean {
 			produto = new Produto();
 			pedido = new Pedido();
 			item = new ItemPedido();
+			tipoPedido = TipoPedido.Selecione;
+			cliente = new Cliente();
 			itemsPedido = new ArrayList<ItemPedido>();
 			mesa = 0;
 			qtd = 0;
 			return null;
 		}catch(Exception ex){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
+			produto = new Produto();
+			pedido = new Pedido();
+			item = new ItemPedido();
+			tipoPedido = TipoPedido.Selecione;
+			cliente = new Cliente();
+			itemsPedido = new ArrayList<ItemPedido>();
+			mesa = 0;
+			qtd = 0;
 			return null;	
 		}
 	}
@@ -107,6 +132,8 @@ public class PedidoLocalBean {
 		item.setTotalItem(item.getProduto().getPreco() * item.getQtd());
 		itemsPedido.add(item);
 		
+		
+		para1.setLista_itens(null);
 		
 		para1.setLista_itens(itemsPedido);
 		
@@ -140,7 +167,8 @@ public class PedidoLocalBean {
 			
 			pedido = param;
 			
-			itemsPedido = pedido.getLista_itens();
+			itemsPedido = param.getLista_itens();
+			
 			System.out.println(itemsPedido);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Era pra pegar essa buceta."));
 			return null;
@@ -172,29 +200,47 @@ public class PedidoLocalBean {
 				desconto = desconto.replace(".", "");
 				desconto = desconto.replace(",", ".");
 				pagamento.setDesconto(Double.parseDouble(desconto));				
+			}else{
+				pagamento.setDesconto(0);
 			}
 				pagamento.setId(null);
 				pagamento.setForma_pagamento(forma);
+				pagamento.setValor_pago(param.getValor_total() - pagamento.getDesconto());
 				
 			if(forma == FormaPagamento.DÉBITO || forma == FormaPagamento.CRÉDITO){
 					pagamento.setBandeira(bandeira);
 			}else{
 					pagamento.setBandeira(null);
 			}
+				pagamento.setHora_pagamento(new Date());
+				pagamento.setPedido(param);
 				
-				param.getPagamentos().add(pagamento);
-				
-				Fachada.getInstancia().alterarPedido(param);
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Pagamento efetuado com êxito."));
-			if(condicao == 1){
+			if(condicao == 0){			
 				param.setFechamento_pedido(new Date());
 				param.setStatus_aberto(false);
+				pagamento.setValor_pago(param.getValor_total());
+				Fachada.getInstancia().alterarPedido(param);
+				Fachada.getInstancia().inserirPagamento(pagamento);
+			}else{
+				param.setValor_total(param.getValor_total() - Double.parseDouble(desconto));
+				pagamento.setValor_pago(param.getValor_total());
+				Fachada.getInstancia().alterarPedido(param);
+				Fachada.getInstancia().inserirPagamento(pagamento);
 			}
-
+				
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Pagamento efetuado com êxito."));
+				forma = FormaPagamento.Selecione;
+				bandeira = Bandeira.Selecione;
+				condicao = 0;
+				desconto = "";
 
 			return null;
 		}catch(Exception ex){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
+			forma = FormaPagamento.Selecione;
+			bandeira = Bandeira.Selecione;
+			condicao = 0;
+			desconto = "";
 			return null;
 		}
 	}
@@ -373,6 +419,32 @@ public class PedidoLocalBean {
 
 	public void setCondicao(int condicao) {
 		this.condicao = condicao;
+	}
+
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+	public List<Cliente> getClientes() {
+		try {
+			return Fachada.getInstancia().consultarTodosCliente();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
 	}
 	
 

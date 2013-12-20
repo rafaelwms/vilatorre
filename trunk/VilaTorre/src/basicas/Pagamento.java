@@ -13,6 +13,10 @@ public class Pagamento{
 	private Integer id;
 	
 	
+	@ManyToOne
+	@JoinColumn(name="pedido", referencedColumnName="id_pedido")
+	private Pedido pedido;
+	
 	@Column(nullable=false)
 	@Enumerated(EnumType.STRING)
 	private FormaPagamento forma_pagamento;
@@ -104,6 +108,14 @@ public class Pagamento{
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 }

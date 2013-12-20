@@ -23,8 +23,8 @@
 			</p:submenu>
 			
 			<p:submenu label="Vendas">
-				<p:menuitem value="Local" url="/vendas/telaVendasLocal.xhtml?faces-redirect=true"/>
-				<p:menuitem value="Pagamento" url="/vendas/telaPagamento.xhtml?faces-redirect=true"/>
+				<p:menuitem value="Gerar Pedidos" url="/vendas/telaVendasLocal.xhtml?faces-redirect=true"/>
+				<p:menuitem value="Efetuar Pagamento" url="/vendas/telaPagamento.xhtml?faces-redirect=true"/>
 			</p:submenu>
 			<p:submenu label="Administrativo">
 				<p:menuitem value="Funcionário" url="/funcionario/telaFuncionario.xhtml?faces-redirect=true"/>
@@ -32,12 +32,12 @@
 				<p:menuitem value="Cargo" url="/gerencia/telaCargo.xhtml?faces-redirect=true"/>
 			</p:submenu>
 			
-			<f:facet name="options">
+			
 				<p:submenu rendered="#{not empty loginBean.logado}" label="Usuário logado: #{loginBean.logado.usuario.login}">
-					&nbsp;
-				<p:menuitem action="#{loginBean.efetuarLogoff}" immediate="true" rendered="#{not empty loginBean.logado}" value="Logout" icon="ui-icon-extlink" />
+				
+				<p:menuitem action="#{loginBean.efetuarLogoff}" immediate="true" rendered="#{not empty loginBean.logado}" value="Sair" />
 				</p:submenu>
-			</f:facet>
+			
 		</p:menu>
 	</h:form>
 
