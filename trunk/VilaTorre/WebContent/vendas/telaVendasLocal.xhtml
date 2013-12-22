@@ -77,7 +77,7 @@
 						</p:column>
 						
 						<p:column headerText="Add Item" style="width:30px;">
-							<p:commandButton value="+" action="#{pedidoLocalBean.addItem(ped)}" immediate="true" update=":formPedidoLocal:pedidoTable" />
+							<p:commandButton value="+" action="#{pedidoLocalBean.addItem(ped)}" update=":formPedidoLocal" />
 						</p:column>
 						
 						<p:column headerText="Lista" style="width:30px;">
@@ -91,7 +91,10 @@
 					<p:panel header="Detalhamento do pedido" >
 						<p:dataTable id="listaItems" value="#{pedidoLocalBean.itemsPedido}" var="it">
 							
+							
+							
 							<p:column headerText="Pedido">
+								<h:inputHidden value="#{it.id_item}" />
 								<h:outputText value="#{pedidoLocalBean.pedido.id_pedido}" />
 							</p:column>
 							
@@ -113,6 +116,10 @@
 							
 							<p:column headerText="Total R$">
 								<h:outputText value="#{it.totalItem}" />
+							</p:column>
+							
+							<p:column headerText="Remover" style="width:30px;">
+								<p:commandButton value="-" onclick="return confirm('Confirma a exclusão do Item que contém #{it.produto.nome}?')" action="#{pedidoLocalBean.delItem(it)}" update=":formPedidoLocal:listaItems" />
 							</p:column>
 							
 						</p:dataTable>
