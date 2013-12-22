@@ -10,8 +10,8 @@ public class ItemPedido{
 	@GeneratedValue
 	private Integer id_item;
 	
-	@ManyToOne
-	@JoinColumn(name="pedido", referencedColumnName="id_pedido")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="pedido", referencedColumnName="id_pedido", insertable=true, updatable=true)
 	private Pedido pedido;
 	
 	@Column
