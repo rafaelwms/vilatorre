@@ -72,10 +72,16 @@ public class MateriaPrimaBean {
 		}catch(Exception ex){
 			
 		}
-		
-		
 		return null;
 	}
+	
+	
+	public void sortByNome(){
+		
+
+		
+	}
+	
 	
 	public MateriaPrima getMateria() {
 		return materia;

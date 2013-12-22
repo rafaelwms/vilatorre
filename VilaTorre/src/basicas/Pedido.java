@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import com.sun.faces.mgbean.ManagedBeanPreProcessingException.Type;
+
 
 @Entity
 public class Pedido{
@@ -15,7 +17,7 @@ public class Pedido{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date abertura_pedido;
 	
-	@OneToMany(mappedBy="pedido")
+	@OneToMany(mappedBy="pedido", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<ItemPedido> lista_itens;
 	
 	@Column

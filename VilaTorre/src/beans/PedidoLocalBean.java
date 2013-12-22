@@ -123,26 +123,11 @@ public class PedidoLocalBean {
 		try{
 		item.setId_item(null);
 		item.setPedido(para1);
-		itemsPedido = new ArrayList<ItemPedido>();
-		itemsPedido = para1.getLista_itens();
-		
-		item.setNumOrdem(itemsPedido.size() + 1);
+		item.setNumOrdem(para1.getLista_itens().size() + 1);
 		item.setProduto(produto);	
 		item.setQtd(qtd);
 		item.setTotalItem(item.getProduto().getPreco() * item.getQtd());
-		itemsPedido.add(item);
-		
-		
-		para1.setLista_itens(null);
-		
-		para1.setLista_itens(itemsPedido);
-		
-		for (ItemPedido it : para1.getLista_itens()){
-			
-			para1.setValor_total(para1.getValor_total() + it.getProduto().getPreco());
-			
-		}
-		
+		para1.setValor_total(para1.getValor_total() + item.getTotalItem());
 		Fachada.getInstancia().adicionarItemPedido(para1, item);
 		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Item adicionado com êxito."));

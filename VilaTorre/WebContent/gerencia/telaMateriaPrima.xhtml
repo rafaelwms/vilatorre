@@ -46,10 +46,10 @@
 				
 
 					<p:dataTable id="cargoTable" var="mat" value="#{materiaPrimaBean.materias}"
-						emptyMessage="Nenhuma matéria prima cadastrado.">
+						emptyMessage="Nenhuma matéria prima cadastrado." rows="5" paginator="true"  >
 						
 						<h:inputHidden value="#{materiaPrimaBean.materia.id}"/>
-						<p:column headerText="Matéria Prima">
+						<p:column headerText="Matéria Prima" sortBy="nome" >
 							<h:outputText value="#{mat.nome}" />
 						</p:column>
 						
