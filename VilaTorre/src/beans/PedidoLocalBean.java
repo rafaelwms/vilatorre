@@ -127,7 +127,6 @@ public class PedidoLocalBean {
 		item.setProduto(produto);	
 		item.setQtd(qtd);
 		item.setTotalItem(item.getProduto().getPreco() * item.getQtd());
-		para1.setValor_total(para1.getValor_total() + item.getTotalItem());
 		Fachada.getInstancia().adicionarItemPedido(para1, item);
 		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Item adicionado com êxito."));
@@ -135,6 +134,7 @@ public class PedidoLocalBean {
 		pedido = new Pedido();
 		item = new ItemPedido();
 		itemsPedido = new ArrayList<ItemPedido>();
+		tipoPedido = TipoPedido.Selecione;
 		mesa = 0;
 		qtd = 0;
 		return null;
@@ -145,17 +145,44 @@ public class PedidoLocalBean {
 	}
 	
 	
+	public String delItem(ItemPedido para1){
+		try{
+	
+		item = para1;
+		
+		pedido = para1.getPedido();
+		
+		Fachada.getInstancia().removerItemPedido(pedido, para1);
+		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Item removido com êxito."));
+		produto = new Produto();
+		pedido = new Pedido();
+		item = new ItemPedido();
+		itemsPedido = new ArrayList<ItemPedido>();
+		tipoPedido = TipoPedido.Selecione;
+		mesa = 0;
+		qtd = 0;
+		return null;
+		}catch(Exception ex){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
+			return null;
+		}
+	}
+	
+	
+	
 	public String listarItems(Pedido param){
 	
 		
 		try {
 			
+			itemsPedido = new ArrayList<ItemPedido>();
+			
 			pedido = param;
 			
 			itemsPedido = param.getLista_itens();
 			
-			System.out.println(itemsPedido);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Era pra pegar essa buceta."));
+
 			return null;
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
