@@ -19,6 +19,9 @@ import basicas.Pedido.TipoPedido;
 @ManagedBean
 public class PedidoLocalBean {
 	
+	
+	private Pedido pedidoSelecionado = new Pedido();
+	
 	private Pedido pedido = new Pedido();
 	
 	private Pagamento pagamento = new Pagamento();
@@ -43,11 +46,15 @@ public class PedidoLocalBean {
 	
 	private List<Pedido> pedidosAbertos = new ArrayList<Pedido>();
 	
+	private List<Pedido> pedidosAbertos2 = new ArrayList<Pedido>();
+	
 	private Produto produto = new Produto();
 	
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
 	private ItemPedido item = new ItemPedido();
+	
+	private ItemPedido itemSelecionado = new ItemPedido();
 	
 	private List<ItemPedido> itemsPedido = new ArrayList<ItemPedido>();
 	
@@ -60,6 +67,14 @@ public class PedidoLocalBean {
 	private int mesa;
 	
 	public PedidoLocalBean(){}
+	
+	
+	public String selecionarPedido(Pedido paramm){
+		
+		pedidoSelecionado = paramm;
+		
+		return null;
+	}
 	
 	
 	public String abrirPedido(){
@@ -145,14 +160,11 @@ public class PedidoLocalBean {
 	}
 	
 	
-	public String delItem(ItemPedido para1){
+	public String delItem(){
 		try{
 	
-		item = para1;
 		
-		pedido = para1.getPedido();
-		
-		Fachada.getInstancia().removerItemPedido(pedido, para1);
+		Fachada.getInstancia().removerItemPedido(pedidoSelecionado, itemSelecionado);
 		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Item removido com êxito."));
 		produto = new Produto();
@@ -170,27 +182,24 @@ public class PedidoLocalBean {
 	}
 	
 	
-	
-	public String listarItems(Pedido param){
-	
+	public String cancelarPedido(Pedido param){
+		
 		
 		try {
-			
-			itemsPedido = new ArrayList<ItemPedido>();
-			
-			pedido = param;
-			
-			itemsPedido = param.getLista_itens();
-			
-
-			return null;
+			param.setCancelado(true);
+			param.setFechamento_pedido(new Date());
+			param.setStatus_aberto(false);
+			Fachada.getInstancia().alterarPedido(param);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Pedido Cancelado com êxito."));
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage()));
 			e.printStackTrace();
-			return null;
 		}
 		
+		
+		return null;
 	}
+
 	
 	
 	public String pagar(Pedido param){
@@ -457,6 +466,46 @@ public class PedidoLocalBean {
 
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
+	}
+
+
+	public Pedido getPedidoSelecionado() {
+		return pedidoSelecionado;
+	}
+
+
+	public void setPedidoSelecionado(Pedido pedidoSelecionado) {
+		this.pedidoSelecionado = pedidoSelecionado;
+	}
+
+
+	public List<Pedido> getPedidosAbertos2() {
+		pedidosAbertos2 = new ArrayList<Pedido>();
+		try{
+			for(Pedido check: Fachada.getInstancia().consultarTodosPedido()){
+				if(check.isStatus_aberto() == true){
+					pedidosAbertos2.add(check);
+				}
+			}
+			return pedidosAbertos2;
+		}catch(Exception ex){
+			return null;
+		}
+	}
+
+
+	public void setPedidosAbertos2(List<Pedido> pedidosAbertos2) {
+		this.pedidosAbertos2 = pedidosAbertos2;
+	}
+
+
+	public ItemPedido getItemSelecionado() {
+		return itemSelecionado;
+	}
+
+
+	public void setItemSelecionado(ItemPedido itemSelecionado) {
+		this.itemSelecionado = itemSelecionado;
 	}
 	
 
