@@ -23,6 +23,9 @@ public class Pedido{
 	@Column
 	private boolean status_aberto;
 	
+	@Column
+	private boolean cancelado;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechamento_pedido;
 	
@@ -42,7 +45,11 @@ public class Pedido{
 	
 	private double valor_total;
 	
-	public Pedido(){}
+	public Pedido(){
+		
+		this.setCancelado(false);
+		
+	}
 
 	public Date getAbertura_pedido() {
 		return abertura_pedido;
@@ -114,6 +121,14 @@ public class Pedido{
 
 	public void setId_pedido(Integer id_pedido) {
 		this.id_pedido = id_pedido;
+	}
+
+	public boolean isCancelado() {
+		return cancelado;
+	}
+
+	public void setCancelado(boolean cancelado) {
+		this.cancelado = cancelado;
 	}
 
 
