@@ -160,11 +160,11 @@ public class PedidoLocalBean {
 	}
 	
 	
-	public String delItem(){
+	public String delItem(ItemPedido it, Pedido pe){
 		try{
 	
-		
-		Fachada.getInstancia().removerItemPedido(pedidoSelecionado, itemSelecionado);
+	
+		Fachada.getInstancia().removerItemPedido(pe, it);
 		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Item removido com êxito."));
 		produto = new Produto();

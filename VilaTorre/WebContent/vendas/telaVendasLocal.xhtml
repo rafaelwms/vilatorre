@@ -57,7 +57,7 @@
 				
 
 					<p:dataTable id="pedidoTable" var="ped" value="#{pedidoLocalBean.pedidosAbertos}"
-						emptyMessage="Nenhum produto cadastrado.">
+						emptyMessage="Nenhum pedido aberto.">
 						
 						
 						<p:column headerText="ID">
@@ -68,8 +68,8 @@
 							<h:outputText value="#{ped.abertura_pedido}" />
 						</p:column>
 
-						<p:column  headerText="Mesa">
-							<h:outputText value="#{ped.num_mesa}" />
+						<p:column  headerText="Tipo">
+							<h:outputText value="#{ped.tipo_pedido}" />
 						</p:column>
 						
 						<p:column  headerText="Valor total">
@@ -83,28 +83,31 @@
 							<p:menuitem  value="Cancelar" action="#{pedidoLocalBean.cancelarPedido(ped)}" update=":formPedidoLocal" title="Clique para cancelar este pedido." />
 							</p:menuButton>
 						</p:column>
-
-	
 						
+					
 					</p:dataTable>
 					</p:panel>
 					<p:panel header="Detalhamento do pedido" >
-							<p:panelGrid columns="3">
-							<h:outputText for="joba" value="Pedido ID:" />
-						<p:selectOneMenu id="joba" value="#{pedidoLocalBean.pedidoSelecionado}" converter="pedidoConverter">
-							<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-							<f:selectItems value="#{pedidoLocalBean.pedidosAbertos2}" var="ped2" itemLabel="#{ped2.id_pedido}" />
+					<p:panel>
+						<p:panelGrid columns="3">
+				
+						<p:selectOneMenu value="#{pedidoLocalBean.pedidoSelecionado}" converter="pedidoConverter" immediate="true">
+						<f:selectItem noSelectionOption="true" itemLabel="Pedido" />
+						<f:selectItems value="#{pedidoLocalBean.pedidosAbertos2}" var="ped2" itemLabel="#{ped2.id_pedido}" />
 						</p:selectOneMenu>
-							<p:commandButton value="Selecionar" update=":formPedidoLocal" />	
-							
-							
-							<h:outputText for="jo" value="Item #:" />
-							<p:selectOneMenu id="jo" value="#{pedidoLocalBean.itemSelecionado}" converter="itemConverter">
-							<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-							<f:selectItems value="#{pedidoLocalBean.pedidoSelecionado.lista_itens}" var="itz" itemLabel="#{itz.numOrdem}" />
+						
+						<p:selectOneMenu value="#{pedidoLocalBean.itemSelecionado}" converter="itemConverter">
+						<f:selectItem noSelectionOption="true" itemLabel="Item" />
+						<f:selectItems value="#{pedidoLocalBean.pedidoSelecionado.lista_itens}" var="itz" itemLabel="#{itz.id_item} - #{itz.produto.nome}" />
 						</p:selectOneMenu>
-						<p:commandButton value="Remover" action="#{pedidoLocalBean.delItem()}" update=":formPedidoLocal:listaItems" />	
+						
+						<p:commandButton action="#{pedidoLocalBean.delItem(itz, ped2)}" icon="ui-icon-trash" />
+						
 						</p:panelGrid>
+					
+					
+					</p:panel>
+		
 							
 						<p:dataTable id="listaItems" value="#{pedidoLocalBean.pedidoSelecionado.lista_itens}" var="it">
 							<p:column headerText="Pedido">
