@@ -34,7 +34,7 @@ public class ScriptDeCarga {
 			
 			
 			Endereco endereco = new Endereco();
-			endereco.setLogradouro("Rua JosÈ Bonif·cio");
+			endereco.setLogradouro("Rua Jos√© Bonif√°cio");
 			endereco.setNumero("1356");
 			endereco.setComplemento("101 C");
 			endereco.setBairro("Torre");
