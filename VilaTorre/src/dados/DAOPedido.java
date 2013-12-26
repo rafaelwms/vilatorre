@@ -13,8 +13,8 @@ public class DAOPedido extends DAOGenerico<Pedido> implements IDAOPedido{
 		try{
 		pedido.getLista_itens().remove(item);
 		NegocioCalculos.calcularPedido(pedido);
-		this.alterar(pedido);
 		daoItem.remover(item);
+		this.alterar(pedido);
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());
 		}
