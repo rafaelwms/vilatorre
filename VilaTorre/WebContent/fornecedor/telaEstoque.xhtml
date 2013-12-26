@@ -23,13 +23,13 @@
        				
      				   
      				   <h:outputText  for="min" value="Quantidade Mínima:"/>
-     				   <p:inputText id="min" onkeypress="mascara(this,numeros)" value="#{estoqueBeans.min}"/>
+     				   <p:inputText id="min" onkeypress="mascara(this,double)" value="#{estoqueBeans.min}"/>
      				   
      				   <h:outputText  for="max" value="Quantidade Máxima:"/>
-     				   <p:inputText id="max" onkeypress="mascara(this,numeros)" value="#{estoqueBeans.max}"/>
+     				   <p:inputText id="max" onkeypress="mascara(this,double)" value="#{estoqueBeans.max}"/>
 						
 					   <h:outputText  for="now" value="Quantidade Atual:"/>
-     				   <p:inputText id="now" onkeypress="mascara(this,numeros)" value="#{estoqueBeans.quantidade}"/>
+     				   <p:inputText id="now" onkeypress="mascara(this,double)" value="#{estoqueBeans.quantidade}"/>
 					   <h:inputHidden value="#{estoqueBeans.estoque.id}"/>
 				</h:panelGrid>
 			</p:panel>
@@ -47,7 +47,7 @@
 				
 
 					<p:dataTable id="estoqueTable" var="estq" value="#{estoqueBeans.estoques}"
-						emptyMessage="Nenhum estoque registrado.">
+						emptyMessage="Nenhum estoque registrado." rows="10" paginator="true">
 						
 						<h:inputHidden value="#{estq.id}"/>
 						<p:column headerText="Matéria Prima">

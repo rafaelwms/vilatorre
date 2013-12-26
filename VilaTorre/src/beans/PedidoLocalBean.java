@@ -144,9 +144,28 @@ public class PedidoLocalBean {
 	
 	public String addItem(Pedido para1){
 		try{
+			
+			if(produto == null){
+				throw new Exception("É necessário escolher um produto");
+			}
+			
+			if(qtd <1 ){
+				throw new Exception("Quantidade inválida.");
+			}
+			
+			
+			
 		item.setId_item(null);
 		item.setPedido(para1);
-		item.setNumOrdem(para1.getLista_itens().size() + 1);
+		int numOrdem = 1;
+		for(ItemPedido it : para1.getLista_itens()){
+			
+			if(numOrdem <= it.getNumOrdem()){
+				numOrdem = (it.getNumOrdem() + 1);
+			}
+			
+		}
+		item.setNumOrdem(numOrdem);
 		item.setProduto(produto);	
 		item.setQtd(qtd);
 		item.setTotalItem(item.getProduto().getPreco() * item.getQtd());
@@ -160,7 +179,7 @@ public class PedidoLocalBean {
 		tipoPedido = TipoPedido.Selecione;
 		mesa = 0;
 		qtd = 0;
-		return null;
+		return "/vendas/telaVendasLocal.xhtml?faces-redirect=true";
 		}catch(Exception ex){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
 			return null;
@@ -168,11 +187,14 @@ public class PedidoLocalBean {
 	}
 	
 	
-	public String delItem(){
+	public String delItem(ItemPedido inter){
 		try{
 			
+			if(inter == null){
+				throw new Exception("Porra de item nullo carallho!!");
+			}
 	
-		Fachada.getInstancia().removerItemPedido(pedidoSelecionado, itemSelecionado);
+		Fachada.getInstancia().removerItemPedido(inter.getPedido(), inter);
 		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Item removido com êxito."));
 		produto = new Produto();
@@ -182,7 +204,7 @@ public class PedidoLocalBean {
 		tipoPedido = TipoPedido.Selecione;
 		mesa = 0;
 		qtd = 0;
-		return null;
+		return "/vendas/telaVendasLocal.xhtml?faces-redirect=true";
 		}catch(Exception ex){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
 			return null;

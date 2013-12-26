@@ -52,7 +52,7 @@
 				
 
 					<p:dataTable id="cimentoTable" var="cimento" value="#{fornecimentoBean.fornecimentos}"
-						emptyMessage="Nenhum produto cadastrado.">
+						emptyMessage="Nenhum produto cadastrado." rows="10" paginator="true">
 						
 						<h:inputHidden value="#{cimento.id}"/>
 						<p:column headerText="Fornecedor">

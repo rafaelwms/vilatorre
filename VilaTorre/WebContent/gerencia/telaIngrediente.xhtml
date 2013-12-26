@@ -25,7 +25,7 @@
        		 </p:selectOneMenu> 
        		 			
        		 			<h:outputText for="qtdIngrediente" value="Quantidade:" />
-					<p:inputText onkeypress="mascara(this,numeros)"  id="qtdIngrediente" tabindex="3" value="#{ingredienteBean.ingrediente.quantidade}"/>
+					<p:inputText onkeypress="mascara(this,double)"  id="qtdIngrediente" tabindex="3" value="#{ingredienteBean.ingrediente.quantidade}"/>
        		 
 					
 					<h:outputText for="medidaIngre" value="Medida:"/>
@@ -52,8 +52,8 @@
 			<p:panel header="Lista dos Ingredientes" toggleable="true">
 				
 
-					<p:dataTable id="igrediTable" var="ing" value="#{ingredienteBean.ingredientes}"
-						emptyMessage="Nenhum ingrediente cadastrado.">
+					<p:dataTable id="ingrediTable" var="ing" value="#{ingredienteBean.ingredientes}"
+						emptyMessage="Nenhum ingrediente cadastrado." rows="10" paginator="true">
 						
 						<h:inputHidden value="#{ingredienteBean.ingrediente.id}"/>
 						<p:column headerText="Ingrediente">
@@ -74,8 +74,8 @@
 						
 						<p:column headerText="Ações" style="width:30px;">
 						<p:menuButton value="Selecione">
-							<p:menuitem  value="Editar" actionListener="#{ingredienteBean.editar(ing)}" update=":formIngrediente" icon="ui-icon-pencil"/>						
-							<p:menuitem  value="Excluir" onclick="return confirm('Confirma a exclusão do ingrediente #{ing.nome}?')" action="#{ingredienteBean.excluir(ing)}" icon="ui-icon-trash" />
+							<p:menuitem  value="Editar" actionListener="#{ingredienteBean.editar(ing)}" update=":formIngrediente" />						
+							<p:menuitem  value="Excluir" action="#{ingredienteBean.excluir(ing)}"  update=":formIngrediente" />
 						</p:menuButton>
 						</p:column>
 

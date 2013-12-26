@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Ingrediente extends ObjetoGeral{
 	
 	@Column
-	private int qtd;
+	private double qtd;
 	
 	@Enumerated(EnumType.STRING)
 	public Medida medida;
@@ -26,11 +26,11 @@ public class Ingrediente extends ObjetoGeral{
 		this.setMedida(medida);
 	}
 
-	public int getQuantidade() {
+	public double getQuantidade() {
 		return qtd;
 	}
 
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(double quantidade) {
 		this.qtd = quantidade;
 	}
 
