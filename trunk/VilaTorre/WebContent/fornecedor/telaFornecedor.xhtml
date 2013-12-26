@@ -60,7 +60,7 @@
 			<p:panel header="Lista dos Fornecedores" toggleable="true"  toggleTitle="Clique aqui pra visualizar os funcionários cadastrados.">
 				
 
-					<p:dataTable id="fornecTable" var="fornec" value="#{fornecedorBean.fornecedores}"	emptyMessage="Nenhum fornecedor cadastrado.">
+					<p:dataTable id="fornecTable" var="fornec" value="#{fornecedorBean.fornecedores}"	emptyMessage="Nenhum fornecedor cadastrado." rows="10" paginator="true">
 						
 						<h:inputHidden value="#{fornec.id}"/>
 						

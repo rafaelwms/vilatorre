@@ -67,7 +67,7 @@ public class IngredienteBean {
 	public String excluir(Ingrediente param){
 		try {  
 			Fachada.getInstancia().removerIngrediente(param);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ingrediente "+ingrediente.getNome()+" removido com êxito."));			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Ingrediente "+param.getNome()+" removido com êxito."));			
 			return null;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

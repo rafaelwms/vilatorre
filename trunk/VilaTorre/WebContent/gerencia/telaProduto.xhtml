@@ -48,7 +48,7 @@
 				
 
 					<p:dataTable id="produtoTable" var="prod" value="#{produtoBean.produtos}"
-						emptyMessage="Nenhum produto cadastrado.">
+						emptyMessage="Nenhum produto cadastrado." rows="10" paginator="true">
 						
 						<h:inputHidden value="#{produtoBean.produto.id}"/>
 						<p:column headerText="Produto">
