@@ -273,8 +273,13 @@ public class PedidoLocalBean {
 				Fachada.getInstancia().alterarPedido(param);
 				Fachada.getInstancia().inserirPagamento(pagamento);
 			}else{
-				param.setValor_total(param.getValor_total() - Double.parseDouble(desconto));
-				pagamento.setValor_pago(param.getValor_total());
+				
+				if(desconto.trim().equals("")){
+					throw new Exception("Para pagamento parcial é necessário setar o valor pago no campo desconto.");
+				}
+				
+				param.setValor_total(param.getValor_total() - pagamento.getDesconto());
+				pagamento.setValor_pago(pagamento.getDesconto());
 				Fachada.getInstancia().alterarPedido(param);
 				Fachada.getInstancia().inserirPagamento(pagamento);
 			}

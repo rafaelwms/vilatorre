@@ -11,14 +11,22 @@ public class DAOEstoque extends DAOGenerico<Estoque> implements IDAOEstoque{
 
 	@Override
 	public void deduzirEstoque(Estoque estoque, double qtd) throws Exception {
-		// TODO Auto-generated method stub
-	
+		try{
+		estoque.setQuantidade(estoque.getQuantidade() - qtd);
+		this.alterar(estoque);
+		}catch(Exception x){
+			throw new Exception("Probelma na dedução do estoque.");
+		}
 	}
 
 	@Override
 	public void alimentarEstoque(Estoque estoque, double qtd) throws Exception {
-		// TODO Auto-generated method stub
-		//Não foi necessário utilizar este método na camada de dados, uma vez que o mesmo está sendo tratado em NegocioComum
+		try{
+			estoque.setQuantidade(estoque.getQuantidade() + qtd);
+			this.alterar(estoque);
+			}catch(Exception x){
+				throw new Exception("Probelma na alimentação do estoque.");
+			}
 	}
 
 	@Override
