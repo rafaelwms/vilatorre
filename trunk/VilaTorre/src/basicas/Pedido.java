@@ -17,7 +17,7 @@ public class Pedido{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date abertura_pedido;
 	
-	@OneToMany(mappedBy="pedido", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="pedido", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<ItemPedido> lista_itens;
 	
 	@Column

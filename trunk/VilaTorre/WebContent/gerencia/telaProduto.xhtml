@@ -50,9 +50,31 @@
 					<p:dataTable id="produtoTable" var="prod" value="#{produtoBean.produtos}"
 						emptyMessage="Nenhum produto cadastrado." rows="10" paginator="true">
 						
-						<h:inputHidden value="#{produtoBean.produto.id}"/>
+						<h:inputHidden value="#{prod.id}"/>
 						<p:column headerText="Produto">
-							<h:outputText value="#{prod.nome}" />
+							<p:commandButton id="ingrs" value="#{prod.nome}" type="Button" />
+							<p:overlayPanel dynamic="true" for="ingrs" showEffect="slide" hideEffect="fade">
+								<p:dataTable id="ingrediTable" value="#{prod.ingredientes}" var="ing">
+								
+									<f:facet name="header">
+										<h:outputText value="Ingredientes do #{prod.nome}"/>
+									</f:facet>
+									<p:column headerText="Ingrediente">
+										<h:outputText value="#{ing.nome}"/>
+									</p:column>
+									<p:column headerText="Qtd">
+										<h:outputText value="#{ing.qtd}"/>
+									</p:column>
+									<p:column headerText="Medida">
+										<h:outputText value="#{ing.medida}"/>
+									</p:column>
+								</p:dataTable>
+							
+							
+							</p:overlayPanel>
+							
+							
+							
 						</p:column>
 						
 						<p:column  headerText="Preço">

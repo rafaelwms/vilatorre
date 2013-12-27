@@ -1,5 +1,7 @@
 package basicas;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -15,6 +17,9 @@ public class Ingrediente extends ObjetoGeral{
 	@ManyToOne
 	@JoinColumn(name="materia", referencedColumnName="id")
 	private MateriaPrima materiaPrima;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	private List<Produto> produtos;
 	
 	public enum Medida{gramas, unidade, porção}
 	
@@ -48,6 +53,14 @@ public class Ingrediente extends ObjetoGeral{
 
 	public void setMateriaPrima(MateriaPrima materiaPrima) {
 		this.materiaPrima = materiaPrima;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
 	}
 
 

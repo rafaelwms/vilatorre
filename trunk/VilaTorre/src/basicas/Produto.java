@@ -14,7 +14,7 @@ public class Produto extends ObjetoGeral  {
 	private double preco;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="produto_ingredientes")
+	@JoinTable(name="produto_ingredientes", joinColumns=@JoinColumn(name="produto", referencedColumnName="id"), inverseJoinColumns=@JoinColumn(name="ingrediente", referencedColumnName="id")) 
 	private List<Ingrediente> ingredientes;
 	
 	@Enumerated(EnumType.STRING)
