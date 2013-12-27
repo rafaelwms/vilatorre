@@ -671,7 +671,17 @@ public class NegocioComum {
 		 */
 		public void inserirPedido(Pedido pedido)throws Exception{
 			try {
-				NegocioCalculos.calcularPedido(pedido);
+				pedido.setValor_total(pedido.getLista_itens().get(0).getTotalItem());
+				
+				for(Ingrediente ing : pedido.getLista_itens().get(0).getProduto().getIngredientes()){
+					
+					Estoque estoque = daoEstoque.localizarEstoqueMateria(ing.getMateriaPrima());
+					if(estoque != null){
+						daoEstoque.alterar(NegocioCalculos.deduzirEstoque(estoque, ing.getQuantidade()));
+					}
+				}
+				
+				
 				daoPedido.inserir(pedido);
 				daoItemPedido.inserir(pedido.getLista_itens().get(0));
 			} catch (Exception e) {
@@ -711,6 +721,19 @@ public class NegocioComum {
 		}
 		public void removerItemPedido(Pedido pedido, ItemPedido item) throws Exception{
 			try {
+				
+				for(Ingrediente ing : item.getProduto().getIngredientes()){
+					
+					Estoque estoque = daoEstoque.localizarEstoqueMateria(ing.getMateriaPrima());
+					
+					if(estoque != null){
+					
+						daoEstoque.alterar(NegocioCalculos.alimentarEstoque(estoque, ing.getQuantidade()));
+				
+					}
+				}
+				
+				
 				daoPedido.removerItemPedido(pedido, item);
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());
@@ -719,6 +742,15 @@ public class NegocioComum {
 		public void adicionarItemPedido(Pedido pedido, ItemPedido item) throws Exception{
 			
 			try {
+				for(Ingrediente ing : item.getProduto().getIngredientes()){
+					Estoque estoque = daoEstoque.localizarEstoqueMateria(ing.getMateriaPrima());
+					
+					if(estoque != null){
+					daoEstoque.alterar(NegocioCalculos.deduzirEstoque(estoque, ing.getQuantidade())) ;
+					}
+				}
+				
+				
 				daoPedido.adicionarItemPedido(pedido, item);
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());
@@ -732,6 +764,10 @@ public class NegocioComum {
 		 */
 		public void inserirPagamento(Pagamento pagamento)throws Exception{
 			try {	
+				
+				pagamento.getPedido().setValor_total(pagamento.getPedido().getValor_total() - pagamento.getDesconto());
+				daoPedido.alterar(pagamento.getPedido());
+				
 				daoPagamento.inserir(pagamento);
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());
