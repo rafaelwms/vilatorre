@@ -15,7 +15,7 @@ public class LoginBean {
 	
 	private String login;
 	private String senha;
-	private Pessoa logado;
+	private Pessoa logado = new Funcionario();
 	
 	
 	public String tentarLogar(){
@@ -31,13 +31,16 @@ public class LoginBean {
 			FacesContext.getCurrentInstance().addMessage("loginTry", new FacesMessage("Senha vazia."));
 			return null;
 		} else {
+		
+			Pessoa log = Fachada.getInstancia().logarPessoa(login, senha);
 			
-		 logado = Fachada.getInstancia().logarPessoa(login, senha);
-		 FacesContext.getCurrentInstance().addMessage("loginTry", new FacesMessage("Bem vindo "+logado.getNome()+"."));
-		 
-		 if(logado == null){
-			 throw new Exception("Login ou senha inválidos.");
-		 }
+			if(log.getId() == null || log.getId() < 1){
+				throw new Exception("");
+			}else{
+			
+				
+		logado = log;		
+		
 		 
 		 if(logado.getUsuario().getTipoUser() == TipoUser.ADMINISTRADOR)
 			 retorno = "template/adminTemplate.xhtml?faces-redirect=true";
@@ -49,8 +52,9 @@ public class LoginBean {
 			 retorno = "engine/cliente.xhtml?faces-redirect=true";
 		}
 			return retorno;
+		}
 		}catch(Exception ex){
-			FacesContext.getCurrentInstance().addMessage("loginTry", new FacesMessage(ex.getMessage()));
+			FacesContext.getCurrentInstance().addMessage("loginTry", new FacesMessage("Login ou senha inválidos."));
 			return null;
 		}
 		

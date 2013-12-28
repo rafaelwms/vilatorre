@@ -62,7 +62,7 @@ public class PedidoLocalBean {
 	
 	private TipoPedido tipoPedido;
 	
-	private int qtd;
+	private int quantidade;
 	
 	private int mesa;
 	
@@ -99,7 +99,7 @@ public class PedidoLocalBean {
 				}
 			}
 			
-			if(qtd < 1){
+			if(quantidade < 1){
 				throw new Exception("Quantidade inválida.");
 			}
 			
@@ -108,7 +108,7 @@ public class PedidoLocalBean {
 			pedido.setId_pedido(null);
 			item.setId_item(null);
 			item.setProduto(produto);	
-			item.setQtd(qtd);
+			item.setQtd(quantidade);
 			item.setNumOrdem(1);	
 			pedido.setAbertura_pedido(new Date());
 			pedido.setNum_mesa(mesa);
@@ -125,7 +125,7 @@ public class PedidoLocalBean {
 			cliente = new Cliente();
 			itemsPedido = new ArrayList<ItemPedido>();
 			mesa = 0;
-			qtd = 0;
+			quantidade = 0;
 			return null;
 		}catch(Exception ex){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
@@ -136,7 +136,7 @@ public class PedidoLocalBean {
 			cliente = new Cliente();
 			itemsPedido = new ArrayList<ItemPedido>();
 			mesa = 0;
-			qtd = 0;
+			quantidade = 0;
 			return null;	
 		}
 	}
@@ -149,7 +149,7 @@ public class PedidoLocalBean {
 				throw new Exception("É necessário escolher um produto");
 			}
 			
-			if(qtd <1 ){
+			if(quantidade <1 ){
 				throw new Exception("Quantidade inválida.");
 			}
 			
@@ -167,8 +167,7 @@ public class PedidoLocalBean {
 		}
 		item.setNumOrdem(numOrdem);
 		item.setProduto(produto);	
-		item.setQtd(qtd);
-		item.setTotalItem(item.getProduto().getPreco() * item.getQtd());
+		item.setQtd(quantidade);
 		Fachada.getInstancia().adicionarItemPedido(para1, item);
 		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Item adicionado com êxito."));
@@ -178,7 +177,7 @@ public class PedidoLocalBean {
 		itemsPedido = new ArrayList<ItemPedido>();
 		tipoPedido = TipoPedido.Selecione;
 		mesa = 0;
-		qtd = 0;
+		quantidade = 0;
 		return "/vendas/telaVendasLocal.xhtml?faces-redirect=true";
 		}catch(Exception ex){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
@@ -203,7 +202,7 @@ public class PedidoLocalBean {
 		itemsPedido = new ArrayList<ItemPedido>();
 		tipoPedido = TipoPedido.Selecione;
 		mesa = 0;
-		qtd = 0;
+		quantidade = 0;
 		return "/vendas/telaVendasLocal.xhtml?faces-redirect=true";
 		}catch(Exception ex){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
@@ -398,13 +397,13 @@ public class PedidoLocalBean {
 	}
 
 
-	public int getQtd() {
-		return qtd;
+	public int getQuantidade() {
+		return quantidade;
 	}
 
 
-	public void setQtd(int qtd) {
-		this.qtd = qtd;
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
 	}
 
 

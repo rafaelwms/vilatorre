@@ -26,17 +26,17 @@ public class Ingrediente extends ObjetoGeral{
 	public Ingrediente(){}
 	
 	public Ingrediente(int qtd, MateriaPrima materiaPrima, Medida medida){
-		this.setQuantidade(qtd);
+		this.setQtd(qtd);
 		this.setMateriaPrima(materiaPrima);
 		this.setMedida(medida);
 	}
 
-	public double getQuantidade() {
+	public double getQtd() {
 		return qtd;
 	}
 
-	public void setQuantidade(double quantidade) {
-		this.qtd = quantidade;
+	public void setQtd(double qtd) {
+		this.qtd = qtd;
 	}
 
 	public Medida getMedida() {
