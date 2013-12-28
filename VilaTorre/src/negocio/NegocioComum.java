@@ -671,17 +671,19 @@ public class NegocioComum {
 		 */
 		public void inserirPedido(Pedido pedido)throws Exception{
 			try {
-				pedido.setValor_total(pedido.getLista_itens().get(0).getTotalItem());
+				
 				
 				for(Ingrediente ing : pedido.getLista_itens().get(0).getProduto().getIngredientes()){
-					
+					for(int i = 0; i < pedido.getLista_itens().get(0).getQtd(); i++){
 					Estoque estoque = daoEstoque.localizarEstoqueMateria(ing.getMateriaPrima());
 					if(estoque != null){
-						daoEstoque.alterar(NegocioCalculos.deduzirEstoque(estoque, ing.getQuantidade()));
+						
+						daoEstoque.alterar(NegocioCalculos.deduzirEstoque(estoque, ing.getQtd()));
+						}
 					}
 				}
-				
-				
+				NegocioCalculos.calcularItem(pedido.getLista_itens().get(0));
+				pedido.setValor_total(pedido.getLista_itens().get(0).getTotalItem());
 				daoPedido.inserir(pedido);
 				daoItemPedido.inserir(pedido.getLista_itens().get(0));
 			} catch (Exception e) {
@@ -723,17 +725,17 @@ public class NegocioComum {
 			try {
 				
 				for(Ingrediente ing : item.getProduto().getIngredientes()){
-					
+					for(int i = 0; i < item.getQtd(); i++){
 					Estoque estoque = daoEstoque.localizarEstoqueMateria(ing.getMateriaPrima());
 					
 					if(estoque != null){
-					
-						daoEstoque.alterar(NegocioCalculos.alimentarEstoque(estoque, ing.getQuantidade()));
-				
+						
+						daoEstoque.alterar(NegocioCalculos.alimentarEstoque(estoque, ing.getQtd()));
+						}
 					}
 				}
 				
-				
+				NegocioCalculos.calcularItem(item);
 				daoPedido.removerItemPedido(pedido, item);
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());
@@ -743,14 +745,16 @@ public class NegocioComum {
 			
 			try {
 				for(Ingrediente ing : item.getProduto().getIngredientes()){
+					for(int i = 0; i < item.getQtd(); i++){
 					Estoque estoque = daoEstoque.localizarEstoqueMateria(ing.getMateriaPrima());
-					
 					if(estoque != null){
-					daoEstoque.alterar(NegocioCalculos.deduzirEstoque(estoque, ing.getQuantidade())) ;
+						
+					daoEstoque.alterar(NegocioCalculos.deduzirEstoque(estoque, ing.getQtd())) ;
+						}
 					}
 				}
 				
-				
+				NegocioCalculos.calcularItem(item);
 				daoPedido.adicionarItemPedido(pedido, item);
 			} catch (Exception e) {
 				throw new Exception(e.getMessage());

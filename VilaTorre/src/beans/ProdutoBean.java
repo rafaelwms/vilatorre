@@ -44,6 +44,16 @@ public class ProdutoBean {
 				throw new Exception("É necessário selecionar uma categoria.");
 			}
 			
+			
+			if(ingredientes.size() < 1 ){
+				throw new Exception("É necessário selecionar ao menos um ingrediente.");
+			}
+			
+			
+			if(preco.trim().equals("")){
+				throw new Exception("Preço invalido.");
+			}
+
 			preco = preco.replace(".", "");
 			preco = preco.replace(",", ".");
 			produto.setPreco(Double.parseDouble(preco));
@@ -84,7 +94,9 @@ public class ProdutoBean {
 		this.produto = param;
 		this.categoria = param.getCategoria();
 		this.preco =  Datas.double2MoneyString(param.getPreco());
-		this.ingredientes = param.getIngredientes();
+		for(Ingrediente i : param.getIngredientes()){
+			ingredientes.add(i);
+		}
 		
 		
 		System.out.println(produto);
