@@ -21,7 +21,11 @@ function moeda(v){
 
 function execmascara(){   
     v_obj.value=v_fun(v_obj.value)   
-}   
+} 
+
+function popup(obj){
+	window.open('obj','page','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=900,height=768'); 
+}
   
 function numeros(v){   
     v=v.replace(/\D/g,""); // permite digitar apenas numero     
