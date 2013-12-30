@@ -20,6 +20,7 @@ public class FuncionarioBean {
 	
 	private Funcionario func = new Funcionario();
 	private Usuario usuario = new Usuario();
+	private TipoUser tipoUser;
 	private Endereco endereco = new Endereco();
 	private Cargo cargoEscolhido = new Cargo();
 	private String admissao;
@@ -29,7 +30,7 @@ public class FuncionarioBean {
 	private List<Cargo> cargos = new ArrayList<Cargo>();
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 
-	private TipoUser tipos;
+	private TipoUser[] tipos;
 	
 	public String salvar(){
 		
@@ -40,6 +41,25 @@ public class FuncionarioBean {
 			if(demissao != null){
 				func.setDemissao(Datas.criarData(demissao));
 			}
+			
+			if(cargoEscolhido == null || cargoEscolhido.getId() < 1){
+				throw new Exception("É necessário escolher um cargo.");
+			}
+			
+			if(usuario.getLogin().trim().equals("")){
+				throw new Exception("É necessário digitar o login.");
+			}
+			
+			if(usuario.getSenha().trim().equals("")){
+				throw new Exception("É necessário digitar a senha.");
+			}
+			
+			if(tipoUser == TipoUser.Selecione){
+				throw new Exception("É necessário escolher um nível de acesso.");
+			}
+			
+			
+			usuario.setTipoUser(tipoUser);
 			func.setAdmissao(Datas.criarData(admissao));	
 			func.setNasc(Datas.criarData(nasc));
 			salario = salario.replace(".", "");
@@ -74,9 +94,15 @@ public class FuncionarioBean {
 				nasc = new String();
 				admissao = new String();
 				demissao = new String();
+				tipoUser = TipoUser.Selecione;
 				return  null;
 			
 			}else{
+				
+				if(func.getId() == 1){
+					throw new Exception("Não é possível alterar este usuário, pois é o desenvolvidor do sistema.");
+				}
+				
 				
 				Fachada.getInstancia().alterarFuncionario(func);
 				FacesContext.getCurrentInstance().addMessage("cadastroFunc", new FacesMessage("Alteração de " + func.getNome() + " efetuada com sucesso."));
@@ -88,8 +114,8 @@ public class FuncionarioBean {
 				salario = new String();
 				nasc = new String();
 				admissao = new String();
-				demissao = new String();				
-				return  null;
+				demissao = new String();
+				tipoUser = TipoUser.Selecione;
 				
 			}				
 			
@@ -127,7 +153,7 @@ public class FuncionarioBean {
 		return null;
 	}
 	
-		public TipoUser[] getTipoUser(){
+		public TipoUser[] getTipos(){
 			
 		    return TipoUser.values();
 		  }
@@ -140,6 +166,8 @@ public class FuncionarioBean {
 		this.nasc = Datas.formatarData(funcParam.getNasc());
 		this.admissao = Datas.formatarData(funcParam.getAdmissao());
 		this.salario = Datas.double2MoneyString(funcParam.getSalario());
+		this.tipoUser = funcParam.getUsuario().getTipoUser();
+		
 		System.out.println(func);
 		System.out.println(endereco);
 		System.out.println(usuario);
@@ -147,6 +175,7 @@ public class FuncionarioBean {
 		System.out.println(nasc);
 		System.out.println(admissao);
 		System.out.println(salario);
+		System.out.println(tipoUser);
 	}			
 
 	
@@ -250,13 +279,14 @@ public class FuncionarioBean {
 		this.funcionarios = funcionarios;
 	}
 
-	public TipoUser getTipos() {
-		return tipos;
-	}
 
-	public void setTipos(TipoUser tipos) {
-		this.tipos = tipos;
-	}
 
+	public void setTipoUser(TipoUser tipoUser) {
+		this.tipoUser = tipoUser;
+	}
+	
+	public TipoUser getTipoUser() {
+		return tipoUser;
+	}
 
 }
