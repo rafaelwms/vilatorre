@@ -15,7 +15,7 @@ public class LoginBean {
 	
 	private String login;
 	private String senha;
-	private Pessoa logado = new Funcionario();
+	private Pessoa logado;
 	
 	
 	public String tentarLogar(){
@@ -37,7 +37,8 @@ public class LoginBean {
 			if(log.getId() == null || log.getId() < 1){
 				throw new Exception("");
 			}else{
-			
+		
+		logado = new Funcionario();
 				
 		logado = log;		
 		
@@ -46,7 +47,7 @@ public class LoginBean {
 			 retorno = "template/adminTemplate.xhtml?faces-redirect=true";
 		 
 		 if(logado.getUsuario().getTipoUser() == TipoUser.USUÁRIO)
-			 retorno = "engine/user.xhtml?faces-redirect=true";
+			 retorno = "template/userTemplate.xhtml?faces-redirect=true";
 		 
 		 if(logado.getUsuario().getTipoUser() == TipoUser.CLIENTE)
 			 retorno = "engine/cliente.xhtml?faces-redirect=true";
@@ -70,8 +71,7 @@ public class LoginBean {
 	public String efetuarLogoff(){
 		
 		logado = null;
-		
-		return "../index.xhtml?faces-redirect=true";
+		return "/index.xhtml?faces-redirect=true";
 	}
 
 	
