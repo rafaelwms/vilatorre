@@ -31,13 +31,6 @@
 						 <h:outputText value="#{estq.atualizacao}&nbsp;#{estq.login}"/>
 						</p:column>
 						
-						
-						<p:column headerText="Ações" style="width:30px;">
-						<p:menuButton value="Selecione">
-							<p:menuitem  value="Editar" actionListener="#{estoqueBeans.editar(estq)}" update=":formEstoque" />
-							<p:menuitem  value="Excluir" onclick="return confirm('Confirma a exclusão do estoque selecionado?')" action="#{estoqueBeans.excluir(estq)}"  />
-						</p:menuButton>
-						</p:column>
 
 					</p:dataTable>
 					</p:panel>
