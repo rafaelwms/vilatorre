@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><ui:insert name="titulo"></ui:insert></title>
+	<link type="text/css" rel="stylesheet" href="../css/ui-lightnesss/custom.css"/>
+	<link type="text/css" rel="stylesheet" href="../css/template/template.css"/>
+	<script type="text/javascript" src="../script/money.js" />
+</h:head>
+<h:body styleClass="ui-picklist" >
+		<div  align="center" id="container">
+		<div id="barra" class="ui-widget">
+			<img src="../Imagens/Vila Torre - LOGO - 200.png" />
+			<ui:include src="../engine/barraUser.xhtml"></ui:include>
+			<div class="ui-widget" style="height: 25px;text-align:center">
+			Copyright 2013 by Rafael WMS®, All Rights Reserved
+			</div>
+		</div>
+		<div id="conteudo" class="ui-widget">
+			<ui:insert name="principal" />
+		</div>
+		
+		</div>
+  </h:body>
+</html>
