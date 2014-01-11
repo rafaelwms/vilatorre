@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/adminTemplate.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">.: CLIENTE :.</ui:define>
+	<ui:define name="principal">
+		
+
+	<h:form id="clienteForm">
+	<p:growl life="3000"></p:growl>
+	
+					
+			
+			<p:panel header=".:CLIENTE:. - Dados Pessoais">
+			<h:inputHidden vlaue="#{clienteBean.cliente.id}"></h:inputHidden>
+			<h:panelGrid columns="2" >
+			<h:outputText for="nome" value="Nome:"/><p:inputText required="true" requiredMessage="Digite o nome." tabindex="1" size="70" maxlength="130" id="nome" value="#{clienteBean.cliente.nome}"/>
+			<h:outputText for="sexo" value="Sexo:"/>        
+			<p:selectOneRadio  id="sexo" value="#{clienteBean.cliente.sexo}" >  
+              <f:selectItem itemLabel="Masculino" itemValue="0" />  
+              <f:selectItem itemLabel="Feminino" itemValue="1" />  
+       		  </p:selectOneRadio>
+       		 </h:panelGrid>
+       		<h:panelGrid columns="2" >
+       		<h:panelGrid columns="2" >  
+			<h:outputText for="nasc" value="Data Nasc.:"/><p:inputMask tabindex="2" id="nasc" mask="99/99/9999" value="#{clienteBean.nasc}"/>
+			<h:outputText for="rg" value="RG:  "/><p:inputText required="true" requiredMessage="Digite o rg." tabindex="3"  label="RG" id="rg" value="#{clienteBean.cliente.rg}"/>
+			</h:panelGrid>
+			<h:panelGrid columns="2" > 
+			<h:outputText for="cpf" value="CPF: "/><p:inputMask required="true" requiredMessage="Digite o cpf." tabindex="4"  mask="999.999.999-99"  id="cpf" value="#{clienteBean.cliente.cpf}"/>
+			<h:outputText for="fone" value="Fone: "/><p:inputMask required="true" requiredMessage="Digite o fone." tabindex="5"   mask="(99)9999-9999"  id="fone" value="#{clienteBean.cliente.fone}"/>
+			</h:panelGrid>
+			
+			</h:panelGrid>
+			<h:panelGrid columns="2" > 
+			<h:outputText for="email" value="E-mail: "/><p:inputText required="true" size="70" requiredMessage="Digite o e-mail." tabindex="6"   id="email" value="#{clienteBean.cliente.email}"/>
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:panel header="Dados de Usuário">
+			<h:panelGrid columns="2">
+			<h:panelGrid columns="2">
+			<h:outputText for="login" value="Login:"/><p:inputText tabindex="7"  maxlength="130"  id="login" value="#{clienteBean.usuario.login}"/>
+			<h:outputText for="senha" value="Senha:"/><p:password tabindex="8" feedback="true" promptLabel="Digite sua senha." weakLabel="Fraca" goodLabel="Razoável" strongLabel="Forte" id="senha" value="#{clienteBean.usuario.senha}"/>
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+			<h:outputText value="    " for="espaco"/><h:inputHidden id="espaco"/>
+			<h:outputText for="senha2" value="Confirm. Senha:"/><p:password tabindex="9" feedback="false" required="false" id="senha2"/>
+			</h:panelGrid>
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:panel header="Endereço">
+			<h:panelGrid columns="2">
+			<h:outputText for="logradouro" value="Logradouro:"/><p:inputText required="true" requiredMessage="Digite o lagradouro." tabindex="10" size="70"  maxlength="130"  id="logradouro" value="#{clienteBean.endereco.logradouro}"/>
+			<h:outputText for="numero" value="Numero:"/><p:inputText required="true" requiredMessage="Digite o número." tabindex="11" id="numero" value="#{clienteBean.endereco.numero}"/>
+			<h:outputText for="complemento" value="Complemento:"/><p:inputText tabindex="12"  required="false" id="complemento" value="#{clienteBean.endereco.complemento}"/>
+			<h:outputText for="bairro" value="Bairro:"/><p:inputText required="true" requiredMessage="Digite o bairro." tabindex="13" id="bairro" value="#{clienteBean.endereco.bairro}"/>
+			</h:panelGrid>
+			</p:panel>
+			
+			
+			
+			<p:panel>
+			
+			<p:menuButton value="Ações">
+			<p:menuitem value="Salvar" action="#{clienteBean.salvar}"  ajax="false" /> 
+			<p:menuitem value="Limpar" type="reset"  immediate="true"/>
+			</p:menuButton>
+		    </p:panel>
+				<p:panel header="Lista dos Clientes" toggleable="true"  toggleTitle="Clique aqui pra visualizar os clientes cadastrados.">
+				
+
+					<p:dataTable id="cliTable" var="cli" value="#{clienteBean.clientes}"	emptyMessage="Nenhum cliente cadastrado." rows="50" paginator="true"  >
+						
+						<h:inputHidden value="#{clienteBean.cliente.id}"/>
+						<p:column headerText="Cliente">
+							<h:outputText value="#{cli.nome}" />
+						</p:column>
+
+						<p:column  headerText="Fone">
+							<h:outputText value="#{cli.fone}" />
+						</p:column>
+						
+						<p:column  headerText="Bairro">
+							<h:outputText value="#{cli.endereco.bairro}" />
+						</p:column>
+
+										
+						<p:column headerText="Ações" style="width: 30px;">
+						<p:menuButton value="Selecione">
+							<p:menuitem  value="Editar" actionListener="#{clienteBean.editar(cli)}" update=":clienteForm" />
+							<p:menuitem  value="Excluir"  action="#{clienteBean.remover(cli)}" update=":clienteForm" />
+						</p:menuButton>
+						</p:column>
+
+					</p:dataTable>
+					</p:panel>
+
+			<div align="center">
+			<p:panel header="Vila Torre Original Burger System© 2013 All Rigths Reserved - Rafael WMS®" />
+			</div>
+			
+ 
+    
+	
+	</h:form>
+	
+
+
+	</ui:define>
+</ui:composition>

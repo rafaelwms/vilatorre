@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/adminTemplate.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">.: CARGO :.</ui:define>
+	<ui:define name="principal">
+
+	
+
+			<h:form id="formCargo">
+			
+			<p:panel header="Informações do cargo" id="dadosCargo">
+				<h:panelGrid columns="2">
+					
+					<h:outputText for="nomeCargo" value="Nome:" />
+					<p:inputText id="nomeCargo" value="#{cargoBean.cargo.nome}"
+						tabindex="1" size="70" />
+					<h:outputText for="descCargo" value="Descrição:" />
+					<p:inputTextarea id="descCargo"
+						value="#{cargoBean.cargo.descricao}" tabindex="2" />
+						<h:inputHidden value="#{cargoBean.cargo.id}"/>
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel>
+				<p:menuButton value="Ações">
+					<p:menuitem value="Salvar" action="#{cargoBean.salvar}" ajax="false" />
+					<p:menuitem value="Limpar" type="reset" ajax="false" immediate="true" />
+				</p:menuButton>
+			</p:panel>
+			
+			<p:panel header="Lista dos cargos" toggleable="true">
+				
+
+					<p:dataTable id="cargoTable" var="cargo" value="#{cargoBean.cargos}"
+						emptyMessage="Nenhum cargo cadastrado.">
+						
+						<h:inputHidden value="#{cargoBean.cargo.id}"/>
+						<p:column headerText="Cargo">
+							<h:outputText value="#{cargo.nome}" />
+						</p:column>
+
+						<p:column  headerText="Descrição">
+							<h:outputText value="#{cargo.descricao}" />
+						</p:column>
+						
+						<p:column headerText="Ações" style="width: 30px;">
+						<p:menuButton value="Selecione">
+							<p:menuitem value="Editar" actionListener="#{cargoBean.editar(cargo)}" update=":formCargo:dadosCargo" />
+				
+							<p:menuitem value="Excluir"  action="#{cargoBean.excluir(cargo)}" update=":formCargo:dadosCargo" />
+						</p:menuButton>
+						
+						</p:column>
+
+					</p:dataTable>
+					</p:panel>
+
+				</h:form>
+
+</ui:define>
+</ui:composition>
