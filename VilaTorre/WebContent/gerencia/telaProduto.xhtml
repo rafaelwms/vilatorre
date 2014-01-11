@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/adminTemplate.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">.: PRODUTO :.</ui:define>
+	<ui:define name="principal">
+	
+
+			<h:form id="formProduto">
+			<p:growl life="3000"/>
+			<p:panel header="Informações do Produto">
+				<h:panelGrid columns="2">
+					
+					<h:outputText for="nomeProduto" value="Nome:" />
+					<p:inputText id="nomeProduto" value="#{produtoBean.produto.nome}" tabindex="1" size="70" />		 
+					
+					<h:outputText for="categoriaProduto" value="Categoria:"/>
+					<p:selectOneMenu value="#{produtoBean.categoria}"  tabindex="2" id="categoriaProduto">  
+           		 		  <f:selectItems value="#{produtoBean.categorias}"/>
+       				</p:selectOneMenu> 
+       				
+       				<h:outputText value="Ingredientes:" for="ingredientes"/>
+       				<p:selectManyMenu id="ingredientes"  value="#{produtoBean.ingredientes}" converter="ingredienteConverter" style="width:425px;height:150px"   showCheckbox="true">              			
+            			<f:selectItems value="#{produtoBean.todosIngredientes}" var="ing" itemLabel="#{ing.nome}"  />  
+       				 </p:selectManyMenu>
+       				
+     				   
+     				   <h:outputText  for="preco" value="Preço R$:"/>
+     				   <p:inputText id="preco" onkeypress="mascara(this,moeda)" value="#{produtoBean.preco}"/>
+						
+					   <h:outputText for="descProduto" value="Descrição:" />
+					   <p:inputTextarea id="descProduto" value="#{produtoBean.produto.descricao}" tabindex="5" />
+					   <h:inputHidden value="#{produtoBean.produto.id}"/>
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel>
+				<p:menuButton value="Ações">
+					<p:menuitem value="Salvar" action="#{produtoBean.salvar}" ajax="false" tabindex="6"/>
+					<p:menuitem value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true"/>
+				</p:menuButton>
+			</p:panel>
+			
+			<p:panel header="Lista dos Produtos" toggleable="true">
+				
+
+					<p:dataTable id="produtoTable" var="prod" value="#{produtoBean.produtos}"
+						emptyMessage="Nenhum produto cadastrado." rows="10" paginator="true">
+						
+						<h:inputHidden value="#{prod.id}"/>
+						<p:column headerText="Produto">
+							<p:commandButton id="ingrs" value="#{prod.nome}" type="Button" />
+							<p:overlayPanel dynamic="true" for="ingrs" showEffect="slide" hideEffect="fade">
+								<p:dataTable id="ingrediTable" value="#{prod.ingredientes}" var="ing">
+								<f:facet name="header">
+										<h:outputText value="Ingredientes do #{prod.nome}"/>
+									</f:facet>
+
+									<p:column headerText="Ingrediente">
+										<h:outputText value="#{ing.nome}"/>
+									</p:column>
+									<p:column headerText="Qtd">
+										<h:outputText value="#{ing.qtd}"/>
+									</p:column>
+									<p:column headerText="Medida">
+										<h:outputText value="#{ing.medida}"/>
+									</p:column>
+								</p:dataTable>
+							
+							
+							</p:overlayPanel>
+							
+							
+							
+						</p:column>
+						
+						<p:column  headerText="Preço">
+							<h:outputText value="#{prod.preco}" />
+						</p:column>
+						
+						<p:column  headerText="Categoria">
+							<h:outputText value="#{prod.categoria}" />
+						</p:column>
+						
+						<p:column headerText="Ações" style="width:30px;">
+						<p:menuButton value="Selecione">
+							<p:menuitem  value="Editar" actionListener="#{produtoBean.editar(prod)}" update=":formProduto" />
+							<p:menuitem  value="Excluir"  action="#{produtoBean.excluir(prod)}" update=":formProduto" />
+						</p:menuButton>
+						</p:column>
+
+					</p:dataTable>
+					</p:panel>
+
+				</h:form>
+
+
+
+</ui:define>
+</ui:composition>

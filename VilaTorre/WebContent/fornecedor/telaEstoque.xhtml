@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/adminTemplate.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">.: ESTOQUE :.</ui:define>
+	<ui:define name="principal">
+
+
+			<h:form id="formEstoque">
+			<p:growl life="3000"/>
+			<p:panel header="Informações do Estoque">
+				<h:panelGrid columns="2">
+					
+      			     
+      			     <h:outputText value="MateriaPrima:" />  
+  				     <p:selectOneMenu value="#{estoqueBeans.materia}" converter="materiaConverter"  filter="true" filterMatchMode="startsWith">  
+        			    <f:selectItem  noSelectionOption="true" itemLabel="Selecione a materia prima."  />  
+           				<f:selectItems value="#{estoqueBeans.materias}" var="mat" itemLabel="#{mat.nome}" />  
+      			     </p:selectOneMenu>
+       				
+     				   
+     				   <h:outputText  for="min" value="Quantidade Mínima:"/>
+     				   <p:inputText id="min" onkeypress="mascara(this,double)" value="#{estoqueBeans.min}"/>
+     				   
+     				   <h:outputText  for="max" value="Quantidade Máxima:"/>
+     				   <p:inputText id="max" onkeypress="mascara(this,double)" value="#{estoqueBeans.max}"/>
+						
+					   <h:outputText  for="now" value="Quantidade Atual:"/>
+     				   <p:inputText id="now" onkeypress="mascara(this,double)" value="#{estoqueBeans.quantidade}"/>
+					   <h:inputHidden value="#{estoqueBeans.estoque.id}"/>
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel>
+			
+				<p:menuButton value="Ações">
+					<p:menuitem value="Salvar" action="#{estoqueBeans.salvar}" ajax="false"  tabindex="6"/>
+					<p:menuitem value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true"  />
+			   </p:menuButton>
+				
+			</p:panel>
+			
+			<p:panel header="Estoque" toggleable="true">
+				
+
+					<p:dataTable id="estoqueTable" var="estq" value="#{estoqueBeans.estoques}"
+						emptyMessage="Nenhum estoque registrado." rows="10" paginator="true">
+						
+						<h:inputHidden value="#{estq.id}"/>
+						<p:column headerText="Matéria Prima">
+							<h:outputText value="#{estq.materia.nome}" />
+						</p:column>
+						
+						<p:column  headerText="Situação">
+						 <p:progressBar value="#{estoqueBeans.percentual(estq)}"  labelTemplate="{value}%" displayOnly="true"/>	
+						</p:column>
+						
+						<p:column  headerText="Última Atualização">
+						 <h:outputText value="#{estq.atualizacao}&nbsp;#{estq.login}"/>
+						</p:column>
+						
+						
+						<p:column headerText="Ações" style="width:30px;">
+						<p:menuButton value="Selecione">
+							<p:menuitem  value="Editar" actionListener="#{estoqueBeans.editar(estq)}" update=":formEstoque" />
+							<p:menuitem  value="Excluir"  action="#{estoqueBeans.excluir(estq)}" update=":formEstoque" />
+						</p:menuButton>
+						</p:column>
+
+					</p:dataTable>
+					</p:panel>
+
+				</h:form>
+
+</ui:define>
+</ui:composition>

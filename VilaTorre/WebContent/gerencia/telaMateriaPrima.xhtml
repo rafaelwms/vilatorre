@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/adminTemplate.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">.: MATERIA PRIMA :.</ui:define>
+	<ui:define name="principal">
+	
+
+
+			<h:form id="formMateria">
+			<p:growl life="3000"/>
+			<p:panel header="Informações da Matéria Prima" id="dadosMateria">
+				<h:panelGrid columns="2">
+					
+					<h:outputText for="nomeMateria" value="Nome:" />
+					<p:inputText id="nomeMateria" value="#{materiaPrimaBean.materia.nome}"
+						tabindex="1" size="70" />
+					
+					<h:outputText for="unidMateria" value="Unidade:"/>
+					<p:selectOneMenu value="#{materiaPrimaBean.unid}"  id="unidMateria">  
+        	    		  <f:selectItem noSelectionOption="true" itemLabel="Selecione uma unidade."></f:selectItem>
+           		 		  <f:selectItems value="#{materiaPrimaBean.unidades}"/>
+       				</p:selectOneMenu> 
+					
+						
+					<h:outputText for="descMateria" value="Descrição:" />
+					<p:inputTextarea id="descMateria"
+						value="#{materiaPrimaBean.materia.descricao}" tabindex="2" />
+						<h:inputHidden value="#{materiaPrimaBean.materia.id}"/>
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel>
+		
+					<p:menuButton value="Ações">
+						<p:menuitem value="Salvar" action="#{materiaPrimaBean.salvar}" ajax="false" />
+						<p:menuitem value="Limpar" type="reset" ajax="false" immediate="true" />
+					</p:menuButton>
+			
+			</p:panel>
+			
+			<p:panel header="Lista das Materias Primas" toggleable="true">
+				
+
+					<p:dataTable id="cargoTable" var="mat" value="#{materiaPrimaBean.materias}"
+						emptyMessage="Nenhuma matéria prima cadastrado." rows="10" paginator="true"  >
+						
+						<h:inputHidden value="#{mat.id}"/>
+						<p:column headerText="Matéria Prima" sortBy="nome" >
+							<h:outputText value="#{mat.nome}" />
+						</p:column>
+						
+						<p:column headerText="Unidade" style="width: 20px;">
+							<h:outputText value="#{mat.unidade}" />
+						</p:column>
+
+						<p:column  headerText="Descrição">
+							<h:outputText value="#{mat.descricao}" />
+						</p:column>
+						
+						<p:column headerText="Ações" style="width: 30px;" >
+							<p:menuButton value="Selecione">
+							<p:menuitem value="Editar" actionListener="#{materiaPrimaBean.editar(mat)}" update=":formMateria"/>
+                            <p:menuitem value="Excluir"  action="#{materiaPrimaBean.remover(mat)}" update=":formMateria" />
+						</p:menuButton>
+						</p:column>
+
+					</p:dataTable>
+					</p:panel>
+
+				</h:form>
+
+</ui:define>
+</ui:composition>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template/userTemplate.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="titulo">.: PEDIDOS :.</ui:define>
+	<ui:define name="principal">
+
+	
+
+
+
+			<h:form id="formPedidoLocal">
+			<p:growl life="3000"/>
+
+			<p:panel header=".: PEDIDOS :. " id="info">
+				<h:panelGrid columns="2">
+				
+				<h:outputText value="Produto:" for="produtos"/>
+					 <p:selectOneMenu id="produtos" value="#{pedidoLocalBean.produto}" converter="produtoConverter"  filter="true" filterMatchMode="startsWith">  
+        			    <f:selectItem  noSelectionOption="true" itemLabel="Selecione um produto."  />  
+           				<f:selectItems value="#{pedidoLocalBean.produtos}" var="prod" itemLabel="#{prod.nome} &nbsp;&nbsp; #{prod.preco} " />  
+      			     </p:selectOneMenu>
+      			 
+      			 
+      			 
+      			 <h:outputText value="Quantidade:" for="qtd"/>
+      			 <p:inputText id="qtd" value="#{pedidoLocalBean.quantidade}" onkeypress="mascara(this, numeros)"/>    
+      			 
+      			 <h:outputText value="Tipo de pedido:" for="tipoPedido"/>
+      			 <p:selectOneMenu id="tipoPedido" value="#{pedidoLocalBean.tipoPedido}">        			    
+           				<f:selectItems value="#{pedidoLocalBean.tipos}"/>  
+      			     </p:selectOneMenu>
+      			 
+      			 <h:outputText value="Cliente:" for="clientes"/>
+      			 <p:selectOneMenu id="clientes" value="#{pedidoLocalBean.cliente}" converter="cliConverter"  filter="true" filterMatchMode="startsWith" style="width: 300px;">
+      			 	<f:selectItems value="#{pedidoLocalBean.clientes}" var="cli" itemLabel="#{cli.nome}&nbsp;-&nbsp;#{cli.fone}"/>
+      			 </p:selectOneMenu>
+      			 
+      			     
+				<h:outputText value="Mesa:" for="mesa"/>
+      			 <p:inputText id="mesa" value="#{pedidoLocalBean.mesa}" onkeypress="mascara(this, numeros)"/>    	
+					
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel>
+				<p:menuButton value="Ações">
+					<p:menuitem value="Novo Pedido" action="#{pedidoLocalBean.abrirPedido}" ajax="false"  tabindex="6"/>
+					<p:menuitem value="Limpar" type="reset" ajax="false" tabindex="7" immediate="true"  />
+				</p:menuButton>
+			</p:panel>
+			
+			<p:panel header="Lista dos Pedidos Abertos" toggleable="true">
+				
+
+					<p:dataTable id="pedidoTable" var="ped" value="#{pedidoLocalBean.pedidosAbertos}"
+						emptyMessage="Nenhum pedido aberto." rows="10" paginator="true">
+						
+						
+						<p:column headerText="Pedido Nr.">
+
+							<p:commandButton id="lista" type="button" value="#{ped.id_pedido}" title="Clique aqui para visualisar ou editar os ítens deste pedido." />
+						
+						<p:overlayPanel for="lista" dynamic="true" showEffect="slide" hideEffect="fade" >
+							<p:dataTable  value="#{ped.lista_itens}" var="it" >
+						
+							<f:facet name="header">
+								
+							<h:outputText value ="Detalhes do pedido de ID #{ped.id_pedido}" />
+							</f:facet>
+						
+							<p:column headerText="Pedido">
+								<h:inputHidden value="#{it.id_item}" />
+								<h:outputText value="#{it.pedido.id_pedido}" />
+							</p:column>
+							
+							<p:column headerText="Ordem">
+								<h:outputText value="#{it.numOrdem}" />
+							</p:column>
+						
+							<p:column headerText="Produto">
+								<h:outputText value="#{it.produto.nome}" />
+							</p:column>
+							
+							<p:column headerText="Preço R$">
+								<h:outputText value="#{it.produto.preco}" />
+							</p:column>
+							
+							<p:column headerText="Qtd">
+								<h:outputText value="#{it.qtd}" />
+							</p:column>
+							
+							<p:column headerText="Total R$">
+								<h:outputText value="#{it.totalItem}" />
+							</p:column>
+							
+							<p:column>
+								<p:commandButton icon="ui-icon-trash" action="#{pedidoLocalBean.delItem(it)}" update=":formPedidoLocal:pedidoTable" title="Clique aqui se deseja remover este item." />
+							</p:column>
+							
+						</p:dataTable>
+						
+					</p:overlayPanel>
+						
+						</p:column>
+						
+						<p:column headerText="Abertura do pedido">
+							<h:outputText value="#{ped.abertura_pedido}" />
+						</p:column>
+
+						<p:column  headerText="Tipo">
+							<h:outputText value="#{ped.tipo_pedido}" />
+						</p:column>
+								
+						<p:column  headerText="Valor total">
+							<h:outputText value="#{ped.valor_total}" />
+						</p:column>
+						
+						<p:column headerText="Ações" style="width:30px;">
+							<p:menuButton value="Clique...">
+							<p:menuitem  value="Add Item" action="#{pedidoLocalBean.addItem(ped)}" update=":formPedidoLocal" title="Adiciona um ítem a este pedido, de acordo com do dados acima." />
+							<p:menuitem  value="Cancelar" action="#{pedidoLocalBean.cancelarPedido(ped)}" update=":formPedidoLocal" title="Clique para cancelar este pedido." />
+							</p:menuButton>
+						</p:column>
+						
+											
+					</p:dataTable>
+					</p:panel>
+					
+
+				</h:form>
+
+</ui:define>
+</ui:composition>
