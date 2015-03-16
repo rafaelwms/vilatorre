@@ -1,0 +1,1 @@
+Associação do projeto de PSC + Projeto particular.
